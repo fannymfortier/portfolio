@@ -111,6 +111,32 @@ figure {
   margin: 0;
 }
 
+/* Texture globale */
+body {
+  position: relative;
+  background-color: var(--couleur-fond, #EAE3D6);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  /* Image */
+  background-image: url('../images/texture/rough.png');
+  background-repeat: repeat;
+  background-position: center center;
+  
+  /* opacity: 0.15; */
+  
+  /* Accessibilité */
+  z-index: -1;
+  pointer-events: none;
+}
+
 ul[class] {
   padding: 0;
   list-style: none;
