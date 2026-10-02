@@ -23,6 +23,7 @@
   --couleur-fond-plein: var(--creme);
   
   --couleur-texte: var(--charbon);
+  --couleur-hero-nom: var(--charbon-clair);
   --couleur-texte-doux: color-mix(in srgb, var(--charbon) 70%, transparent);
   --couleur-ligne: color-mix(in srgb, var(--charbon) 18%, transparent);
   --couleur-ligne-forte: color-mix(in srgb, var(--charbon) 35%, transparent);
@@ -114,6 +115,7 @@
   --couleur-fond-plein: var(--charbon);
   
   --couleur-texte: var(--creme);
+  --couleur-hero-nom: var(--creme);
   --couleur-texte-doux: color-mix(in srgb, var(--creme) 70%, transparent);
   --couleur-ligne: color-mix(in srgb, var(--creme) 18%, transparent);
   --couleur-ligne-forte: color-mix(in srgb, var(--creme) 35%, transparent);

@@ -175,7 +175,7 @@
   font-size: var(--taille-hero);
   line-height: 0.88;
   letter-spacing: 0.01em;
-  color: var(--charbon-clair);
+  color: var(--couleur-hero-nom);
   margin-bottom: var(--espace-m);
 }
 
