@@ -130,7 +130,8 @@ body::before {
   background-repeat: repeat;
   background-position: center center;
   
-  /* opacity: 0.15; */
+  opacity: 0.15;
+  blend-mode: multiply;
   
   /* Accessibilité */
   z-index: -1;
