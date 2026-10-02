@@ -70,6 +70,78 @@
 }
 
 
+/* Navigation et contrôles */
+.navigation {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--espace-l);
+}
+
+.navigation__liste {
+  margin-inline: auto;
+}
+
+/* Bouton hamburger (Mobile) */
+.entete__menu-bouton {
+  display: none;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--couleur-ligne-forte);
+  border-radius: var(--rayon-pilule);
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Icone Hamburger */
+.entete__menu-icone,
+.entete__menu-icone::before,
+.entete__menu-icone::after {
+  position: absolute;
+  width: 1.1rem;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: transform var(--duree-survol) ease, background-color var(--duree-survol) ease;
+}
+
+.entete__menu-icone {
+  top: calc(50% - 1px);
+  left: calc(50% - 0.55rem);
+}
+
+.entete__menu-icone::before,
+.entete__menu-icone::after {
+  content: "";
+  left: 0;
+}
+
+.entete__menu-icone::before {
+  top: -6px;
+}
+
+.entete__menu-icone::after {
+  top: 6px;
+}
+
+/* Cacher quand menu s'ouvre */
+.entete__menu-bouton[aria-expanded="true"] .entete__menu-icone {
+  background-color: transparent;
+}
+
+.entete__menu-bouton[aria-expanded="true"] .entete__menu-icone::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.entete__menu-bouton[aria-expanded="true"] .entete__menu-icone::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+
 /* ---------- 2. HERO SECTION ---------- */
 .hero {
   position: relative;
@@ -83,7 +155,7 @@
   overflow: hidden;
 }
 
-/* Étiquettes d'angle éditoriales */
+/* Étiquettes */
 .hero__etiquette {
   position: absolute;
   z-index: 2;
@@ -120,7 +192,7 @@
   padding-inline: 0.15em;
 }
 
-/* Cercle SVG style "dessiné à la main" */
+/* Cercle scribbly surligneur */
 .hero__cercle-svg {
   position: absolute;
   top: -20%;
@@ -130,25 +202,6 @@
   pointer-events: none;
   color: var(--couleur-accent);
   overflow: visible;
-}
-
-/* Vague organique inférieure */
-.hero__vague-conteneur {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  z-index: 1;
-}
-
-.hero__vague {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: clamp(50px, 8vh, 100px);
-  color: var(--couleur-surface);
 }
 
 
@@ -168,10 +221,13 @@
   padding-bottom: var(--espace-s);
 }
 
-.apropos__numero,
-.projets__numero,
-.contact__numero {
-  color: var(--couleur-accent);
+/* Titres de section */
+.section h2 {
+  color: var(--couleur-accent-texte);
+}
+
+.section h2 .texte-accent {
+  color: var(--couleur-texte);
 }
 
 .apropos__grille {
@@ -214,8 +270,9 @@
   color: var(--couleur-texte-doux);
 }
 
-/* Carte de projet flat / magazine */
+/* Carte de projet : toute la carte est cliquable */
 .carte-projet {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--espace-m);
@@ -226,8 +283,15 @@
   transition: border-color var(--duree-survol) ease;
 }
 
-.carte-projet:hover {
+.carte-projet:hover,
+.carte-projet:focus-within {
   border-color: var(--couleur-accent);
+}
+
+/* Accessibilité de focus */
+.carte-projet:has(.carte-projet__bouton:focus-visible) {
+  outline: 2px solid var(--couleur-accent);
+  outline-offset: 3px;
 }
 
 .carte-projet:hover .carte-projet__titre {
@@ -235,17 +299,15 @@
 }
 
 .carte-projet__vignette {
-  width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  padding: 0;
-  border: 0;
   border-radius: var(--rayon-petit);
   background-color: var(--couleur-fond);
-  cursor: zoom-in;
 }
 
-.carte-projet__vignette img {
+.carte-projet__vignette img,
+.projet-overlay__image img,
+.projet-overlay__galerie img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -258,7 +320,8 @@
   gap: var(--espace-xs);
 }
 
-.carte-projet__categorie {
+.carte-projet__categorie,
+.projet-overlay__categorie {
   font-size: var(--taille-micro);
   font-weight: var(--graisse-forte);
   letter-spacing: var(--lettres-espacees);
@@ -271,6 +334,26 @@
   transition: color var(--duree-survol) ease;
 }
 
+/* Bouton projet */
+.carte-projet__bouton {
+  padding: 0;
+  border: 0;
+  background: none;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.carte-projet__bouton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.carte-projet__bouton:focus-visible {
+  outline: none;
+}
+
 .carte-projet__description {
   font-size: var(--taille-petit);
   color: var(--couleur-texte-doux);
@@ -278,67 +361,23 @@
 }
 
 .carte-projet__tags,
-.carte-projet__galerie,
-.carte-projet__liens {
+.projet-overlay__tags {
   display: flex;
   flex-wrap: wrap;
+  gap: var(--espace-xs);
 }
 
 .carte-projet__tags {
-  gap: var(--espace-xs);
   margin-top: auto;
 }
 
-.carte-projet__tags li {
+.carte-projet__tags li,
+.projet-overlay__tags li {
   padding: 0.25em 0.75em;
   border: 1px solid var(--couleur-ligne-forte);
   border-radius: var(--rayon-pilule);
   font-size: var(--taille-micro);
   font-weight: var(--graisse-moyenne);
-}
-
-.carte-projet__galerie {
-  gap: var(--espace-s);
-  margin-top: var(--espace-s);
-}
-
-.carte-projet__galerie button {
-  width: 2.75rem;
-  aspect-ratio: 1;
-  overflow: hidden;
-  padding: 0;
-  border: var(--bordure);
-  border-radius: var(--rayon-petit);
-  background-color: var(--couleur-fond);
-  cursor: zoom-in;
-}
-
-.carte-projet__galerie button:hover {
-  border-color: var(--couleur-accent);
-}
-
-.carte-projet__galerie img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.carte-projet__liens {
-  gap: var(--espace-m);
-  margin-top: var(--espace-m);
-  padding-top: var(--espace-s);
-  border-top: var(--bordure);
-  font-size: var(--taille-petit);
-  font-weight: var(--graisse-forte);
-}
-
-.carte-projet__liens a {
-  color: var(--couleur-accent);
-  text-decoration: none;
-}
-
-.carte-projet__liens a:hover {
-  text-decoration: underline;
 }
 
 
@@ -381,7 +420,6 @@
 /* ---------- 6. PIED DE PAGE ---------- */
 .pied {
   padding-block: var(--espace-l);
-  border-top: var(--bordure);
   background-color: var(--couleur-fond);
   color: var(--couleur-texte-doux);
 }
@@ -432,16 +470,235 @@
 }
 
 
-/* ---------- RESPONSIVE ADJUSTMENTS ---------- */
+/* ---------- 8. OVERLAY PROJET ---------- */
+.projet-overlay {
+  width: min(100% - 2 * var(--gouttiere), 60rem);
+  max-width: none;
+  max-height: 90vh;
+  padding: 0;
+  border: var(--bordure);
+  border-radius: var(--rayon-carte);
+  background-color: var(--couleur-fond-plein);
+  color: var(--couleur-texte);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.projet-overlay::backdrop {
+  background-color: var(--couleur-voile);
+}
+
+/* Pas de défilement de la page derrière un dialog ouvert */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+.projet-overlay__interieur {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-m);
+  padding: var(--espace-l);
+}
+
+/* Reste visible en haut pendant qu'on défile */
+.projet-overlay__fermer {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  align-self: flex-end;
+  padding: 0.2em 0.8em;
+  border: 1px solid var(--couleur-ligne-forte);
+  border-radius: var(--rayon-pilule);
+  background-color: var(--couleur-fond-plein);
+  font-size: var(--taille-grand);
+  cursor: pointer;
+}
+
+.projet-overlay__fermer:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}
+
+.projet-overlay__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: var(--rayon-petit);
+  background-color: var(--couleur-surface);
+  cursor: zoom-in;
+}
+
+.projet-overlay__titre {
+  font-size: var(--taille-h2);
+}
+
+.projet-overlay__description {
+  font-size: var(--taille-grand);
+  color: var(--couleur-texte-doux);
+}
+
+.projet-overlay__galerie {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: var(--espace-s);
+}
+
+.projet-overlay__galerie button {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  padding: 0;
+  border: var(--bordure);
+  border-radius: var(--rayon-petit);
+  background-color: var(--couleur-surface);
+  cursor: zoom-in;
+}
+
+.projet-overlay__galerie button:hover {
+  border-color: var(--couleur-accent);
+}
+
+.projet-overlay__liens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-m);
+  padding-top: var(--espace-s);
+  border-top: var(--bordure);
+  font-size: var(--taille-petit);
+  font-weight: var(--graisse-forte);
+}
+
+.projet-overlay__liens a {
+  color: var(--couleur-accent);
+  text-decoration: none;
+}
+
+.projet-overlay__liens a:hover {
+  text-decoration: underline;
+}
+
+
+/* ---------- 9. VAGUES ENTRE LES SECTIONS ---------- */
+.section,
+.pied {
+  position: relative;
+}
+
+/* Hérite le fond */
+.section::before,
+.pied::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: 0;
+  width: 100%;
+  height: var(--vague-hauteur);
+  background-color: inherit;
+  -webkit-mask: var(--vague-forme) center bottom / 100% 100% no-repeat;
+  mask: var(--vague-forme) center bottom / 100% 100% no-repeat;
+  pointer-events: none;
+  transition: background-color var(--duree-theme) ease;
+}
+
+/* Variation */
+.section:nth-of-type(odd)::before {
+  transform: scaleX(-1);
+}
+
+
+/* ---------- RESPONSIVE ---------- */
 @media (max-width: 48rem) {
-  .navigation__liste {
-    gap: var(--espace-m);
-  }
-  
   .hero__etiquette--tl,
   .hero__etiquette--tr,
   .hero__etiquette--bl,
   .hero__etiquette--br {
     display: none; /* Masquer les petits coins sur mobile pour ne pas surcharger */
+  }
+
+  /* --- Menu plein écran --- */
+  .entete__menu-bouton {
+    display: block;
+  }
+
+  .entete__logo {
+    position: relative;
+    z-index: 2;
+  }
+
+  .navigation {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--espace-xl);
+    padding: var(--entete-hauteur) var(--gouttiere) var(--espace-xl);
+    background-color: var(--couleur-fond-plein);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duree-theme) ease, visibility var(--duree-theme);
+  }
+
+  .navigation--ouverte {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navigation__liste {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espace-l);
+    margin-inline: 0;
+  }
+
+  .navigation__liste a {
+    font-family: var(--police-titre);
+    font-size: var(--taille-h2);
+    font-weight: var(--graisse-normale);
+    letter-spacing: 0.02em;
+  }
+
+  /* Le flou de l'en-tête empêcherait le menu de couvrir tout l'écran */
+  .menu-ouvert .entete {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .menu-ouvert {
+    overflow: hidden;
+  }
+
+  /* --- Projets : défilement horizontal --- */
+  .grille-projets {
+    display: flex;
+    gap: var(--espace-m);
+    margin-inline: calc(var(--gouttiere) * -1);
+    padding-inline: var(--gouttiere);
+    padding-bottom: var(--espace-m);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gouttiere);
+  }
+
+  .carte-projet {
+    flex: 0 0 min(82%, 20rem);
+    scroll-snap-align: start;
+  }
+
+  /* --- Overlay plein écran --- */
+  .projet-overlay {
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .projet-overlay__interieur {
+    padding: var(--espace-m) var(--gouttiere) var(--espace-xl);
   }
 }

@@ -20,22 +20,28 @@
 
       <a href="#" class="entete__logo" data-i18n="site.nom">Fanny Fortier</a>
 
-      <nav class="navigation" aria-label="Navigation principale" data-i18n-aria-label="nav.etiquette">
+      <nav id="navigation-principale" class="navigation" aria-label="Navigation principale" data-i18n-aria-label="nav.etiquette">
         <ul class="navigation__liste">
           <li><a href="#about" data-i18n="nav.apropos">À propos</a></li>
           <li><a href="#projects" data-i18n="nav.projets">Projets</a></li>
           <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
+
+        <div class="controles">
+          <button type="button" id="bouton-theme" class="controles__bouton" aria-pressed="false">
+            <span data-i18n="controles.theme">Mode sombre</span>
+          </button>
+          <button type="button" id="bouton-langue" class="controles__bouton">
+            <span data-i18n="controles.langue">English</span>
+          </button>
+        </div>
       </nav>
 
-      <div class="controles">
-        <button type="button" id="bouton-theme" class="controles__bouton" aria-pressed="false">
-          <span data-i18n="controles.theme">Mode sombre</span>
-        </button>
-        <button type="button" id="bouton-langue" class="controles__bouton">
-          <span data-i18n="controles.langue">English</span>
-        </button>
-      </div>
+      <!-- Visible seulement sur mobile -->
+      <button type="button" id="bouton-menu" class="entete__menu-bouton" aria-expanded="false" aria-controls="navigation-principale">
+        <span class="visuellement-cache" data-i18n="menu.ouvrir">Ouvrir le menu</span>
+        <span class="entete__menu-icone" aria-hidden="true"></span>
+      </button>
 
     </div>
   </header>
@@ -64,20 +70,12 @@
 
       <span class="hero__etiquette hero__etiquette--bl etiquette">Édition 2026</span>
       <span class="hero__etiquette hero__etiquette--br etiquette">(01)</span>
-
-      <!-- Vague organique de transition -->
-      <div class="hero__vague-conteneur">
-        <svg class="hero__vague" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,32 C280,85 520,5 720,48 C920,90 1200,15 1440,55 L1440,120 L0,120 Z" fill="currentColor"></path>
-        </svg>
-      </div>
     </section>
 
     <!-- ========== À PROPOS ========== -->
     <section id="about" class="section">
       <div class="conteneur">
         <div class="apropos__entete">
-          <span class="etiquette apropos__numero">(01)</span>
           <h2 data-i18n="apropos.titre">À propos</h2>
         </div>
         <div class="apropos__grille">
@@ -95,7 +93,6 @@
     <section id="projects" class="section">
       <div class="conteneur">
         <div class="projets__entete">
-          <span class="etiquette projets__numero">(02)</span>
           <h2 data-i18n="projets.titre">Projets</h2>
         </div>
         <div id="grille-projets" class="grille-projets" aria-live="polite">
@@ -108,7 +105,6 @@
     <section id="contact" class="section">
       <div class="conteneur">
         <div class="contact__entete">
-          <span class="etiquette contact__numero">(03)</span>
           <h2 data-i18n="contact.titre">
             Discutons d'un <span class="texte-accent">projet</span>
           </h2>
@@ -136,19 +132,39 @@
   <!-- ========== GABARIT D'UNE CARTE DE PROJET ========== -->
   <template id="gabarit-carte-projet">
     <article class="carte-projet">
-      <button type="button" class="carte-projet__vignette" data-lightbox>
+      <div class="carte-projet__vignette">
         <img src="" alt="" loading="lazy">
-      </button>
+      </div>
       <div class="carte-projet__contenu">
         <p class="carte-projet__categorie"></p>
-        <h3 class="carte-projet__titre"></h3>
+        <h3 class="carte-projet__titre">
+          <button type="button" class="carte-projet__bouton" aria-haspopup="dialog"></button>
+        </h3>
         <p class="carte-projet__description"></p>
         <ul class="carte-projet__tags"></ul>
-        <ul class="carte-projet__galerie"></ul>
-        <ul class="carte-projet__liens"></ul>
       </div>
     </article>
   </template>
+
+
+  <!-- ========== OVERLAY PROJET ==========
+       Rempli par main.js avec le projet cliqué -->
+  <dialog id="projet-overlay" class="projet-overlay" aria-labelledby="projet-overlay-titre">
+    <div class="projet-overlay__interieur">
+      <button type="button" class="projet-overlay__fermer" data-i18n-aria-label="projet.fermer" aria-label="Fermer le projet">
+        <span aria-hidden="true">×</span>
+      </button>
+      <button type="button" class="projet-overlay__image" data-lightbox>
+        <img src="" alt="">
+      </button>
+      <p class="projet-overlay__categorie"></p>
+      <h2 id="projet-overlay-titre" class="projet-overlay__titre"></h2>
+      <p class="projet-overlay__description"></p>
+      <ul class="projet-overlay__tags"></ul>
+      <ul class="projet-overlay__galerie"></ul>
+      <ul class="projet-overlay__liens"></ul>
+    </div>
+  </dialog>
 
 
   <!-- ========== LIGHTBOX ========== -->

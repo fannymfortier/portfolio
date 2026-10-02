@@ -14,6 +14,8 @@ export const traductions = {
     "nav.apropos": "À propos",
     "nav.projets": "Projets",
     "nav.contact": "Contact",
+    "menu.ouvrir": "Ouvrir le menu",
+    "menu.fermer": "Fermer le menu",
 
     "controles.theme": "Mode sombre",
     "controles.theme.clair": "Mode clair",
@@ -42,6 +44,7 @@ export const traductions = {
     "contact.texte": "Écrivez-moi pour discuter d'un projet.",
 
     "lightbox.fermer": "Fermer",
+    "projet.fermer": "Fermer le projet",
 
     "pied.texte": "Tous droits réservés."
   },
@@ -53,6 +56,8 @@ export const traductions = {
     "nav.apropos": "About",
     "nav.projets": "Projects",
     "nav.contact": "Contact",
+    "menu.ouvrir": "Open menu",
+    "menu.fermer": "Close menu",
 
     "controles.theme": "Dark mode",
     "controles.theme.clair": "Light mode",
@@ -81,6 +86,7 @@ export const traductions = {
     "contact.texte": "Write to me to talk about a project.",
 
     "lightbox.fermer": "Close",
+    "projet.fermer": "Close project",
 
     "pied.texte": "All rights reserved."
   }

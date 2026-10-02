@@ -2,10 +2,12 @@
    MAIN.JS — Point d'entrée
    ---------------------------------------------------------
    1. Thème clair / sombre
-   2. Langue FR / EN
-   3. Rendu des projets (data/projects.json)
-   4. Lightbox
-   5. Initialisation
+   2. Menu mobile
+   3. Langue FR / EN
+   4. Rendu des projets (data/projects.json)
+   5. Overlay projet
+   6. Lightbox
+   7. Initialisation
    ========================================================= */
 
 import { traductions } from "./translations.js";
@@ -81,7 +83,53 @@ function initialiserTheme() {
 
 
 /* =========================================================
-   2. LANGUE FR / EN
+   2. MENU MOBILE
+   ---------------------------------------------------------
+   Sous 48rem, la navigation devient un menu plein écran.
+   Pendant qu'il est ouvert, le reste de la page est inerte.
+   ========================================================= */
+const boutonMenu = document.getElementById("bouton-menu");
+const navigation = document.getElementById("navigation-principale");
+const ecranMobile = window.matchMedia("(max-width: 48rem)");
+
+function basculerMenu(ouvrir) {
+  navigation.classList.toggle("navigation--ouverte", ouvrir);
+  document.body.classList.toggle("menu-ouvert", ouvrir);
+  document.querySelector("main").inert = ouvrir;
+  document.querySelector(".pied").inert = ouvrir;
+
+  boutonMenu.setAttribute("aria-expanded", String(ouvrir));
+  const texteBouton = boutonMenu.querySelector("[data-i18n]");
+  texteBouton.dataset.i18n = ouvrir ? "menu.fermer" : "menu.ouvrir";
+  texteBouton.textContent = traduire(texteBouton.dataset.i18n);
+}
+
+function menuEstOuvert() {
+  return boutonMenu.getAttribute("aria-expanded") === "true";
+}
+
+function initialiserMenu() {
+  boutonMenu.addEventListener("click", () => basculerMenu(!menuEstOuvert()));
+
+  // Un lien choisi = on ferme pour voir la section
+  navigation.addEventListener("click", (evenement) => {
+    if (evenement.target.closest("a")) basculerMenu(false);
+  });
+
+  document.addEventListener("keydown", (evenement) => {
+    if (evenement.key === "Escape" && menuEstOuvert()) {
+      basculerMenu(false);
+      boutonMenu.focus();
+    }
+  });
+
+  // Retour sur grand écran = menu fermé
+  ecranMobile.addEventListener("change", () => basculerMenu(false));
+}
+
+
+/* =========================================================
+   3. LANGUE FR / EN
    ---------------------------------------------------------
    - data-i18n="cle" remplace le texte de l'élément
    - data-i18n-aria-label="cle" remplace son aria-label
@@ -110,7 +158,8 @@ function changerLangue(nouvelleLangue) {
   langueCourante = nouvelleLangue;
   ecrireStockage(CLE_STOCKAGE_LANGUE, nouvelleLangue);
   appliquerTraductions();
-  afficherProjets(); 
+  afficherProjets();
+  if (projetOuvert) remplirOverlay(projetOuvert);
 }
 
 function initialiserLangue() {
@@ -129,7 +178,7 @@ function initialiserLangue() {
 
 
 /* =========================================================
-   3. RENDU DES PROJETS
+   4. RENDU DES PROJETS
    ---------------------------------------------------------
    Cloner le template de projet pour chaque projet
    ========================================================= */
@@ -174,48 +223,102 @@ function creerCarteProjet(projet) {
   const carte = gabaritCarte.content.firstElementChild.cloneNode(true);
   carte.id = `projet-${projet.id}`;
 
-  // Vignette (ouvre la lightbox)
-  const boutonVignette = carte.querySelector(".carte-projet__vignette");
-  const imageVignette = boutonVignette.querySelector("img");
-  imageVignette.src = projet.thumbnail;
-  imageVignette.alt = projet.title;
-  boutonVignette.dataset.lightbox = projet.thumbnail;
-  boutonVignette.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${projet.title}`);
+  // Vignette décorative : le titre suffit pour les lecteurs d'écran
+  const image = carte.querySelector(".carte-projet__vignette img");
+  cacherSiErreur(image, image);
+  image.src = projet.thumbnail;
+
+  // Le titre est un bouton étiré sur toute la carte (voir composants.css)
+  const bouton = carte.querySelector(".carte-projet__bouton");
+  bouton.textContent = projet.title;
+  bouton.addEventListener("click", () => ouvrirProjet(projet));
+
+  carte.querySelector(".carte-projet__categorie").textContent = traduire(`categorie.${projet.category}`);
+  carte.querySelector(".carte-projet__description").textContent = descriptionDe(projet);
+  remplirListe(carte.querySelector(".carte-projet__tags"), projet.tags, creerTag);
+
+  return carte;
+}
+
+function descriptionDe(projet) {
+  return projet[`description_${langueCourante}`] ?? projet.description_fr;
+}
+
+function creerTag(tag) {
+  const item = document.createElement("li");
+  item.textContent = tag;
+  return item;
+}
+
+// Image introuvable : on cache l'élément au lieu d'une image brisée
+function cacherSiErreur(image, elementACacher) {
+  elementACacher.hidden = false;
+  image.onerror = () => {
+    elementACacher.hidden = true;
+  };
+}
+
+// Liste vide = cachée (comme ça elle reste réutilisable dans l'overlay)
+function remplirListe(liste, elements = [], creerItem) {
+  liste.hidden = elements.length === 0;
+  liste.replaceChildren(...elements.map(creerItem));
+}
+
+
+/* =========================================================
+   5. OVERLAY PROJET
+   ---------------------------------------------------------
+   Un seul <dialog> réutilisé : on le remplit avec le
+   projet cliqué, puis on l'ouvre.
+   ========================================================= */
+const overlay = document.getElementById("projet-overlay");
+let projetOuvert = null;
+
+function ouvrirProjet(projet) {
+  projetOuvert = projet;
+  remplirOverlay(projet);
+  overlay.showModal();
+  overlay.scrollTop = 0;
+}
+
+function remplirOverlay(projet) {
+  // Grande image (ouvre la lightbox)
+  const boutonImage = overlay.querySelector(".projet-overlay__image");
+  const image = boutonImage.querySelector("img");
+  cacherSiErreur(image, boutonImage);
+  image.src = projet.thumbnail;
+  image.alt = projet.title;
+  boutonImage.dataset.lightbox = projet.thumbnail;
+  boutonImage.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${projet.title}`);
 
   // Textes
-  carte.querySelector(".carte-projet__categorie").textContent = traduire(`categorie.${projet.category}`);
-  carte.querySelector(".carte-projet__titre").textContent = projet.title;
-  carte.querySelector(".carte-projet__description").textContent =
-    projet[`description_${langueCourante}`] ?? projet.description_fr;
-
-  // Tags
-  remplirListe(carte.querySelector(".carte-projet__tags"), projet.tags, (tag) => {
-    const item = document.createElement("li");
-    item.textContent = tag;
-    return item;
-  });
+  overlay.querySelector(".projet-overlay__categorie").textContent = traduire(`categorie.${projet.category}`);
+  overlay.querySelector(".projet-overlay__titre").textContent = projet.title;
+  overlay.querySelector(".projet-overlay__description").textContent = descriptionDe(projet);
+  remplirListe(overlay.querySelector(".projet-overlay__tags"), projet.tags, creerTag);
 
   // Galerie (chaque image ouvre la lightbox)
-  remplirListe(carte.querySelector(".carte-projet__galerie"), projet.gallery_images, (source, index) => {
+  remplirListe(overlay.querySelector(".projet-overlay__galerie"), projet.gallery_images, (source, index) => {
     const item = document.createElement("li");
     const bouton = document.createElement("button");
-    const image = document.createElement("img");
+    const imageGalerie = document.createElement("img");
 
     bouton.type = "button";
     bouton.dataset.lightbox = source;
     bouton.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${projet.title} (${index + 1})`);
-    image.src = source;
-    image.alt = "";
-    image.loading = "lazy";
+    cacherSiErreur(imageGalerie, item);
+    imageGalerie.src = source;
+    imageGalerie.alt = "";
+    imageGalerie.loading = "lazy";
 
-    bouton.append(image);
+    bouton.append(imageGalerie);
     item.append(bouton);
     return item;
   });
 
-  // Liens (on ignore ceux dont l'URL est vide)
+  // Liens (URL vide = ignoré)
   const liensValides = Object.entries(projet.links ?? {}).filter(([, url]) => url);
-  remplirListe(carte.querySelector(".carte-projet__liens"), liensValides, ([type, url]) => {
+  remplirListe(overlay.querySelector(".projet-overlay__liens"), liensValides, ([type, url]) => {
     const item = document.createElement("li");
     const lien = document.createElement("a");
     lien.href = url;
@@ -225,22 +328,24 @@ function creerCarteProjet(projet) {
     item.append(lien);
     return item;
   });
-
-  return carte;
 }
 
-// Remplit une liste <ul> ; la retire complètement si elle est vide
-function remplirListe(liste, elements = [], creerItem) {
-  if (elements.length === 0) {
-    liste.remove();
-    return;
-  }
-  liste.replaceChildren(...elements.map(creerItem));
+function initialiserOverlay() {
+  overlay.querySelector(".projet-overlay__fermer").addEventListener("click", () => overlay.close());
+
+  // Clic à l'extérieur du contenu = fermer
+  overlay.addEventListener("click", (evenement) => {
+    if (evenement.target === overlay) overlay.close();
+  });
+
+  overlay.addEventListener("close", () => {
+    projetOuvert = null;
+  });
 }
 
 
 /* =========================================================
-   4. LIGHTBOX
+   6. LIGHTBOX
    ---------------------------------------------------------
    N'importe quel élément avec data-lightbox="chemin/image.jpg"
    ouvre l'image en grand. Une seule écoute sur le document
@@ -260,7 +365,7 @@ function ouvrirLightbox(source, texteAlternatif = "") {
 function initialiserLightbox() {
   document.addEventListener("click", (evenement) => {
     const declencheur = evenement.target.closest("[data-lightbox]");
-    if (!declencheur) return;
+    if (!declencheur || !declencheur.dataset.lightbox) return;
 
     const texteAlternatif = declencheur.querySelector("img")?.alt || declencheur.getAttribute("aria-label") || "";
     ouvrirLightbox(declencheur.dataset.lightbox, texteAlternatif);
@@ -282,10 +387,12 @@ function initialiserLightbox() {
 
 
 /* =========================================================
-   5. INITIALISATION
+   7. INITIALISATION
    ========================================================= */
 initialiserLangue();
 initialiserTheme();
+initialiserMenu();
+initialiserOverlay();
 initialiserLightbox();
 chargerProjets();
 

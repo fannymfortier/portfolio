@@ -20,6 +20,7 @@
   /* Thème clair - Fonds translucides */
   --couleur-fond: color-mix(in srgb, var(--creme) 88%, transparent);
   --couleur-surface: color-mix(in srgb, var(--creme-fonce) 90%, transparent);
+  --couleur-fond-plein: var(--creme); /* pour les menus et overlays */
   
   --couleur-texte: var(--charbon);
   --couleur-texte-doux: color-mix(in srgb, var(--charbon) 70%, transparent);
@@ -36,15 +37,17 @@
   --police-texte: "Plus Jakarta Sans", system-ui, sans-serif;
 
   /* Tailles typographiques */
-  --taille-hero: clamp(3.2rem, 13vw, 11rem);
-  --taille-h1: clamp(2.5rem, 8vw, 6rem);
-  --taille-h2: clamp(2rem, 5vw, 4rem);
-  --taille-h3: 1.5rem;
-  --taille-accroche: clamp(1.2rem, 2.5vw, 1.85rem);
-  --taille-grand: 1.125rem;
-  --taille-texte: 1rem;
-  --taille-petit: 0.875rem;
-  --taille-micro: 0.6875rem;
+  /* Échelle fluide : min à 320px, max à 1280px.
+     rem + vw pour que le zoom du navigateur fonctionne */
+  --taille-hero: clamp(2.75rem, 0.3333rem + 12.0833vw, 10rem);
+  --taille-h1: clamp(2.5rem, 1.3333rem + 5.8333vw, 6rem);
+  --taille-h2: clamp(2rem, 1.3333rem + 3.3333vw, 4rem);
+  --taille-h3: clamp(1.375rem, 1.25rem + 0.625vw, 1.75rem);
+  --taille-accroche: clamp(1.25rem, 1rem + 1.25vw, 2rem);
+  --taille-grand: clamp(1.125rem, 1.0417rem + 0.4167vw, 1.375rem);
+  --taille-texte: clamp(1rem, 0.9583rem + 0.2083vw, 1.125rem);
+  --taille-petit: clamp(0.875rem, 0.8542rem + 0.1042vw, 0.9375rem);
+  --taille-micro: clamp(0.6875rem, 0.6667rem + 0.1042vw, 0.75rem);
 
   /* Graisses */
   --graisse-legere: 300;
@@ -80,9 +83,17 @@
   --rayon-petit: 0.25rem;
   --bordure: 1px solid var(--couleur-ligne);
 
+  /* Vagues entre les sections */
+  --vague-hauteur: clamp(2rem, 1.3333rem + 3.3333vw, 4rem);
+  --vague-forme: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0,32 C280,85 520,5 720,48 C920,90 1200,15 1440,55 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
+
   /* Mouvement */
   --duree-theme: 0.3s;
   --duree-survol: 0.2s;
+
+  /* Texture */
+  --texture-mode: multiply;
+  --texture-opacite: 0.2;
 }
 
 /* ---------- 2. THÈME SOMBRE ---------- */
@@ -92,12 +103,16 @@
   /* Thème sombre — Légère transparence pour laisser passer le grain */
   --couleur-fond: color-mix(in srgb, var(--charbon) 90%, transparent);
   --couleur-surface: color-mix(in srgb, var(--charbon-clair) 92%, transparent);
+  --couleur-fond-plein: var(--charbon);
   
   --couleur-texte: var(--creme);
   --couleur-texte-doux: color-mix(in srgb, var(--creme) 70%, transparent);
   --couleur-ligne: color-mix(in srgb, var(--creme) 18%, transparent);
   --couleur-ligne-forte: color-mix(in srgb, var(--creme) 35%, transparent);
   --couleur-accent-texte: var(--corail);
+
+  --texture-mode: screen;
+  --texture-opacite: 0.08;
 }
 
 
@@ -133,37 +148,24 @@ body {
   color: var(--couleur-texte);
 }
 
-/* Texture globale */
+/* Texture globale, par-dessus tout (ne bloque pas les clics) */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  
-  /* Image Texture */
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+
   background-image: url('../images/texture/rough.png');
   background-repeat: repeat;
-  background-position: center center;
-  
-  /* Intensité */
-  opacity: 0.3;
-  mix-blend-mode: multiply;
-  
-  /* Accessibilité Texture */
-  z-index: 1;
-  pointer-events: none;
+
+  opacity: var(--texture-opacite);
+  mix-blend-mode: var(--texture-mode);
 }
 
-/* Contenu au dessus de la texture */
-.entete,
-.hero,
-.section,
-.pied,
-.lightbox {
-  position: relative;
-  z-index: 2;
+/* hidden gagne toujours, même sur un élément en flex */
+[hidden] {
+  display: none !important;
 }
 
 ul[class] {
