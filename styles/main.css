@@ -123,8 +123,8 @@
   --couleur-ligne-forte: color-mix(in srgb, var(--creme) 35%, transparent);
   --couleur-accent-texte: var(--corail);
 
-  --texture-mode: screen;
-  --texture-opacite: 0.08;
+  --texture-mode: multiply;
+  --texture-opacite: 0.4;
 
   --photo-filtre: brightness(0.98) contrast(0.95) saturate(1);
 }
