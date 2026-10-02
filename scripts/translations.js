@@ -1,0 +1,87 @@
+/* =========================================================
+   TRANSLATIONS.JS — Dictionnaire FR / EN
+   ---------------------------------------------------------
+   Clés (nav., projets., etc.).
+   Dans le HTML : data-i18n="nav.projets"
+   Pour ajouter un texte : ajoute la même clé dans fr ET en.
+   ========================================================= */
+
+export const traductions = {
+  fr: {
+    "site.nom": "Portfolio",
+
+    "nav.etiquette": "Navigation principale",
+    "nav.apropos": "À propos",
+    "nav.projets": "Projets",
+    "nav.contact": "Contact",
+
+    "controles.theme": "Mode sombre",
+    "controles.theme.clair": "Mode clair",
+    "controles.langue": "English",
+
+    "apropos.titre": "À propos",
+    "apropos.texte": "Texte de présentation à venir.",
+
+    "projets.titre": "Projets",
+    "projets.chargement": "Chargement des projets…",
+    "projets.erreur": "Les projets n'ont pas pu être chargés. Actualise la page pour réessayer.",
+    "projets.vide": "Aucun projet pour le moment.",
+    "projets.agrandir": "Agrandir l'image",
+
+    "categorie.jeu": "Jeu vidéo",
+    "categorie.web": "Site web",
+    "categorie.identite": "Identité visuelle",
+    "categorie.application": "Application",
+
+    "lien.site": "Voir le site",
+    "lien.github": "Code sur GitHub",
+    "lien.demo": "Démo",
+    "lien.video": "Vidéo",
+
+    "contact.titre": "Contact",
+    "contact.texte": "Écrivez-moi pour discuter d'un projet.",
+
+    "lightbox.fermer": "Fermer",
+
+    "pied.texte": "Tous droits réservés."
+  },
+
+  en: {
+    "site.nom": "Portfolio",
+
+    "nav.etiquette": "Main navigation",
+    "nav.apropos": "About",
+    "nav.projets": "Projects",
+    "nav.contact": "Contact",
+
+    "controles.theme": "Dark mode",
+    "controles.theme.clair": "Light mode",
+    "controles.langue": "Français",
+
+    "apropos.titre": "About",
+    "apropos.texte": "Introduction coming soon.",
+
+    "projets.titre": "Projects",
+    "projets.chargement": "Loading projects…",
+    "projets.erreur": "Projects couldn't be loaded. Refresh the page to try again.",
+    "projets.vide": "No projects yet.",
+    "projets.agrandir": "Enlarge image",
+
+    "categorie.jeu": "Video game",
+    "categorie.web": "Website",
+    "categorie.identite": "Visual identity",
+    "categorie.application": "App",
+
+    "lien.site": "Visit site",
+    "lien.github": "Code on GitHub",
+    "lien.demo": "Demo",
+    "lien.video": "Video",
+
+    "contact.titre": "Contact",
+    "contact.texte": "Write to me to talk about a project.",
+
+    "lightbox.fermer": "Close",
+
+    "pied.texte": "All rights reserved."
+  }
+};

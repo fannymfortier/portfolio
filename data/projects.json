@@ -1,0 +1,62 @@
+[
+  {
+    "id": "economiq",
+    "title": "economiQ",
+    "category": "web",
+    "description_fr": "Description du projet à compléter.",
+    "description_en": "Project description to come.",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "thumbnail": "images/projets/economiq/vignette.jpg",
+    "gallery_images": [
+      "images/projets/economiq/galerie-01.jpg",
+      "images/projets/economiq/galerie-02.jpg"
+    ],
+    "links": {
+      "site": "",
+      "github": ""
+    }
+  },
+  {
+    "id": "letallurgie",
+    "title": "Létallurgie",
+    "category": "jeu",
+    "description_fr": "Jeu de casse-têtes narratif réalisé en équipe dans Unity, se déroulant dans un village des années 1810.",
+    "description_en": "Team-made narrative puzzle game built in Unity, set in an 1810s village.",
+    "tags": ["Unity", "C#", "URP"],
+    "thumbnail": "images/projets/letallurgie/vignette.jpg",
+    "gallery_images": [
+      "images/projets/letallurgie/galerie-01.jpg",
+      "images/projets/letallurgie/galerie-02.jpg"
+    ],
+    "links": {
+      "site": "",
+      "github": ""
+    }
+  },
+  {
+    "id": "studio-tattoo",
+    "title": "Studio Tattoo",
+    "category": "identite",
+    "description_fr": "Description du projet à compléter.",
+    "description_en": "Project description to come.",
+    "tags": ["Figma", "Illustrator"],
+    "thumbnail": "images/projets/studio-tattoo/vignette.jpg",
+    "gallery_images": [
+      "images/projets/studio-tattoo/galerie-01.jpg"
+    ],
+    "links": {
+      "site": ""
+    }
+  },
+  {
+    "id": "petit-pas",
+    "title": "Petit Pas",
+    "category": "application",
+    "description_fr": "Description du projet à compléter.",
+    "description_en": "Project description to come.",
+    "tags": ["Figma"],
+    "thumbnail": "images/projets/petit-pas/vignette.jpg",
+    "gallery_images": [],
+    "links": {}
+  }
+]

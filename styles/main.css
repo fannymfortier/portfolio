@@ -1,0 +1,265 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+/* =========================
+   MAIN.CSS — général
+   ========================= */
+
+/* ---------- 1. VARIABLES ---------- */
+:root {
+  color-scheme: light;
+
+  /* Palette officielle Funky Editorial */
+  --charbon: #2f2b3a;
+  --charbon-clair: #3a3547;
+  --creme: #eae3d6;
+  --creme-fonce: #dfd7c8;
+  --corail: #ee7360;
+
+  /* Thème clair (par défaut) */
+  --couleur-fond: var(--creme);
+  --couleur-surface: var(--creme-fonce);
+  --couleur-texte: var(--charbon);
+  --couleur-texte-doux: color-mix(in srgb, var(--charbon) 70%, transparent);
+  --couleur-ligne: color-mix(in srgb, var(--charbon) 18%, transparent);
+  --couleur-ligne-forte: color-mix(in srgb, var(--charbon) 35%, transparent);
+  --couleur-accent: var(--corail);
+  --couleur-accent-texte: var(--corail);
+  --couleur-voile: color-mix(in srgb, var(--charbon) 85%, transparent);
+
+  /* Polices */
+  --police-titre: "Anton", Impact, sans-serif;
+  --police-accent: "Instrument Serif", Georgia, serif;
+  --police-texte: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* Tailles typographiques */
+  --taille-hero: clamp(3.2rem, 13vw, 11rem);
+  --taille-h1: clamp(2.5rem, 8vw, 6rem);
+  --taille-h2: clamp(2rem, 5vw, 4rem);
+  --taille-h3: 1.5rem;
+  --taille-accroche: clamp(1.2rem, 2.5vw, 1.85rem);
+  --taille-grand: 1.125rem;
+  --taille-texte: 1rem;
+  --taille-petit: 0.875rem;
+  --taille-micro: 0.6875rem;
+
+  /* Graisses */
+  --graisse-legere: 300;
+  --graisse-normale: 400;
+  --graisse-moyenne: 500;
+  --graisse-forte: 600;
+  --graisse-grasse: 700;
+
+  /* Interlignage & Espacement */
+  --interligne: 1.6;
+  --interligne-titre: 0.92;
+  --interligne-moyen: 1.2;
+  --lettres-espacees: 0.15em;
+
+  /* Espaces */
+  --espace-xs: 0.25rem;
+  --espace-s: 0.5rem;
+  --espace-m: 1rem;
+  --espace-l: 2rem;
+  --espace-xl: 4rem;
+  --espace-xxl: 6rem;
+
+  /* Layout */
+  --largeur-max: 84rem;
+  --largeur-texte: 65ch;
+  --gouttiere: clamp(1.25rem, 4vw, 3rem);
+  --entete-hauteur: 4.5rem;
+  --carte-largeur-min: 18rem;
+
+  /* Formes */
+  --rayon-pilule: 999px;
+  --rayon-carte: 0.25rem;
+  --rayon-petit: 0.25rem;
+  --bordure: 1px solid var(--couleur-ligne);
+
+  /* Mouvement */
+  --duree-theme: 0.3s;
+  --duree-survol: 0.2s;
+}
+
+
+/* ---------- 2. THÈME SOMBRE ---------- */
+.dark-theme {
+  color-scheme: dark;
+
+  --couleur-fond: var(--charbon);
+  --couleur-surface: var(--charbon-clair);
+  --couleur-texte: var(--creme);
+  --couleur-texte-doux: color-mix(in srgb, var(--creme) 70%, transparent);
+  --couleur-ligne: color-mix(in srgb, var(--creme) 18%, transparent);
+  --couleur-ligne-forte: color-mix(in srgb, var(--creme) 35%, transparent);
+  --couleur-accent-texte: var(--corail);
+}
+
+
+/* ---------- 3. RESET ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1, h2, h3, h4,
+p,
+ul,
+figure {
+  margin: 0;
+}
+
+ul[class] {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid var(--couleur-accent);
+  outline-offset: 3px;
+}
+
+
+/* ---------- 4. TYPOGRAPHIE ---------- */
+body {
+  font-family: var(--police-texte);
+  font-size: var(--taille-texte);
+  font-weight: var(--graisse-normale);
+  line-height: var(--interligne);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--police-titre);
+  font-weight: var(--graisse-normale);
+  line-height: var(--interligne-titre);
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: var(--taille-h1);
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: var(--taille-h2);
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: var(--taille-h3);
+  line-height: var(--interligne-moyen);
+}
+
+p {
+  max-width: var(--largeur-texte);
+}
+
+small {
+  font-size: var(--taille-petit);
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--couleur-accent);
+}
+
+strong {
+  font-weight: var(--graisse-grasse);
+}
+
+
+/* ---------- 5. LAYOUT DE BASE ---------- */
+body {
+  min-height: 100vh;
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+}
+
+.conteneur {
+  width: 100%;
+  max-width: var(--largeur-max);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+}
+
+.section {
+  padding-block: var(--espace-xxl);
+  scroll-margin-top: var(--entete-hauteur);
+}
+
+
+/* ---------- 6. UTILITAIRES ---------- */
+.etiquette {
+  font-size: var(--taille-micro);
+  font-weight: var(--graisse-forte);
+  letter-spacing: var(--lettres-espacees);
+  text-transform: uppercase;
+  color: var(--couleur-texte-doux);
+}
+
+.texte-accent {
+  font-family: var(--police-accent);
+  font-style: italic;
+  font-weight: var(--graisse-normale);
+  text-transform: none;
+  color: var(--couleur-accent);
+}
+
+.texte-doux {
+  color: var(--couleur-texte-doux);
+}
+
+.visuellement-cache {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+
+/* ---------- 7. TRANSITIONS & ACCESSIBILITÉ ---------- */
+body,
+body > * {
+  transition:
+    background-color var(--duree-theme) ease,
+    color var(--duree-theme) ease,
+    border-color var(--duree-theme) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+}

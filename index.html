@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio — Fanny Fortier</title>
+  <meta name="description" content="Portfolio de Fanny Fortier, designer web & multimédia basée à Montréal.">
+
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/composants.css">
+
+  <script type="module" src="scripts/main.js"></script>
+</head>
+
+<body>
+
+  <!-- ========== EN-TÊTE ========== -->
+  <header class="entete">
+    <div class="conteneur entete__interieur">
+
+      <a href="#" class="entete__logo" data-i18n="site.nom">Fanny Fortier</a>
+
+      <nav class="navigation" aria-label="Navigation principale" data-i18n-aria-label="nav.etiquette">
+        <ul class="navigation__liste">
+          <li><a href="#about" data-i18n="nav.apropos">À propos</a></li>
+          <li><a href="#projects" data-i18n="nav.projets">Projets</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="controles">
+        <button type="button" id="bouton-theme" class="controles__bouton" aria-pressed="false">
+          <span data-i18n="controles.theme">Mode sombre</span>
+        </button>
+        <button type="button" id="bouton-langue" class="controles__bouton">
+          <span data-i18n="controles.langue">English</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ========== CONTENU PRINCIPAL ========== -->
+  <main>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero">
+      <span class="hero__etiquette hero__etiquette--tl etiquette">Intégration multimédia</span>
+      <span class="hero__etiquette hero__etiquette--tr etiquette">Montréal, QC</span>
+      
+      <div class="hero__contenu">
+        <h1 class="hero__nom">FANNY FORTIER</h1>
+        <p class="hero__sous-titre">
+          Designer web & 
+          <span class="hero__mot-accent">
+            <span class="texte-accent">multimédia</span>
+            <svg class="hero__cercle-svg" viewBox="0 0 240 80" aria-hidden="true">
+              <path d="M 10 40 C 20 10, 220 5, 230 40 C 238 70, 15 75, 12 42 C 10 20, 90 12, 180 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </p>
+      </div>
+
+      <span class="hero__etiquette hero__etiquette--bl etiquette">Édition 2026</span>
+      <span class="hero__etiquette hero__etiquette--br etiquette">(01)</span>
+
+      <!-- Vague organique de transition -->
+      <div class="hero__vague-conteneur">
+        <svg class="hero__vague" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,32 C280,85 520,5 720,48 C920,90 1200,15 1440,55 L1440,120 L0,120 Z" fill="currentColor"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ========== À PROPOS ========== -->
+    <section id="about" class="section">
+      <div class="conteneur">
+        <div class="apropos__entete">
+          <span class="etiquette apropos__numero">(01)</span>
+          <h2 data-i18n="apropos.titre">À propos</h2>
+        </div>
+        <div class="apropos__grille">
+          <p class="apropos__lead" data-i18n="apropos.texte">
+            Étudiante en Intégration Multimédia à Montréal, je conçois des expériences numériques à la frontière du design d'interface, du développement front-end et de la création interactive.
+          </p>
+          <p class="apropos__detail">
+            Mon approche privilégie la clarté typographique, l'accessibilité web et des concepts visuels forts sans artifices inutiles.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROJETS ========== -->
+    <section id="projects" class="section">
+      <div class="conteneur">
+        <div class="projets__entete">
+          <span class="etiquette projets__numero">(02)</span>
+          <h2 data-i18n="projets.titre">Projets</h2>
+        </div>
+        <div id="grille-projets" class="grille-projets" aria-live="polite">
+          <p class="grille-projets__message" data-i18n="projets.chargement">Chargement des projets…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section">
+      <div class="conteneur">
+        <div class="contact__entete">
+          <span class="etiquette contact__numero">(03)</span>
+          <h2 data-i18n="contact.titre">
+            Discutons d'un <span class="texte-accent">projet</span>
+          </h2>
+        </div>
+        <p data-i18n="contact.texte">Basée à Montréal, disponible pour des projets de conception web et de multimédia.</p>
+        <ul class="contact__liste">
+          <li><a href="mailto:courriel@exemple.com">courriel@exemple.com</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========== PIED DE PAGE ========== -->
+  <footer class="pied">
+    <div class="conteneur">
+      <p><small>© <span id="annee-courante"></span> <span data-i18n="pied.texte">Tous droits réservés.</span></small></p>
+    </div>
+  </footer>
+
+
+  <!-- ========== GABARIT D'UNE CARTE DE PROJET ========== -->
+  <template id="gabarit-carte-projet">
+    <article class="carte-projet">
+      <button type="button" class="carte-projet__vignette" data-lightbox>
+        <img src="" alt="" loading="lazy">
+      </button>
+      <div class="carte-projet__contenu">
+        <p class="carte-projet__categorie"></p>
+        <h3 class="carte-projet__titre"></h3>
+        <p class="carte-projet__description"></p>
+        <ul class="carte-projet__tags"></ul>
+        <ul class="carte-projet__galerie"></ul>
+        <ul class="carte-projet__liens"></ul>
+      </div>
+    </article>
+  </template>
+
+
+  <!-- ========== LIGHTBOX ========== -->
+  <dialog id="lightbox" class="lightbox">
+    <button type="button" class="lightbox__fermer" data-i18n-aria-label="lightbox.fermer" aria-label="Fermer">
+      <span aria-hidden="true">×</span>
+    </button>
+    <img class="lightbox__image" src="" alt="">
+  </dialog>
+
+</body>
+</html>
