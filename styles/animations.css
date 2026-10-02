@@ -1,0 +1,127 @@
+/* =========================
+   ANIMATIONS.CSS — animations d'entrée
+   ========================= */
+
+/* ---------- 1. VARIABLES ---------- */
+:root {
+  --courbe-rebond: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --courbe-douce: cubic-bezier(0.22, 1, 0.36, 1);
+  --duree-entree: 0.9s;
+  --delai-lettre: 0.05s;
+  --vitesse-boil: 0.4s;
+}
+
+
+/* ---------- 2. KEYFRAMES ---------- */
+@keyframes monter-rebond {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes descendre {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes apparaitre {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bouillir {
+  0% {
+    filter: url(#boil-1);
+  }
+
+  25% {
+    filter: url(#boil-2);
+  }
+
+  50% {
+    filter: url(#boil-3);
+  }
+
+  75% {
+    filter: url(#boil-4);
+  }
+}
+
+@keyframes dessiner {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+/* ---------- 3. TITRE EN LETTRES ---------- */
+.filtres-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.decoupe__mot {
+  white-space: nowrap;
+}
+
+
+/* ---------- 4. ENTRÉE DE LA PAGE ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .entete {
+    animation: descendre 0.6s var(--courbe-douce) both;
+  }
+
+  .hero__nom .decoupe__lettre {
+    animation: monter-rebond 0.7s var(--courbe-rebond) both;
+    animation-delay: calc(0.15s + var(--i) * var(--delai-lettre));
+  }
+
+  .hero__sous-titre {
+    animation: monter-rebond var(--duree-entree) var(--courbe-rebond) 0.6s both;
+  }
+
+  .hero__cercle-svg path {
+    stroke-dasharray: 1;
+    animation: dessiner 0.8s var(--courbe-douce) 1.2s both;
+  }
+
+  .hero__etiquette {
+    animation: apparaitre 0.6s ease 1.4s both;
+  }
+
+  /* Sans JS, le titre entre d'un bloc */
+  .hero__nom {
+    animation:
+      monter-rebond var(--duree-entree) var(--courbe-rebond) 0.15s both,
+      bouillir var(--vitesse-boil) steps(1) infinite;
+  }
+
+  /* Avec JS, lettre par lettre (edge boil en continu) */
+  .hero__nom:has(.decoupe__lettre) {
+    animation: bouillir var(--vitesse-boil) steps(1) infinite;
+  }
+}

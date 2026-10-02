@@ -1,0 +1,16 @@
+/* =========================
+   PIED.CSS — pied de page
+   ========================= */
+
+/* ---------- 1. PIED DE PAGE ---------- */
+.pied {
+  padding-block: var(--espace-l);
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte-doux);
+}
+
+.pied small {
+  font-size: var(--taille-micro);
+  letter-spacing: var(--lettres-espacees);
+  text-transform: uppercase;
+}

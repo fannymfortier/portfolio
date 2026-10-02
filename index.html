@@ -7,12 +7,38 @@
   <meta name="description" data-i18n-content="site.description" content="Portfolio de Fanny Fortier, designer web & multimédia basée à Montréal.">
 
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/composants.css">
+  <link rel="stylesheet" href="styles/entete.css">
+  <link rel="stylesheet" href="styles/hero.css">
+  <link rel="stylesheet" href="styles/projets.css">
+  <link rel="stylesheet" href="styles/apropos.css">
+  <link rel="stylesheet" href="styles/contact.css">
+  <link rel="stylesheet" href="styles/pied.css">
+  <link rel="stylesheet" href="styles/animations.css">
 
-  <script type="module" src="scripts/main.js"></script>
+  <script type="module" src="scripts/interactif.js"></script>
 </head>
 
 <body>
+
+  <!-- ========== FILTRES SVG (edge boil) ========== -->
+  <svg class="filtres-svg" aria-hidden="true" focusable="false">
+    <filter id="boil-1">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3" result="bruit" />
+      <feDisplacementMap in="SourceGraphic" in2="bruit" scale="4" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="boil-2">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="17" result="bruit" />
+      <feDisplacementMap in="SourceGraphic" in2="bruit" scale="4" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="boil-3">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="42" result="bruit" />
+      <feDisplacementMap in="SourceGraphic" in2="bruit" scale="4" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="boil-4">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="88" result="bruit" />
+      <feDisplacementMap in="SourceGraphic" in2="bruit" scale="4" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
 
   <!-- ========== EN-TÊTE ========== -->
   <header class="entete">
@@ -55,13 +81,13 @@
       <span class="hero__etiquette hero__etiquette--tr etiquette" data-i18n="hero.lieu">Montréal, QC</span>
       
       <div class="hero__contenu">
-        <h1 class="hero__nom" data-i18n="hero.nom">FANNY FORTIER</h1>
+        <h1 class="hero__nom" data-i18n-lettres="hero.nom">FANNY FORTIER</h1>
         <p class="hero__sous-titre">
           <span data-i18n="hero.sousTitre.debut">Designer web &amp;</span>
           <span class="hero__mot-accent">
             <span class="texte-accent" data-i18n="hero.sousTitre.accent">multimédia</span>
             <svg class="hero__cercle-svg" viewBox="0 0 240 80" aria-hidden="true">
-              <path d="M 10 40 C 20 10, 220 5, 230 40 C 238 70, 15 75, 12 42 C 10 20, 90 12, 180 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M 10 40 C 20 10, 220 5, 230 40 C 238 70, 15 75, 12 42 C 10 20, 90 12, 180 15" pathLength="1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           </span>
           <span data-i18n="hero.sousTitre.fin"></span>

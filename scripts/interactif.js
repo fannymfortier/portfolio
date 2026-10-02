@@ -1,5 +1,5 @@
 /* =========================================================
-   MAIN.JS — Point d'entrée
+   INTERACTIF.JS — Point d'entrée
    ---------------------------------------------------------
    1. Thème clair / sombre
    2. Menu mobile
@@ -9,44 +9,30 @@
    6. Initialisation
    ========================================================= */
 
-import { traductions } from "./translations.js";
+import {
+  CLE_STOCKAGE_THEME,
+  CLE_STOCKAGE_LANGUE,
+  CHEMIN_PROJETS,
+  FILTRE_TOUS,
+  lireStockage,
+  ecrireStockage,
+  langueCourante,
+  definirLangue,
+  traduire,
+  chargerTraductions,
+  appliquerTraductions,
+  texteDe,
+  chargerJSON,
+  normaliser
+} from "./utilitaire.js";
+import { creerCarteProjet, creerBoutonFiltre, creerMessageGrille, decouperEnLettres } from "./templates.js";
 import { afficherPageProjet } from "./projet.js";
 
-
-/* ---------------------------------------------------------
-   CONFIGURATION
-   --------------------------------------------------------- */
-const CLE_STOCKAGE_THEME = "portfolio-theme";
-const CLE_STOCKAGE_LANGUE = "portfolio-langue";
-const CHEMIN_PROJETS = "data/projects.json";
-const LANGUE_PAR_DEFAUT = "fr";
-const FILTRE_TOUS = "tous";
-
-// État partagé entre les modules
-let langueCourante = LANGUE_PAR_DEFAUT;
+// État de la page
 let listeProjets = [];
 let projetsCharges = false;
 let filtreCourant = FILTRE_TOUS;
 let rechercheCourante = "";
-
-
-/* ---------------------------------------------------------
-   UTILITAIRE : localStorage sécurisé
-   --------------------------------------------------------- */
-function lireStockage(cle) {
-  try {
-    return localStorage.getItem(cle);
-  } catch {
-    return null;
-  }
-}
-
-function ecrireStockage(cle, valeur) {
-  try {
-    localStorage.setItem(cle, valeur);
-  } catch {
-  }
-}
 
 
 /* =========================================================
@@ -128,49 +114,23 @@ function initialiserMenu() {
 
 /* =========================================================
    3. LANGUE FR / EN
-   ---------------------------------------------------------
-   - data-i18n="cle" remplace le texte de l'élément
-   - data-i18n-aria-label="cle" remplace son aria-label
    ========================================================= */
 const boutonLangue = document.getElementById("bouton-langue");
 
-// Retourne la traduction d'une clé, ou la clé elle-même si elle manque
-// (pratique pour repérer les oublis directement dans la page)
-function traduire(cle) {
-  return traductions[langueCourante]?.[cle] ?? cle;
-}
-
-function appliquerTraductions() {
-  document.documentElement.lang = langueCourante;
-
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
-    element.textContent = traduire(element.dataset.i18n);
-  });
-
-  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
-    element.setAttribute("aria-label", traduire(element.dataset.i18nAriaLabel));
-  });
-
-  document.querySelectorAll("[data-i18n-content]").forEach((element) => {
-    element.setAttribute("content", traduire(element.dataset.i18nContent));
-  });
-}
-
 function changerLangue(nouvelleLangue) {
-  langueCourante = nouvelleLangue;
+  definirLangue(nouvelleLangue);
   ecrireStockage(CLE_STOCKAGE_LANGUE, nouvelleLangue);
   appliquerTraductions();
+  document.querySelectorAll("[data-i18n-lettres]").forEach(decouperEnLettres);
   afficherTout();
 }
 
 function initialiserLangue() {
   const langueSauvegardee = lireStockage(CLE_STOCKAGE_LANGUE);
-
-  if (langueSauvegardee && traductions[langueSauvegardee]) {
-    langueCourante = langueSauvegardee;
-  }
+  if (langueSauvegardee) definirLangue(langueSauvegardee);
 
   appliquerTraductions();
+  document.querySelectorAll("[data-i18n-lettres]").forEach(decouperEnLettres);
 
   boutonLangue.addEventListener("click", () => {
     changerLangue(langueCourante === "fr" ? "en" : "fr");
@@ -181,10 +141,9 @@ function initialiserLangue() {
 /* =========================================================
    4. RENDU DES PROJETS
    ---------------------------------------------------------
-   Cloner le template de projet pour chaque projet
+   Cloner le template de projet pour chaque projet (templates.js)
    ========================================================= */
 const grilleProjets = document.getElementById("grille-projets");
-const gabaritCarte = document.getElementById("gabarit-carte-projet");
 const filtreCategories = document.getElementById("filtre-categories");
 const champRecherche = document.getElementById("recherche-projets");
 const statutProjets = document.getElementById("statut-projets");
@@ -193,15 +152,13 @@ const idProjet = new URLSearchParams(window.location.search).get("id");
 
 async function chargerProjets() {
   try {
-    const reponse = await fetch(CHEMIN_PROJETS);
-    if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
-    listeProjets = await reponse.json();
+    listeProjets = await chargerJSON(CHEMIN_PROJETS);
     projetsCharges = true;
     afficherTout();
   } catch (erreur) {
     console.error("Erreur de chargement des projets :", erreur);
     if (grilleProjets) afficherMessageGrille("projets.erreur");
-    if (pageProjet) afficherPageProjet(null, idProjet, { traduire, langue: langueCourante });
+    if (pageProjet) afficherPageProjet(null, idProjet);
   }
 }
 
@@ -215,16 +172,12 @@ function afficherTout() {
   }
 
   if (pageProjet) {
-    afficherPageProjet(listeProjets, idProjet, { traduire, langue: langueCourante });
+    afficherPageProjet(listeProjets, idProjet);
   }
 }
 
 function afficherMessageGrille(cle) {
-  const message = document.createElement("p");
-  message.className = "grille-projets__message";
-  message.dataset.i18n = cle;
-  message.textContent = traduire(cle);
-  grilleProjets.replaceChildren(message);
+  grilleProjets.replaceChildren(creerMessageGrille(cle));
 }
 
 function afficherProjets() {
@@ -253,22 +206,11 @@ function afficherFiltres() {
 
   const categories = [FILTRE_TOUS, ...new Set(listeProjets.map((projet) => projet.category))];
 
-  const boutons = categories.map((categorie) => {
-    const bouton = document.createElement("button");
-    bouton.type = "button";
-    bouton.className = "filtre-projets__bouton";
-    bouton.dataset.categorie = categorie;
-    bouton.textContent = traduire(categorie === FILTRE_TOUS ? "filtre.tous" : `categorie.${categorie}`);
-    bouton.setAttribute("aria-pressed", String(categorie === filtreCourant));
-    return bouton;
-  });
+  const boutons = categories.map((categorie) => creerBoutonFiltre(categorie, categorie === filtreCourant));
 
   filtreCategories.replaceChildren(...boutons);
 }
 
-function normaliser(texte) {
-  return texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
 
 function correspondAuFiltre(projet) {
   if (filtreCourant !== FILTRE_TOUS && projet.category !== filtreCourant) return false;
@@ -276,7 +218,7 @@ function correspondAuFiltre(projet) {
 
   const texte = [
     projet.title,
-    descriptionDe(projet),
+    texteDe(projet, "description"),
     traduire(`categorie.${projet.category}`),
     ...(projet.tags ?? [])
   ].join(" ");
@@ -302,46 +244,8 @@ function initialiserFiltres() {
   });
 }
 
-function creerCarteProjet(projet) {
-  const carte = gabaritCarte.content.firstElementChild.cloneNode(true);
-  carte.id = `projet-${projet.id}`;
 
-  const image = carte.querySelector(".carte-projet__vignette img");
-  cacherSiErreur(image, image);
-  image.src = projet.thumbnail;
 
-  const lien = carte.querySelector(".carte-projet__lien");
-  lien.textContent = projet.title;
-  lien.href = `projet.html?id=${encodeURIComponent(projet.id)}`;
-
-  carte.querySelector(".carte-projet__categorie").textContent = traduire(`categorie.${projet.category}`);
-  carte.querySelector(".carte-projet__description").textContent = descriptionDe(projet);
-  remplirListe(carte.querySelector(".carte-projet__tags"), projet.tags, creerTag);
-
-  return carte;
-}
-
-function descriptionDe(projet) {
-  return projet[`description_${langueCourante}`] ?? projet.description_fr;
-}
-
-function creerTag(tag) {
-  const item = document.createElement("li");
-  item.textContent = tag;
-  return item;
-}
-
-function cacherSiErreur(image, elementACacher) {
-  elementACacher.hidden = false;
-  image.onerror = () => {
-    elementACacher.hidden = true;
-  };
-}
-
-function remplirListe(liste, elements = [], creerItem) {
-  liste.hidden = elements.length === 0;
-  liste.replaceChildren(...elements.map(creerItem));
-}
 
 
 /* =========================================================
@@ -389,6 +293,10 @@ function initialiserLightbox() {
 /* =========================================================
    6. INITIALISATION
    ========================================================= */
+// Les lettres d'abord, pour ne pas attendre le chargement des traductions
+document.querySelectorAll("[data-i18n-lettres]").forEach(decouperEnLettres);
+
+await chargerTraductions();
 initialiserLangue();
 initialiserTheme();
 initialiserMenu();

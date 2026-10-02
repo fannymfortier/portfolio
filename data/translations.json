@@ -1,17 +1,8 @@
-/* =========================================================
-   TRANSLATIONS.JS — Dictionnaire FR / EN
-   ---------------------------------------------------------
-   Clés (nav., projets., etc.).
-   Dans le HTML : data-i18n="nav.projets"
-   Pour ajouter un texte : ajoute la même clé dans fr ET en.
-   ========================================================= */
-
-export const traductions = {
-  fr: {
+{
+  "fr": {
     "site.nom": "Fanny Fortier",
     "site.titre": "Portfolio — Fanny Fortier",
     "site.description": "Portfolio de Fanny Fortier, designer web & multimédia basée à Montréal.",
-
     "hero.role": "Intégration multimédia",
     "hero.lieu": "Montréal, QC",
     "hero.edition": "Édition 2026",
@@ -19,22 +10,18 @@ export const traductions = {
     "hero.sousTitre.debut": "Designer web &",
     "hero.sousTitre.accent": "multimédia",
     "hero.sousTitre.fin": "",
-
     "nav.etiquette": "Navigation principale",
     "nav.apropos": "À propos",
     "nav.projets": "Projets",
     "nav.contact": "Contact",
     "menu.ouvrir": "Ouvrir le menu",
     "menu.fermer": "Fermer le menu",
-
     "controles.theme": "Mode sombre",
     "controles.theme.clair": "Mode clair",
     "controles.langue": "English",
-
     "apropos.titre": "À propos",
     "apropos.accroche": "Étudiante en Intégration Multimédia à Montréal, je conçois des expériences numériques à la frontière du design d'interface, du développement front-end et de la création interactive.",
     "apropos.texte": "Mon approche privilégie la clarté typographique, l'accessibilité web et des concepts visuels forts sans artifices inutiles.",
-
     "projets.titre": "Projets",
     "projets.chargement": "Chargement des projets…",
     "projets.erreur": "Les projets n'ont pas pu être chargés. Actualise la page pour réessayer.",
@@ -42,27 +29,22 @@ export const traductions = {
     "projets.agrandir": "Agrandir l'image",
     "projets.aucunResultat": "Aucun projet ne correspond à cette recherche.",
     "projets.compte": "{n} projet(s)",
-
     "filtre.etiquette": "Filtrer par catégorie",
     "filtre.tous": "Tous",
     "filtre.recherche": "Rechercher un projet",
-
     "categorie.jeu": "Jeu vidéo",
     "categorie.web": "Site web",
     "categorie.identite": "Identité visuelle",
     "categorie.application": "Application",
     "categorie.graphisme": "Graphisme",
     "categorie.autre": "Autre",
-
     "lien.site": "Voir le site",
     "lien.github": "Code sur GitHub",
     "lien.demo": "Démo",
     "lien.video": "Vidéo",
-
     "contact.titre.debut": "Discutons d'un",
     "contact.titre.accent": "projet",
     "contact.texte": "Basée à Montréal, disponible pour des projets de conception web et de multimédia.",
-
     "lightbox.fermer": "Fermer",
     "projet.retour": "Tous les projets",
     "projet.annee": "Année",
@@ -74,15 +56,12 @@ export const traductions = {
     "projet.suivant": "Projet suivant",
     "projet.introuvable": "Projet introuvable",
     "projet.video": "Vidéo du projet",
-
     "pied.texte": "Tous droits réservés."
   },
-
-  en: {
+  "en": {
     "site.nom": "Fanny Fortier",
     "site.titre": "Portfolio — Fanny Fortier",
     "site.description": "Portfolio of Fanny Fortier, web & multimedia designer based in Montréal.",
-
     "hero.role": "Multimedia integration",
     "hero.lieu": "Montréal, QC",
     "hero.edition": "2026 Edition",
@@ -90,22 +69,18 @@ export const traductions = {
     "hero.sousTitre.debut": "Web &",
     "hero.sousTitre.accent": "multimedia",
     "hero.sousTitre.fin": "designer",
-
     "nav.etiquette": "Main navigation",
     "nav.apropos": "About",
     "nav.projets": "Projects",
     "nav.contact": "Contact",
     "menu.ouvrir": "Open menu",
     "menu.fermer": "Close menu",
-
     "controles.theme": "Dark mode",
     "controles.theme.clair": "Light mode",
     "controles.langue": "Français",
-
     "apropos.titre": "About",
     "apropos.accroche": "Introduction coming soon.",
     "apropos.texte": "More about my path coming soon.",
-
     "projets.titre": "Projects",
     "projets.chargement": "Loading projects…",
     "projets.erreur": "Projects couldn't be loaded. Refresh the page to try again.",
@@ -113,27 +88,22 @@ export const traductions = {
     "projets.agrandir": "Enlarge image",
     "projets.aucunResultat": "No project matches this search.",
     "projets.compte": "{n} project(s)",
-
     "filtre.etiquette": "Filter by category",
     "filtre.tous": "All",
     "filtre.recherche": "Search projects",
-
     "categorie.jeu": "Video game",
     "categorie.web": "Website",
     "categorie.identite": "Visual identity",
     "categorie.application": "App",
     "categorie.graphisme": "Graphic design",
     "categorie.autre": "Other",
-
     "lien.site": "Visit site",
     "lien.github": "Code on GitHub",
     "lien.demo": "Demo",
     "lien.video": "Video",
-
     "contact.titre.debut": "Let's talk about a",
     "contact.titre.accent": "project",
     "contact.texte": "Based in Montréal, available for web design and multimedia projects.",
-
     "lightbox.fermer": "Close",
     "projet.retour": "All projects",
     "projet.annee": "Year",
@@ -145,7 +115,6 @@ export const traductions = {
     "projet.suivant": "Next project",
     "projet.introuvable": "Project not found",
     "projet.video": "Project video",
-
     "pied.texte": "All rights reserved."
   }
-};
+}

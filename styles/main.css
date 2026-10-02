@@ -16,6 +16,8 @@
   --creme: #eae3d6;
   --creme-fonce: #dfd7c8;
   --corail: #ee7360;
+  --corail-pale: #f4a596;
+  --corail-fonce: #b8432f;
 
   /* Thème clair - Fonds translucides */
   --couleur-fond: color-mix(in srgb, var(--creme) 88%, transparent);
@@ -24,6 +26,8 @@
   
   --couleur-texte: var(--charbon);
   --couleur-hero-nom: var(--charbon-clair);
+  --couleur-logo: var(--corail);
+  --couleur-logo-actif: var(--corail-fonce);
   --couleur-texte-doux: color-mix(in srgb, var(--charbon) 70%, transparent);
   --couleur-ligne: color-mix(in srgb, var(--charbon) 18%, transparent);
   --couleur-ligne-forte: color-mix(in srgb, var(--charbon) 35%, transparent);
@@ -59,6 +63,8 @@
   /* Interlignage & Espacement */
   --interligne: 1.6;
   --interligne-titre: 0.92;
+  --titre-debord-haut: 0.15em;
+  --titre-debord-bas: 0.25em;
   --interligne-moyen: 1.2;
   --lettres-espacees: 0.15em;
 
@@ -118,6 +124,8 @@
   
   --couleur-texte: var(--creme);
   --couleur-hero-nom: var(--creme);
+  --couleur-logo: var(--corail-pale);
+  --couleur-logo-actif: var(--corail);
   --couleur-texte-doux: color-mix(in srgb, var(--creme) 70%, transparent);
   --couleur-ligne: color-mix(in srgb, var(--creme) 18%, transparent);
   --couleur-ligne-forte: color-mix(in srgb, var(--creme) 35%, transparent);
@@ -244,8 +252,8 @@ h3 {
 }
 
 /* Texture dans les titres */
-:is(h1, h2),
-:is(h1, h2) * {
+:is(h1, h2):not(:has(*)),
+:is(h1, h2) :not(:has(*)) {
   background-image:
     url('../images/texture/rough-tuile.webp'),
     linear-gradient(currentColor, currentColor);
@@ -254,6 +262,13 @@ h3 {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding-block: var(--titre-debord-haut) var(--titre-debord-bas);
+  margin-block: calc(var(--titre-debord-haut) * -1) calc(var(--titre-debord-bas) * -1);
+}
+
+/* Titre en morceaux : chaque morceau garde sa propre couleur */
+:is(h1, h2) * {
+  display: inline-block;
 }
 
 /* Surlignage */
@@ -273,8 +288,8 @@ h2 *::selection {
 }
 
 @media (forced-colors: active) {
-  :is(h1, h2),
-  :is(h1, h2) * {
+  :is(h1, h2):not(:has(*)),
+  :is(h1, h2) :not(:has(*)) {
     background-image: none;
     -webkit-text-fill-color: currentColor;
   }
@@ -353,7 +368,57 @@ body {
 }
 
 
-/* ---------- 7. TRANSITIONS & ACCESSIBILITÉ ---------- */
+/* ---------- 7. SECTIONS ---------- */
+.apropos__entete,
+.projets__entete,
+.contact__entete {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espace-m);
+  margin-bottom: var(--espace-xl);
+  border-bottom: var(--bordure);
+  padding-bottom: var(--espace-s);
+}
+
+/* Titres de section */
+.section h2 {
+  color: var(--couleur-accent-texte);
+}
+
+.section h2 .texte-accent {
+  color: var(--couleur-texte);
+}
+
+
+/* ---------- 8. VAGUES ENTRE LES SECTIONS ---------- */
+.section,
+.pied {
+  position: relative;
+}
+
+/* Hérite le fond */
+.section::before,
+.pied::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: 0;
+  width: 100%;
+  height: var(--vague-hauteur);
+  background-color: inherit;
+  -webkit-mask: var(--vague-forme) center bottom / 100% 100% no-repeat;
+  mask: var(--vague-forme) center bottom / 100% 100% no-repeat;
+  pointer-events: none;
+  transition: background-color var(--duree-theme) ease;
+}
+
+/* Variation */
+.section:nth-of-type(odd)::before {
+  transform: scaleX(-1);
+}
+
+
+/* ---------- 9. TRANSITIONS & ACCESSIBILITÉ ---------- */
 body,
 body > * {
   transition:

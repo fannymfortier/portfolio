@@ -1,0 +1,93 @@
+/* =========================
+   APROPOS.CSS — section À propos
+   ========================= */
+
+/* ---------- 1. À PROPOS ---------- */
+#about {
+  background-color: var(--couleur-fond);
+}
+
+.apropos__grille {
+  display: grid;
+  gap: var(--espace-xl);
+  align-items: center;
+}
+
+.apropos__photo {
+  position: relative;
+  isolation: isolate;
+  justify-self: center;
+  width: min(70%, 16rem);
+  aspect-ratio: 4 / 5;
+  margin: 0;
+}
+
+.apropos__photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--couleur-accent);
+  border-radius: var(--forme-organique);
+  translate: 0.75rem 0.75rem;
+  rotate: -5deg;
+}
+
+.apropos__photo img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: var(--forme-organique);
+  background-color: var(--couleur-surface);
+  color: transparent;
+  filter: var(--photo-filtre);
+}
+
+.apropos__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--forme-organique);
+  background-color: var(--photo-teinte);
+  opacity: var(--photo-teinte-opacite);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.apropos__contenu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-l);
+}
+
+.apropos__accroche {
+  font-size: var(--taille-accroche);
+  font-weight: var(--graisse-legere);
+  line-height: 1.35;
+}
+
+.apropos__texte {
+  font-size: var(--taille-grand);
+}
+
+@media (min-width: 48rem) {
+  .apropos__grille {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+
+  .apropos__photo {
+    width: 100%;
+  }
+}
+
+@media (min-width: 64rem) {
+  .apropos__grille {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--espace-xxl);
+  }
+
+  .apropos__photo {
+    width: min(100%, 24rem);
+  }
+}

@@ -1,0 +1,38 @@
+/* =========================
+   CONTACT.CSS — section Contact
+   ========================= */
+
+/* ---------- 1. CONTACT ---------- */
+#contact {
+  background-color: var(--couleur-surface);
+}
+
+#contact > .conteneur > p {
+  margin-bottom: var(--espace-xl);
+  font-size: var(--taille-grand);
+  color: var(--couleur-texte-doux);
+}
+
+.contact__liste {
+  display: grid;
+  gap: var(--espace-s);
+  max-width: 36rem;
+}
+
+.contact__liste a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--espace-m) var(--espace-l);
+  border: var(--bordure);
+  border-radius: var(--rayon-petit);
+  background-color: var(--couleur-fond);
+  font-weight: var(--graisse-forte);
+  text-decoration: none;
+  transition: border-color var(--duree-survol) ease, transform var(--duree-survol) ease;
+}
+
+.contact__liste a:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}

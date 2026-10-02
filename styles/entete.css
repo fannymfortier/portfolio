@@ -1,0 +1,227 @@
+/* =========================
+   ENTETE.CSS — en-tête et navigation
+   ========================= */
+
+/* ---------- 1. EN-TÊTE FLOU ---------- */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: var(--bordure);
+  background-color: color-mix(in srgb, var(--couleur-fond) 82%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.entete__interieur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-m);
+  height: var(--entete-hauteur);
+}
+
+.entete__logo {
+  font-family: var(--police-texte);
+  font-size: var(--taille-petit);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--lettres-espacees);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--couleur-logo);
+  transition: color var(--duree-survol) ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.entete__logo:hover,
+.entete__logo:active,
+.entete__logo:focus-visible {
+  color: var(--couleur-logo-actif);
+}
+
+.navigation__liste {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-xl);
+}
+
+.navigation__liste a {
+  font-size: var(--taille-petit);
+  font-weight: var(--graisse-forte);
+  letter-spacing: var(--lettres-espacees);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color var(--duree-survol) ease;
+}
+
+.controles {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-s);
+}
+
+.controles__bouton {
+  padding: 0.4em 1em;
+  border: 1px solid var(--couleur-ligne-forte);
+  border-radius: var(--rayon-pilule);
+  background: transparent;
+  font-size: var(--taille-micro);
+  font-weight: var(--graisse-forte);
+  letter-spacing: var(--lettres-espacees);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color var(--duree-survol) ease, color var(--duree-survol) ease;
+}
+
+.controles__bouton:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}
+
+
+/* Navigation et contrôles */
+.navigation {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--espace-l);
+}
+
+.navigation__liste {
+  margin-inline: auto;
+}
+
+/* Bouton hamburger (Mobile) */
+.entete__menu-bouton {
+  display: none;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--couleur-ligne-forte);
+  border-radius: var(--rayon-pilule);
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Icone Hamburger */
+.entete__menu-icone,
+.entete__menu-icone::before,
+.entete__menu-icone::after {
+  position: absolute;
+  width: 1.1rem;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: transform var(--duree-survol) ease, background-color var(--duree-survol) ease;
+}
+
+.entete__menu-icone {
+  top: calc(50% - 1px);
+  left: calc(50% - 0.55rem);
+}
+
+.entete__menu-icone::before,
+.entete__menu-icone::after {
+  content: "";
+  left: 0;
+}
+
+.entete__menu-icone::before {
+  top: -6px;
+}
+
+.entete__menu-icone::after {
+  top: 6px;
+}
+
+/* Cacher quand menu s'ouvre */
+.entete__menu-bouton[aria-expanded="true"] .entete__menu-icone {
+  background-color: transparent;
+}
+
+.entete__menu-bouton[aria-expanded="true"] .entete__menu-icone::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.entete__menu-bouton[aria-expanded="true"] .entete__menu-icone::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+
+/* ---------- 2. RESPONSIVE ---------- */
+@media (max-width: 48rem) {
+  /* Menu plein écran */
+  .entete__menu-bouton {
+    display: block;
+  }
+
+  .entete__logo {
+    position: relative;
+    z-index: 2;
+  }
+
+  .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--espace-xl);
+    width: 100%;
+    height: calc(var(--entete-hauteur) + 1px);
+    padding: calc(var(--entete-hauteur) + var(--espace-xxl)) var(--gouttiere) var(--espace-xl);
+    overflow: hidden;
+    border-bottom: var(--bordure);
+    background-color: var(--couleur-fond-plein);
+    visibility: hidden;
+    transition:
+      height var(--duree-menu) var(--courbe-menu),
+      visibility 0s linear var(--duree-menu);
+  }
+
+  .navigation--ouverte {
+    height: 100dvh;
+    visibility: visible;
+    transition:
+      height var(--duree-menu) var(--courbe-menu),
+      visibility 0s;
+  }
+
+  .navigation > * {
+    opacity: 0;
+    transform: translateY(-1rem);
+    transition:
+      opacity var(--duree-survol) ease,
+      transform var(--duree-survol) ease;
+  }
+
+  .navigation--ouverte > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--duree-theme) ease calc(var(--duree-menu) / 2),
+      transform var(--duree-theme) var(--courbe-menu) calc(var(--duree-menu) / 2);
+  }
+
+  .navigation__liste {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espace-l);
+    margin-inline: 0;
+  }
+
+  .navigation__liste a {
+    font-family: var(--police-titre);
+    font-size: var(--taille-h2);
+    font-weight: var(--graisse-normale);
+    letter-spacing: 0.02em;
+  }
+
+  .menu-ouvert {
+    overflow: hidden;
+  }
+}
