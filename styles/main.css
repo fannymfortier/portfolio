@@ -131,7 +131,7 @@ body::before {
   background-position: center center;
   
   opacity: 0.15;
-  blend-mode: multiply;
+  mix-blend-mode: multiply;
   
   /* Accessibilité */
   z-index: -1;
