@@ -79,6 +79,7 @@
   --rayon-pilule: 999px;
   --rayon-carte: 0.25rem;
   --rayon-petit: 0.25rem;
+  --rayon-champ: 0.5rem;
   --bordure: 1px solid var(--couleur-ligne);
 
   /* Vagues entre les sections */

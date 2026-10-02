@@ -20,11 +20,14 @@ const CLE_STOCKAGE_THEME = "portfolio-theme";
 const CLE_STOCKAGE_LANGUE = "portfolio-langue";
 const CHEMIN_PROJETS = "data/projects.json";
 const LANGUE_PAR_DEFAUT = "fr";
+const FILTRE_TOUS = "tous";
 
 // État partagé entre les modules
 let langueCourante = LANGUE_PAR_DEFAUT;
 let listeProjets = [];
 let projetsCharges = false;
+let filtreCourant = FILTRE_TOUS;
+let rechercheCourante = "";
 
 
 /* ---------------------------------------------------------
@@ -153,6 +156,7 @@ function changerLangue(nouvelleLangue) {
   langueCourante = nouvelleLangue;
   ecrireStockage(CLE_STOCKAGE_LANGUE, nouvelleLangue);
   appliquerTraductions();
+  afficherFiltres();
   afficherProjets();
   if (projetOuvert) remplirOverlay(projetOuvert);
 }
@@ -179,6 +183,9 @@ function initialiserLangue() {
    ========================================================= */
 const grilleProjets = document.getElementById("grille-projets");
 const gabaritCarte = document.getElementById("gabarit-carte-projet");
+const filtreCategories = document.getElementById("filtre-categories");
+const champRecherche = document.getElementById("recherche-projets");
+const statutProjets = document.getElementById("statut-projets");
 
 async function chargerProjets() {
   try {
@@ -186,6 +193,7 @@ async function chargerProjets() {
     if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
     listeProjets = await reponse.json();
     projetsCharges = true;
+    afficherFiltres();
     afficherProjets();
   } catch (erreur) {
     console.error("Erreur de chargement des projets :", erreur);
@@ -202,7 +210,6 @@ function afficherMessageGrille(cle) {
 }
 
 function afficherProjets() {
-
   if (!projetsCharges) return;
 
   if (listeProjets.length === 0) {
@@ -210,8 +217,71 @@ function afficherProjets() {
     return;
   }
 
-  const cartes = listeProjets.map(creerCarteProjet);
-  grilleProjets.replaceChildren(...cartes);
+  const projetsVisibles = listeProjets.filter(correspondAuFiltre);
+  statutProjets.textContent = traduire("projets.compte").replace("{n}", projetsVisibles.length);
+
+  if (projetsVisibles.length === 0) {
+    afficherMessageGrille("projets.aucunResultat");
+    return;
+  }
+
+  grilleProjets.replaceChildren(...projetsVisibles.map(creerCarteProjet));
+  grilleProjets.scrollLeft = 0;
+}
+
+// Filtre et recherche
+function afficherFiltres() {
+  if (!projetsCharges) return;
+
+  const categories = [FILTRE_TOUS, ...new Set(listeProjets.map((projet) => projet.category))];
+
+  const boutons = categories.map((categorie) => {
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className = "filtre-projets__bouton";
+    bouton.dataset.categorie = categorie;
+    bouton.textContent = traduire(categorie === FILTRE_TOUS ? "filtre.tous" : `categorie.${categorie}`);
+    bouton.setAttribute("aria-pressed", String(categorie === filtreCourant));
+    return bouton;
+  });
+
+  filtreCategories.replaceChildren(...boutons);
+}
+
+function normaliser(texte) {
+  return texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function correspondAuFiltre(projet) {
+  if (filtreCourant !== FILTRE_TOUS && projet.category !== filtreCourant) return false;
+  if (!rechercheCourante) return true;
+
+  const texte = [
+    projet.title,
+    descriptionDe(projet),
+    traduire(`categorie.${projet.category}`),
+    ...(projet.tags ?? [])
+  ].join(" ");
+
+  return normaliser(texte).includes(rechercheCourante);
+}
+
+function initialiserFiltres() {
+  filtreCategories.addEventListener("click", (evenement) => {
+    const bouton = evenement.target.closest("[data-categorie]");
+    if (!bouton) return;
+
+    filtreCourant = bouton.dataset.categorie;
+    filtreCategories.querySelectorAll("[data-categorie]").forEach((autre) => {
+      autre.setAttribute("aria-pressed", String(autre === bouton));
+    });
+    afficherProjets();
+  });
+
+  champRecherche.addEventListener("input", () => {
+    rechercheCourante = normaliser(champRecherche.value.trim());
+    afficherProjets();
+  });
 }
 
 function creerCarteProjet(projet) {
@@ -379,6 +449,7 @@ function initialiserLightbox() {
 initialiserLangue();
 initialiserTheme();
 initialiserMenu();
+initialiserFiltres();
 initialiserOverlay();
 initialiserLightbox();
 chargerProjets();

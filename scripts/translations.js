@@ -29,11 +29,19 @@ export const traductions = {
     "projets.erreur": "Les projets n'ont pas pu être chargés. Actualise la page pour réessayer.",
     "projets.vide": "Aucun projet pour le moment.",
     "projets.agrandir": "Agrandir l'image",
+    "projets.aucunResultat": "Aucun projet ne correspond à cette recherche.",
+    "projets.compte": "{n} projet(s)",
+
+    "filtre.etiquette": "Filtrer par catégorie",
+    "filtre.tous": "Tous",
+    "filtre.recherche": "Rechercher un projet",
 
     "categorie.jeu": "Jeu vidéo",
     "categorie.web": "Site web",
     "categorie.identite": "Identité visuelle",
     "categorie.application": "Application",
+    "categorie.graphisme": "Graphisme",
+    "categorie.autre": "Autre",
 
     "lien.site": "Voir le site",
     "lien.github": "Code sur GitHub",
@@ -71,11 +79,19 @@ export const traductions = {
     "projets.erreur": "Projects couldn't be loaded. Refresh the page to try again.",
     "projets.vide": "No projects yet.",
     "projets.agrandir": "Enlarge image",
+    "projets.aucunResultat": "No project matches this search.",
+    "projets.compte": "{n} project(s)",
+
+    "filtre.etiquette": "Filter by category",
+    "filtre.tous": "All",
+    "filtre.recherche": "Search projects",
 
     "categorie.jeu": "Video game",
     "categorie.web": "Website",
     "categorie.identite": "Visual identity",
     "categorie.application": "App",
+    "categorie.graphisme": "Graphic design",
+    "categorie.autre": "Other",
 
     "lien.site": "Visit site",
     "lien.github": "Code on GitHub",

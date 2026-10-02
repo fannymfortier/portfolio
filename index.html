@@ -77,7 +77,21 @@
         <div class="projets__entete">
           <h2 data-i18n="projets.titre">Projets</h2>
         </div>
-        <div id="grille-projets" class="grille-projets" aria-live="polite">
+
+        <div class="filtre-projets">
+          <div class="filtre-projets__recherche">
+            <label for="recherche-projets" class="visuellement-cache" data-i18n="filtre.recherche">Rechercher un projet</label>
+            <input type="search" id="recherche-projets" class="filtre-projets__champ" autocomplete="off">
+            <svg class="filtre-projets__icone" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="M15.5 15.5 21 21" />
+            </svg>
+          </div>
+          <div id="filtre-categories" class="filtre-projets__categories" role="group" aria-label="Filtrer par catégorie" data-i18n-aria-label="filtre.etiquette"></div>
+        </div>
+        <p id="statut-projets" class="visuellement-cache" aria-live="polite"></p>
+
+        <div id="grille-projets" class="grille-projets">
           <p class="grille-projets__message" data-i18n="projets.chargement">Chargement des projets…</p>
         </div>
       </div>
