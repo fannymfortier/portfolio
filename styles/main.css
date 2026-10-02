@@ -5,19 +5,22 @@
    ========================= */
 
 /* ---------- 1. VARIABLES ---------- */
+
+/* Palette de couleur */
 :root {
   color-scheme: light;
 
-  /* Palette officielle Funky Editorial */
+  /* Palette officielle */
   --charbon: #2f2b3a;
   --charbon-clair: #3a3547;
   --creme: #eae3d6;
   --creme-fonce: #dfd7c8;
   --corail: #ee7360;
 
-  /* Thème clair (par défaut) */
-  --couleur-fond: var(--creme);
-  --couleur-surface: var(--creme-fonce);
+  /* Thème clair - Fonds translucides */
+  --couleur-fond: color-mix(in srgb, var(--creme) 88%, transparent);
+  --couleur-surface: color-mix(in srgb, var(--creme-fonce) 90%, transparent);
+  
   --couleur-texte: var(--charbon);
   --couleur-texte-doux: color-mix(in srgb, var(--charbon) 70%, transparent);
   --couleur-ligne: color-mix(in srgb, var(--charbon) 18%, transparent);
@@ -25,6 +28,7 @@
   --couleur-accent: var(--corail);
   --couleur-accent-texte: var(--corail);
   --couleur-voile: color-mix(in srgb, var(--charbon) 85%, transparent);
+
 
   /* Polices */
   --police-titre: "Anton", Impact, sans-serif;
@@ -81,19 +85,21 @@
   --duree-survol: 0.2s;
 }
 
-
 /* ---------- 2. THÈME SOMBRE ---------- */
 .dark-theme {
   color-scheme: dark;
 
-  --couleur-fond: var(--charbon);
-  --couleur-surface: var(--charbon-clair);
+  /* Thème sombre — Légère transparence pour laisser passer le grain */
+  --couleur-fond: color-mix(in srgb, var(--charbon) 90%, transparent);
+  --couleur-surface: color-mix(in srgb, var(--charbon-clair) 92%, transparent);
+  
   --couleur-texte: var(--creme);
   --couleur-texte-doux: color-mix(in srgb, var(--creme) 70%, transparent);
   --couleur-ligne: color-mix(in srgb, var(--creme) 18%, transparent);
   --couleur-ligne-forte: color-mix(in srgb, var(--creme) 35%, transparent);
   --couleur-accent-texte: var(--corail);
 }
+
 
 
 /* ---------- 3. RESET ---------- */
@@ -111,12 +117,23 @@ figure {
   margin: 0;
 }
 
-/* Texture globale */
-body {
-  position: relative;
-  background-color: var(--couleur-fond, #EAE3D6);
+/* Background */
+html {
+  background-color: var(--creme);
 }
 
+.dark-theme {
+  background-color: var(--charbon);
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+}
+
+/* Texture globale */
 body::before {
   content: "";
   position: fixed;
@@ -125,17 +142,28 @@ body::before {
   width: 100vw;
   height: 100vh;
   
-  /* Image */
+  /* Image Texture */
   background-image: url('../images/texture/rough.png');
   background-repeat: repeat;
   background-position: center center;
   
-  opacity: 0.15;
+  /* Intensité */
+  opacity: 0.3;
   mix-blend-mode: multiply;
   
-  /* Accessibilité */
-  z-index: -1;
+  /* Accessibilité Texture */
+  z-index: 1;
   pointer-events: none;
+}
+
+/* Contenu au dessus de la texture */
+.entete,
+.hero,
+.section,
+.pied,
+.lightbox {
+  position: relative;
+  z-index: 2;
 }
 
 ul[class] {
