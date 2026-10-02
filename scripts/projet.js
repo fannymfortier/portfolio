@@ -1,20 +1,150 @@
 /* =========================================================
-   PROJET.JS — Page projet
+   PROJET.JS — Projets
    ---------------------------------------------------------
-   1. Affichage de la page
-   Les blocs et médias sont dans templates.js
+   1. Chargement et grille de l'accueil (filtre et recherche)
+   2. Page projet
+   Les gabarits (cartes, blocs, médias) sont dans templates.js
    ========================================================= */
 
-import { traduire, texteDe } from "./utilitaire.js";
-import { remplirFiche, marquerVideSiErreur, creerBlocs } from "./templates.js";
+import { CHEMIN_PROJETS, FILTRE_TOUS, traduire, texteDe, chargerJSON, normaliser } from "./utilitaire.js";
+import {
+  remplirFiche,
+  marquerVideSiErreur,
+  creerBlocs,
+  creerCarteProjet,
+  creerBoutonFiltre,
+  creerMessageGrille
+} from "./templates.js";
 
 const page = document.getElementById("page-projet");
 
+// État des projets
+let listeProjets = [];
+let projetsCharges = false;
+let filtreCourant = FILTRE_TOUS;
+let rechercheCourante = "";
+
 
 /* =========================================================
-   1. AFFICHAGE DE LA PAGE
+   1. CHARGEMENT ET GRILLE DE L'ACCUEIL
+   ---------------------------------------------------------
+   Cloner le template de projet pour chaque projet (templates.js)
    ========================================================= */
-export function afficherPageProjet(projets, id) {
+const grilleProjets = document.getElementById("grille-projets");
+const filtreCategories = document.getElementById("filtre-categories");
+const champRecherche = document.getElementById("recherche-projets");
+const statutProjets = document.getElementById("statut-projets");
+const idProjet = new URLSearchParams(window.location.search).get("id");
+
+export async function chargerProjets() {
+  try {
+    listeProjets = await chargerJSON(CHEMIN_PROJETS);
+    projetsCharges = true;
+    afficherLesProjets();
+  } catch (erreur) {
+    console.error("Erreur de chargement des projets :", erreur);
+    if (grilleProjets) afficherMessageGrille("projets.erreur");
+    if (page) afficherPageProjet(null, idProjet);
+  }
+}
+
+// Accueil : grille et filtres. Page projet : le projet demandé dans l'URL.
+export function afficherLesProjets() {
+  if (!projetsCharges) return;
+
+  if (grilleProjets) {
+    afficherFiltres();
+    afficherProjets();
+  }
+
+  if (page) {
+    afficherPageProjet(listeProjets, idProjet);
+  }
+
+  annoncerNouveauContenu();
+}
+
+function afficherMessageGrille(cle) {
+  grilleProjets.replaceChildren(creerMessageGrille(cle));
+}
+
+function afficherProjets() {
+  if (!projetsCharges) return;
+
+  if (listeProjets.length === 0) {
+    afficherMessageGrille("projets.vide");
+    return;
+  }
+
+  const projetsVisibles = listeProjets.filter(correspondAuFiltre);
+  statutProjets.textContent = traduire("projets.compte").replace("{n}", projetsVisibles.length);
+
+  if (projetsVisibles.length === 0) {
+    afficherMessageGrille("projets.aucunResultat");
+    return;
+  }
+
+  grilleProjets.replaceChildren(...projetsVisibles.map(creerCarteProjet));
+  grilleProjets.scrollLeft = 0;
+  annoncerNouveauContenu();
+}
+
+// Filtre et recherche
+function afficherFiltres() {
+  if (!projetsCharges) return;
+
+  const categories = [FILTRE_TOUS, ...new Set(listeProjets.map((projet) => projet.category))];
+
+  const boutons = categories.map((categorie) => creerBoutonFiltre(categorie, categorie === filtreCourant));
+
+  filtreCategories.replaceChildren(...boutons);
+}
+
+
+function correspondAuFiltre(projet) {
+  if (filtreCourant !== FILTRE_TOUS && projet.category !== filtreCourant) return false;
+  if (!rechercheCourante) return true;
+
+  const texte = [
+    projet.title,
+    texteDe(projet, "description"),
+    traduire(`categorie.${projet.category}`),
+    ...(projet.tags ?? [])
+  ].join(" ");
+
+  return normaliser(texte).includes(rechercheCourante);
+}
+
+export function initialiserFiltres() {
+  if (!grilleProjets) return;
+
+  filtreCategories.addEventListener("click", (evenement) => {
+    const bouton = evenement.target.closest("[data-categorie]");
+    if (!bouton) return;
+
+    filtreCourant = bouton.dataset.categorie;
+    filtreCategories.querySelectorAll("[data-categorie]").forEach((autre) => {
+      autre.setAttribute("aria-pressed", String(autre === bouton));
+    });
+    afficherProjets();
+  });
+
+  champRecherche.addEventListener("input", () => {
+    rechercheCourante = normaliser(champRecherche.value.trim());
+    afficherProjets();
+  });
+}
+
+// interactif.js écoute cet événement pour les apparitions au scroll
+function annoncerNouveauContenu() {
+  document.dispatchEvent(new CustomEvent("contenu-ajoute"));
+}
+
+
+/* =========================================================
+   2. PAGE PROJET
+   ========================================================= */
+function afficherPageProjet(projets, id) {
 
   const index = projets ? projets.findIndex((projet) => projet.id === id) : -1;
 

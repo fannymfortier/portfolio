@@ -51,7 +51,7 @@ function cloner(idGabarit) {
    2. TITRE DÉCOUPÉ EN LETTRES
    ---------------------------------------------------------
    data-i18n-lettres="cle" : traduit le texte et met chaque
-   lettre dans un span, pour l'animation d'entrée
+   lettre dans un span, pour les animations
    ========================================================= */
 export function decouperEnLettres(element) {
   element.dataset.texteOriginal ??= element.textContent.trim();
@@ -63,9 +63,19 @@ export function decouperEnLettres(element) {
   // Même texte = on ne rejoue pas l'animation
   if (element.dataset.texte === texte) return;
   element.dataset.texte = texte;
-  element.setAttribute("aria-label", texte);
 
+  // Texte complet pour les lecteurs d'écran, les lettres sont cachées
+  const texteLisible = document.createElement("span");
+  texteLisible.className = "visuellement-cache";
+  texteLisible.textContent = texte;
+
+  // Titre en plusieurs morceaux : les lettres continuent après le morceau précédent
   let index = 0;
+  let precedent = element.previousElementSibling;
+  while (precedent) {
+    index += precedent.querySelectorAll(".decoupe__lettre").length;
+    precedent = precedent.previousElementSibling;
+  }
   const morceaux = texte.split(" ").flatMap((mot, position) => {
     const spanMot = document.createElement("span");
     spanMot.className = "decoupe__mot";
@@ -82,7 +92,7 @@ export function decouperEnLettres(element) {
     return position === 0 ? [spanMot] : [" ", spanMot];
   });
 
-  element.replaceChildren(...morceaux);
+  element.replaceChildren(texteLisible, ...morceaux);
 }
 
 

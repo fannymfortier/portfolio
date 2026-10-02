@@ -333,7 +333,17 @@ body {
 
 .section {
   padding-block: var(--espace-xxl);
-  scroll-margin-top: var(--entete-hauteur);
+}
+
+/* Accueil : le haut des sections s'aligne sous l'en-tête */
+html:has(.hero) {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: var(--entete-hauteur);
+}
+
+.hero,
+.section {
+  scroll-snap-align: start;
 }
 
 

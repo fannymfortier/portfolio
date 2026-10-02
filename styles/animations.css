@@ -9,6 +9,7 @@
   --duree-entree: 0.9s;
   --delai-lettre: 0.05s;
   --vitesse-boil: 0.4s;
+  --delai-cascade: 0.08s;
 }
 
 
@@ -17,6 +18,18 @@
   from {
     opacity: 0;
     transform: translateY(40%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes entrer-rebond {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
   }
 
   to {
@@ -123,5 +136,33 @@
   /* Avec JS, lettre par lettre (edge boil en continu) */
   .hero__nom:has(.decoupe__lettre) {
     animation: bouillir var(--vitesse-boil) steps(1) infinite;
+  }
+}
+
+
+/* ---------- 5. APPARITION AU SCROLL ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .apparition {
+    opacity: 0;
+  }
+
+  .apparition--visible {
+    animation: entrer-rebond 0.8s var(--courbe-rebond) both;
+    animation-delay: calc(var(--rang, 0) * var(--delai-cascade));
+  }
+
+  /* Titres en lettres : ce sont les lettres qui entrent */
+  .apparition:has(.decoupe__lettre) {
+    opacity: 1;
+    animation: none;
+  }
+
+  .apparition .decoupe__lettre {
+    opacity: 0;
+  }
+
+  .apparition--visible .decoupe__lettre {
+    animation: monter-rebond 0.7s var(--courbe-rebond) both;
+    animation-delay: calc(var(--i) * var(--delai-lettre));
   }
 }

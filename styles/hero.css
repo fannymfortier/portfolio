@@ -36,7 +36,7 @@
   line-height: 0.88;
   letter-spacing: 0.01em;
   color: var(--couleur-hero-nom);
-  margin-bottom: calc(var(--espace-m) - var(--titre-debord-bas));
+  margin-bottom: var(--espace-l);
 }
 
 .hero__sous-titre {

@@ -4,35 +4,25 @@
    1. Thème clair / sombre
    2. Menu mobile
    3. Langue FR / EN
-   4. Rendu des projets (data/projects.json)
-   5. Lightbox
+   4. Lightbox
+   5. Apparition au scroll
    6. Initialisation
+   Les projets (grille, filtre, page projet) sont dans projet.js
    ========================================================= */
 
 import {
   CLE_STOCKAGE_THEME,
   CLE_STOCKAGE_LANGUE,
-  CHEMIN_PROJETS,
-  FILTRE_TOUS,
   lireStockage,
   ecrireStockage,
   langueCourante,
   definirLangue,
   traduire,
   chargerTraductions,
-  appliquerTraductions,
-  texteDe,
-  chargerJSON,
-  normaliser
+  appliquerTraductions
 } from "./utilitaire.js";
-import { creerCarteProjet, creerBoutonFiltre, creerMessageGrille, decouperEnLettres } from "./templates.js";
-import { afficherPageProjet } from "./projet.js";
-
-// État de la page
-let listeProjets = [];
-let projetsCharges = false;
-let filtreCourant = FILTRE_TOUS;
-let rechercheCourante = "";
+import { decouperEnLettres } from "./templates.js";
+import { chargerProjets, initialiserFiltres, afficherLesProjets } from "./projet.js";
 
 
 /* =========================================================
@@ -122,7 +112,7 @@ function changerLangue(nouvelleLangue) {
   ecrireStockage(CLE_STOCKAGE_LANGUE, nouvelleLangue);
   appliquerTraductions();
   document.querySelectorAll("[data-i18n-lettres]").forEach(decouperEnLettres);
-  afficherTout();
+  afficherLesProjets();
 }
 
 function initialiserLangue() {
@@ -139,117 +129,7 @@ function initialiserLangue() {
 
 
 /* =========================================================
-   4. RENDU DES PROJETS
-   ---------------------------------------------------------
-   Cloner le template de projet pour chaque projet (templates.js)
-   ========================================================= */
-const grilleProjets = document.getElementById("grille-projets");
-const filtreCategories = document.getElementById("filtre-categories");
-const champRecherche = document.getElementById("recherche-projets");
-const statutProjets = document.getElementById("statut-projets");
-const pageProjet = document.getElementById("page-projet");
-const idProjet = new URLSearchParams(window.location.search).get("id");
-
-async function chargerProjets() {
-  try {
-    listeProjets = await chargerJSON(CHEMIN_PROJETS);
-    projetsCharges = true;
-    afficherTout();
-  } catch (erreur) {
-    console.error("Erreur de chargement des projets :", erreur);
-    if (grilleProjets) afficherMessageGrille("projets.erreur");
-    if (pageProjet) afficherPageProjet(null, idProjet);
-  }
-}
-
-// Accueil : grille et filtres. Page projet : le projet demandé dans l'URL.
-function afficherTout() {
-  if (!projetsCharges) return;
-
-  if (grilleProjets) {
-    afficherFiltres();
-    afficherProjets();
-  }
-
-  if (pageProjet) {
-    afficherPageProjet(listeProjets, idProjet);
-  }
-}
-
-function afficherMessageGrille(cle) {
-  grilleProjets.replaceChildren(creerMessageGrille(cle));
-}
-
-function afficherProjets() {
-  if (!projetsCharges) return;
-
-  if (listeProjets.length === 0) {
-    afficherMessageGrille("projets.vide");
-    return;
-  }
-
-  const projetsVisibles = listeProjets.filter(correspondAuFiltre);
-  statutProjets.textContent = traduire("projets.compte").replace("{n}", projetsVisibles.length);
-
-  if (projetsVisibles.length === 0) {
-    afficherMessageGrille("projets.aucunResultat");
-    return;
-  }
-
-  grilleProjets.replaceChildren(...projetsVisibles.map(creerCarteProjet));
-  grilleProjets.scrollLeft = 0;
-}
-
-// Filtre et recherche
-function afficherFiltres() {
-  if (!projetsCharges) return;
-
-  const categories = [FILTRE_TOUS, ...new Set(listeProjets.map((projet) => projet.category))];
-
-  const boutons = categories.map((categorie) => creerBoutonFiltre(categorie, categorie === filtreCourant));
-
-  filtreCategories.replaceChildren(...boutons);
-}
-
-
-function correspondAuFiltre(projet) {
-  if (filtreCourant !== FILTRE_TOUS && projet.category !== filtreCourant) return false;
-  if (!rechercheCourante) return true;
-
-  const texte = [
-    projet.title,
-    texteDe(projet, "description"),
-    traduire(`categorie.${projet.category}`),
-    ...(projet.tags ?? [])
-  ].join(" ");
-
-  return normaliser(texte).includes(rechercheCourante);
-}
-
-function initialiserFiltres() {
-  filtreCategories.addEventListener("click", (evenement) => {
-    const bouton = evenement.target.closest("[data-categorie]");
-    if (!bouton) return;
-
-    filtreCourant = bouton.dataset.categorie;
-    filtreCategories.querySelectorAll("[data-categorie]").forEach((autre) => {
-      autre.setAttribute("aria-pressed", String(autre === bouton));
-    });
-    afficherProjets();
-  });
-
-  champRecherche.addEventListener("input", () => {
-    rechercheCourante = normaliser(champRecherche.value.trim());
-    afficherProjets();
-  });
-}
-
-
-
-
-
-/* =========================================================
-   5. LIGHTBOX
+   4. LIGHTBOX
    ---------------------------------------------------------
    N'importe quel élément avec data-lightbox="chemin/image.jpg"
    ouvre l'image en grand. Une seule écoute sur le document
@@ -291,6 +171,47 @@ function initialiserLightbox() {
 
 
 /* =========================================================
+   5. APPARITION AU SCROLL
+   ---------------------------------------------------------
+   Les éléments entrent avec un rebond quand ils arrivent
+   à l'écran. Sans JS, tout reste simplement visible.
+   ========================================================= */
+const SELECTEUR_APPARITION = [
+  ".section h2",
+  ".filtre-projets",
+  ".carte-projet",
+  ".apropos__photo",
+  ".apropos__contenu > *",
+  "#contact .conteneur > p",
+  ".contact__liste li",
+  ".projet__couverture",
+  ".projet__blocs > *",
+  ".projet__suivant .conteneur > *"
+].join(", ");
+
+const observateurApparition = new IntersectionObserver((entrees) => {
+  entrees.forEach((entree) => {
+    if (!entree.isIntersecting) return;
+    entree.target.classList.add("apparition--visible");
+    observateurApparition.unobserve(entree.target);
+  });
+}, { rootMargin: "0px 0px -10% 0px" });
+
+function preparerApparitions() {
+  document.querySelectorAll(SELECTEUR_APPARITION).forEach((element) => {
+    if (element.classList.contains("apparition")) return;
+
+    // Les voisins entrent en cascade
+    const rang = [...element.parentElement.children].indexOf(element) % 4;
+    element.style.setProperty("--rang", rang);
+
+    element.classList.add("apparition");
+    observateurApparition.observe(element);
+  });
+}
+
+
+/* =========================================================
    6. INITIALISATION
    ========================================================= */
 // Les lettres d'abord, pour ne pas attendre le chargement des traductions
@@ -300,8 +221,10 @@ await chargerTraductions();
 initialiserLangue();
 initialiserTheme();
 initialiserMenu();
-if (grilleProjets) initialiserFiltres();
+initialiserFiltres();
 initialiserLightbox();
+preparerApparitions();
+document.addEventListener("contenu-ajoute", preparerApparitions);
 chargerProjets();
 
 document.getElementById("annee-courante").textContent = new Date().getFullYear();
