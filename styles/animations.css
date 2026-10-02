@@ -166,3 +166,28 @@
     animation-delay: calc(var(--i) * var(--delai-lettre));
   }
 }
+
+
+/* ---------- 6. CARTES : EDGE BOIL AU SURVOL ---------- */
+/* Seulement le contour bouge, le contenu reste net */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .carte-projet::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border: 2px solid var(--couleur-accent);
+    border-radius: var(--rayon-carte);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duree-survol) ease;
+  }
+
+  .carte-projet:hover {
+    border-color: transparent;
+  }
+
+  .carte-projet:hover::after {
+    opacity: 1;
+    animation: bouillir var(--vitesse-boil) steps(1) infinite;
+  }
+}
