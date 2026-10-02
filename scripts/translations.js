@@ -8,7 +8,17 @@
 
 export const traductions = {
   fr: {
-    "site.nom": "Portfolio",
+    "site.nom": "Fanny Fortier",
+    "site.titre": "Portfolio — Fanny Fortier",
+    "site.description": "Portfolio de Fanny Fortier, designer web & multimédia basée à Montréal.",
+
+    "hero.role": "Intégration multimédia",
+    "hero.lieu": "Montréal, QC",
+    "hero.edition": "Édition 2026",
+    "hero.nom": "FANNY FORTIER",
+    "hero.sousTitre.debut": "Designer web &",
+    "hero.sousTitre.accent": "multimédia",
+    "hero.sousTitre.fin": "",
 
     "nav.etiquette": "Navigation principale",
     "nav.apropos": "À propos",
@@ -49,17 +59,37 @@ export const traductions = {
     "lien.demo": "Démo",
     "lien.video": "Vidéo",
 
-    "contact.titre": "Contact",
-    "contact.texte": "Écrivez-moi pour discuter d'un projet.",
+    "contact.titre.debut": "Discutons d'un",
+    "contact.titre.accent": "projet",
+    "contact.texte": "Basée à Montréal, disponible pour des projets de conception web et de multimédia.",
 
     "lightbox.fermer": "Fermer",
-    "projet.fermer": "Fermer le projet",
+    "projet.retour": "Tous les projets",
+    "projet.annee": "Année",
+    "projet.duree": "Durée",
+    "projet.role": "Rôle",
+    "projet.equipe": "Équipe",
+    "projet.outils": "Outils",
+    "projet.credits": "Crédits",
+    "projet.suivant": "Projet suivant",
+    "projet.introuvable": "Projet introuvable",
+    "projet.video": "Vidéo du projet",
 
     "pied.texte": "Tous droits réservés."
   },
 
   en: {
-    "site.nom": "Portfolio",
+    "site.nom": "Fanny Fortier",
+    "site.titre": "Portfolio — Fanny Fortier",
+    "site.description": "Portfolio of Fanny Fortier, web & multimedia designer based in Montréal.",
+
+    "hero.role": "Multimedia integration",
+    "hero.lieu": "Montréal, QC",
+    "hero.edition": "2026 Edition",
+    "hero.nom": "FANNY FORTIER",
+    "hero.sousTitre.debut": "Web &",
+    "hero.sousTitre.accent": "multimedia",
+    "hero.sousTitre.fin": "designer",
 
     "nav.etiquette": "Main navigation",
     "nav.apropos": "About",
@@ -100,11 +130,21 @@ export const traductions = {
     "lien.demo": "Demo",
     "lien.video": "Video",
 
-    "contact.titre": "Contact",
-    "contact.texte": "Write to me to talk about a project.",
+    "contact.titre.debut": "Let's talk about a",
+    "contact.titre.accent": "project",
+    "contact.texte": "Based in Montréal, available for web design and multimedia projects.",
 
     "lightbox.fermer": "Close",
-    "projet.fermer": "Close project",
+    "projet.retour": "All projects",
+    "projet.annee": "Year",
+    "projet.duree": "Duration",
+    "projet.role": "Role",
+    "projet.equipe": "Team",
+    "projet.outils": "Tools",
+    "projet.credits": "Credits",
+    "projet.suivant": "Next project",
+    "projet.introuvable": "Project not found",
+    "projet.video": "Project video",
 
     "pied.texte": "All rights reserved."
   }

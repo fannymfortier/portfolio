@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="site.titre">Portfolio — Fanny Fortier</title>
+  <meta name="description" data-i18n-content="site.description" content="Portfolio de Fanny Fortier, designer web & multimédia basée à Montréal.">
+
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/composants.css">
+
+  <script type="module" src="scripts/main.js"></script>
+</head>
+
+<body>
+
+  <!-- ========== EN-TÊTE ========== -->
+  <header class="entete">
+    <div class="conteneur entete__interieur">
+
+      <a href="index.html" class="entete__logo" data-i18n="site.nom">Fanny Fortier</a>
+
+      <nav id="navigation-principale" class="navigation" aria-label="Navigation principale" data-i18n-aria-label="nav.etiquette">
+        <ul class="navigation__liste">
+          <li><a href="index.html#projects" data-i18n="nav.projets">Projets</a></li>
+          <li><a href="index.html#about" data-i18n="nav.apropos">À propos</a></li>
+          <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+
+        <div class="controles">
+          <button type="button" id="bouton-theme" class="controles__bouton" aria-pressed="false">
+            <span data-i18n="controles.theme">Mode sombre</span>
+          </button>
+          <button type="button" id="bouton-langue" class="controles__bouton">
+            <span data-i18n="controles.langue">English</span>
+          </button>
+        </div>
+      </nav>
+
+      <button type="button" id="bouton-menu" class="entete__menu-bouton" aria-expanded="false" aria-controls="navigation-principale">
+        <span class="visuellement-cache" data-i18n="menu.ouvrir">Ouvrir le menu</span>
+        <span class="entete__menu-icone" aria-hidden="true"></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- ========== CONTENU PRINCIPAL ========== -->
+  <main id="page-projet" class="projet">
+
+    <!-- ========== ENTÊTE DU PROJET ========== -->
+    <section class="projet__entete">
+      <div class="conteneur">
+        <a href="index.html#projects" class="projet__retour etiquette">← <span data-i18n="projet.retour">Tous les projets</span></a>
+        <p class="projet__categorie"></p>
+        <h1 class="projet__titre"></h1>
+        <p class="projet__description"></p>
+
+        <dl class="projet__fiche">
+          <div data-champ="year">
+            <dt data-i18n="projet.annee">Année</dt>
+            <dd></dd>
+          </div>
+          <div data-champ="duration">
+            <dt data-i18n="projet.duree">Durée</dt>
+            <dd></dd>
+          </div>
+          <div data-champ="role">
+            <dt data-i18n="projet.role">Rôle</dt>
+            <dd></dd>
+          </div>
+          <div data-champ="team">
+            <dt data-i18n="projet.equipe">Équipe</dt>
+            <dd></dd>
+          </div>
+          <div data-champ="tools">
+            <dt data-i18n="projet.outils">Outils</dt>
+            <dd></dd>
+          </div>
+        </dl>
+
+        <ul class="projet__liens"></ul>
+      </div>
+    </section>
+
+    <!-- ========== CONTENU DU PROJET ========== -->
+    <section class="section projet__corps">
+      <div class="conteneur">
+        <figure class="projet__couverture">
+          <button type="button" class="projet__couverture-bouton" data-lightbox>
+            <img src="" alt="">
+          </button>
+        </figure>
+        <div class="projet__blocs"></div>
+      </div>
+    </section>
+
+    <!-- ========== PROJET SUIVANT ========== -->
+    <section class="section projet__suivant">
+      <div class="conteneur">
+        <p class="etiquette" data-i18n="projet.suivant">Projet suivant</p>
+        <a href="" class="projet__suivant-lien"></a>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========== PIED DE PAGE ========== -->
+  <footer class="pied">
+    <div class="conteneur">
+      <p><small>© <span id="annee-courante"></span> <span data-i18n="pied.texte">Tous droits réservés.</span></small></p>
+    </div>
+  </footer>
+
+
+  <!-- ========== GABARITS DES BLOCS ========== -->
+  <template id="gabarit-bloc-texte">
+    <div class="bloc bloc-texte">
+      <h2 class="bloc-texte__titre"></h2>
+      <div class="bloc-texte__paragraphes"></div>
+    </div>
+  </template>
+
+  <template id="gabarit-bloc-media">
+    <figure class="bloc bloc-media">
+      <div class="bloc-media__cadre"></div>
+      <figcaption class="bloc-media__fiche">
+        <p class="bloc-media__legende"></p>
+        <dl class="bloc-media__infos">
+          <div data-champ="tools">
+            <dt data-i18n="projet.outils">Outils</dt>
+            <dd></dd>
+          </div>
+          <div data-champ="credits">
+            <dt data-i18n="projet.credits">Crédits</dt>
+            <dd></dd>
+          </div>
+        </dl>
+      </figcaption>
+    </figure>
+  </template>
+
+  <template id="gabarit-bloc-duo">
+    <div class="bloc bloc-duo">
+      <div class="bloc-duo__media"></div>
+      <div class="bloc-duo__texte">
+        <h2 class="bloc-texte__titre"></h2>
+        <div class="bloc-texte__paragraphes"></div>
+      </div>
+    </div>
+  </template>
+
+
+  <!-- ========== LIGHTBOX ========== -->
+  <dialog id="lightbox" class="lightbox">
+    <button type="button" class="lightbox__fermer" data-i18n-aria-label="lightbox.fermer" aria-label="Fermer">
+      <span aria-hidden="true">×</span>
+    </button>
+    <img class="lightbox__image" src="" alt="">
+  </dialog>
+
+</body>
+</html>

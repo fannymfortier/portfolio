@@ -5,12 +5,12 @@
    2. Menu mobile
    3. Langue FR / EN
    4. Rendu des projets (data/projects.json)
-   5. Overlay projet
-   6. Lightbox
-   7. Initialisation
+   5. Lightbox
+   6. Initialisation
    ========================================================= */
 
 import { traductions } from "./translations.js";
+import { afficherPageProjet } from "./projet.js";
 
 
 /* ---------------------------------------------------------
@@ -150,15 +150,17 @@ function appliquerTraductions() {
   document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
     element.setAttribute("aria-label", traduire(element.dataset.i18nAriaLabel));
   });
+
+  document.querySelectorAll("[data-i18n-content]").forEach((element) => {
+    element.setAttribute("content", traduire(element.dataset.i18nContent));
+  });
 }
 
 function changerLangue(nouvelleLangue) {
   langueCourante = nouvelleLangue;
   ecrireStockage(CLE_STOCKAGE_LANGUE, nouvelleLangue);
   appliquerTraductions();
-  afficherFiltres();
-  afficherProjets();
-  if (projetOuvert) remplirOverlay(projetOuvert);
+  afficherTout();
 }
 
 function initialiserLangue() {
@@ -186,6 +188,8 @@ const gabaritCarte = document.getElementById("gabarit-carte-projet");
 const filtreCategories = document.getElementById("filtre-categories");
 const champRecherche = document.getElementById("recherche-projets");
 const statutProjets = document.getElementById("statut-projets");
+const pageProjet = document.getElementById("page-projet");
+const idProjet = new URLSearchParams(window.location.search).get("id");
 
 async function chargerProjets() {
   try {
@@ -193,11 +197,25 @@ async function chargerProjets() {
     if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
     listeProjets = await reponse.json();
     projetsCharges = true;
-    afficherFiltres();
-    afficherProjets();
+    afficherTout();
   } catch (erreur) {
     console.error("Erreur de chargement des projets :", erreur);
-    afficherMessageGrille("projets.erreur");
+    if (grilleProjets) afficherMessageGrille("projets.erreur");
+    if (pageProjet) afficherPageProjet(null, idProjet, { traduire, langue: langueCourante });
+  }
+}
+
+// Accueil : grille et filtres. Page projet : le projet demandé dans l'URL.
+function afficherTout() {
+  if (!projetsCharges) return;
+
+  if (grilleProjets) {
+    afficherFiltres();
+    afficherProjets();
+  }
+
+  if (pageProjet) {
+    afficherPageProjet(listeProjets, idProjet, { traduire, langue: langueCourante });
   }
 }
 
@@ -292,9 +310,9 @@ function creerCarteProjet(projet) {
   cacherSiErreur(image, image);
   image.src = projet.thumbnail;
 
-  const bouton = carte.querySelector(".carte-projet__bouton");
-  bouton.textContent = projet.title;
-  bouton.addEventListener("click", () => ouvrirProjet(projet));
+  const lien = carte.querySelector(".carte-projet__lien");
+  lien.textContent = projet.title;
+  lien.href = `projet.html?id=${encodeURIComponent(projet.id)}`;
 
   carte.querySelector(".carte-projet__categorie").textContent = traduire(`categorie.${projet.category}`);
   carte.querySelector(".carte-projet__description").textContent = descriptionDe(projet);
@@ -327,82 +345,7 @@ function remplirListe(liste, elements = [], creerItem) {
 
 
 /* =========================================================
-   5. OVERLAY PROJET
-   ========================================================= */
-const overlay = document.getElementById("projet-overlay");
-let projetOuvert = null;
-
-function ouvrirProjet(projet) {
-  projetOuvert = projet;
-  remplirOverlay(projet);
-  overlay.showModal();
-  overlay.scrollTop = 0;
-}
-
-function remplirOverlay(projet) {
-  // Grande image
-  const boutonImage = overlay.querySelector(".projet-overlay__image");
-  const image = boutonImage.querySelector("img");
-  cacherSiErreur(image, boutonImage);
-  image.src = projet.thumbnail;
-  image.alt = projet.title;
-  boutonImage.dataset.lightbox = projet.thumbnail;
-  boutonImage.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${projet.title}`);
-
-  // Textes
-  overlay.querySelector(".projet-overlay__categorie").textContent = traduire(`categorie.${projet.category}`);
-  overlay.querySelector(".projet-overlay__titre").textContent = projet.title;
-  overlay.querySelector(".projet-overlay__description").textContent = descriptionDe(projet);
-  remplirListe(overlay.querySelector(".projet-overlay__tags"), projet.tags, creerTag);
-
-  // Galerie
-  remplirListe(overlay.querySelector(".projet-overlay__galerie"), projet.gallery_images, (source, index) => {
-    const item = document.createElement("li");
-    const bouton = document.createElement("button");
-    const imageGalerie = document.createElement("img");
-
-    bouton.type = "button";
-    bouton.dataset.lightbox = source;
-    bouton.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${projet.title} (${index + 1})`);
-    cacherSiErreur(imageGalerie, item);
-    imageGalerie.src = source;
-    imageGalerie.alt = "";
-    imageGalerie.loading = "lazy";
-
-    bouton.append(imageGalerie);
-    item.append(bouton);
-    return item;
-  });
-
-  // Liens
-  const liensValides = Object.entries(projet.links ?? {}).filter(([, url]) => url);
-  remplirListe(overlay.querySelector(".projet-overlay__liens"), liensValides, ([type, url]) => {
-    const item = document.createElement("li");
-    const lien = document.createElement("a");
-    lien.href = url;
-    lien.target = "_blank";
-    lien.rel = "noopener";
-    lien.textContent = traduire(`lien.${type}`);
-    item.append(lien);
-    return item;
-  });
-}
-
-function initialiserOverlay() {
-  overlay.querySelector(".projet-overlay__fermer").addEventListener("click", () => overlay.close());
-
-  overlay.addEventListener("click", (evenement) => {
-    if (evenement.target === overlay) overlay.close();
-  });
-
-  overlay.addEventListener("close", () => {
-    projetOuvert = null;
-  });
-}
-
-
-/* =========================================================
-   6. LIGHTBOX
+   5. LIGHTBOX
    ---------------------------------------------------------
    N'importe quel élément avec data-lightbox="chemin/image.jpg"
    ouvre l'image en grand. Une seule écoute sur le document
@@ -444,13 +387,12 @@ function initialiserLightbox() {
 
 
 /* =========================================================
-   7. INITIALISATION
+   6. INITIALISATION
    ========================================================= */
 initialiserLangue();
 initialiserTheme();
 initialiserMenu();
-initialiserFiltres();
-initialiserOverlay();
+if (grilleProjets) initialiserFiltres();
 initialiserLightbox();
 chargerProjets();
 

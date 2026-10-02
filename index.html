@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio — Fanny Fortier</title>
-  <meta name="description" content="Portfolio de Fanny Fortier, designer web & multimédia basée à Montréal.">
+  <title data-i18n="site.titre">Portfolio — Fanny Fortier</title>
+  <meta name="description" data-i18n-content="site.description" content="Portfolio de Fanny Fortier, designer web & multimédia basée à Montréal.">
 
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/composants.css">
@@ -51,23 +51,24 @@
 
     <!-- ========== HERO SECTION ========== -->
     <section class="hero">
-      <span class="hero__etiquette hero__etiquette--tl etiquette">Intégration multimédia</span>
-      <span class="hero__etiquette hero__etiquette--tr etiquette">Montréal, QC</span>
+      <span class="hero__etiquette hero__etiquette--tl etiquette" data-i18n="hero.role">Intégration multimédia</span>
+      <span class="hero__etiquette hero__etiquette--tr etiquette" data-i18n="hero.lieu">Montréal, QC</span>
       
       <div class="hero__contenu">
-        <h1 class="hero__nom">FANNY FORTIER</h1>
+        <h1 class="hero__nom" data-i18n="hero.nom">FANNY FORTIER</h1>
         <p class="hero__sous-titre">
-          Designer web & 
+          <span data-i18n="hero.sousTitre.debut">Designer web &amp;</span>
           <span class="hero__mot-accent">
-            <span class="texte-accent">multimédia</span>
+            <span class="texte-accent" data-i18n="hero.sousTitre.accent">multimédia</span>
             <svg class="hero__cercle-svg" viewBox="0 0 240 80" aria-hidden="true">
               <path d="M 10 40 C 20 10, 220 5, 230 40 C 238 70, 15 75, 12 42 C 10 20, 90 12, 180 15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           </span>
+          <span data-i18n="hero.sousTitre.fin"></span>
         </p>
       </div>
 
-      <span class="hero__etiquette hero__etiquette--bl etiquette">Édition 2026</span>
+      <span class="hero__etiquette hero__etiquette--bl etiquette" data-i18n="hero.edition">Édition 2026</span>
       <span class="hero__etiquette hero__etiquette--br etiquette">(01)</span>
     </section>
 
@@ -119,8 +120,9 @@
     <section id="contact" class="section">
       <div class="conteneur">
         <div class="contact__entete">
-          <h2 data-i18n="contact.titre">
-            Discutons d'un <span class="texte-accent">projet</span>
+          <h2>
+            <span data-i18n="contact.titre.debut">Discutons d'un</span>
+            <span class="texte-accent" data-i18n="contact.titre.accent">projet</span>
           </h2>
         </div>
         <p data-i18n="contact.texte">Basée à Montréal, disponible pour des projets de conception web et de multimédia.</p>
@@ -152,32 +154,13 @@
       <div class="carte-projet__contenu">
         <p class="carte-projet__categorie"></p>
         <h3 class="carte-projet__titre">
-          <button type="button" class="carte-projet__bouton" aria-haspopup="dialog"></button>
+          <a href="" class="carte-projet__lien"></a>
         </h3>
         <p class="carte-projet__description"></p>
         <ul class="carte-projet__tags"></ul>
       </div>
     </article>
   </template>
-
-
-  <!-- ========== OVERLAY PROJET ========== -->
-  <dialog id="projet-overlay" class="projet-overlay" aria-labelledby="projet-overlay-titre">
-    <div class="projet-overlay__interieur">
-      <button type="button" class="projet-overlay__fermer" data-i18n-aria-label="projet.fermer" aria-label="Fermer le projet">
-        <span aria-hidden="true">×</span>
-      </button>
-      <button type="button" class="projet-overlay__image" data-lightbox>
-        <img src="" alt="">
-      </button>
-      <p class="projet-overlay__categorie"></p>
-      <h2 id="projet-overlay-titre" class="projet-overlay__titre"></h2>
-      <p class="projet-overlay__description"></p>
-      <ul class="projet-overlay__tags"></ul>
-      <ul class="projet-overlay__galerie"></ul>
-      <ul class="projet-overlay__liens"></ul>
-    </div>
-  </dialog>
 
 
   <!-- ========== LIGHTBOX ========== -->

@@ -5,16 +5,46 @@
     "category": "web",
     "description_fr": "Description du projet à compléter.",
     "description_en": "Project description to come.",
-    "tags": ["HTML", "CSS", "JavaScript"],
-    "thumbnail": "images/projets/economiq/vignette.jpg",
-    "gallery_images": [
-      "images/projets/economiq/galerie-01.jpg",
-      "images/projets/economiq/galerie-02.jpg"
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript"
     ],
+    "thumbnail": "images/projets/economiq/vignette.jpg",
+    "cover": "",
+    "year": "",
+    "duration_fr": "",
+    "duration_en": "",
+    "role_fr": "",
+    "role_en": "",
+    "team_fr": "",
+    "team_en": "",
     "links": {
       "site": "",
       "github": ""
-    }
+    },
+    "content": [
+      {
+        "type": "media",
+        "src": "images/projets/economiq/galerie-01.jpg",
+        "alt_fr": "",
+        "alt_en": "",
+        "caption_fr": "",
+        "caption_en": "",
+        "tools": [],
+        "credits": []
+      },
+      {
+        "type": "media",
+        "src": "images/projets/economiq/galerie-02.jpg",
+        "alt_fr": "",
+        "alt_en": "",
+        "caption_fr": "",
+        "caption_en": "",
+        "tools": [],
+        "credits": []
+      }
+    ]
   },
   {
     "id": "letallurgie",
@@ -22,16 +52,64 @@
     "category": "jeu",
     "description_fr": "Jeu de casse-têtes narratif réalisé en équipe dans Unity, se déroulant dans un village des années 1810.",
     "description_en": "Team-made narrative puzzle game built in Unity, set in an 1810s village.",
-    "tags": ["Unity", "C#", "URP"],
-    "thumbnail": "images/projets/letallurgie/vignette.jpg",
-    "gallery_images": [
-      "images/projets/letallurgie/galerie-01.jpg",
-      "images/projets/letallurgie/galerie-02.jpg"
+    "tags": [
+      "Unity",
+      "C#",
+      "URP"
     ],
+    "thumbnail": "images/projets/letallurgie/vignette.jpg",
+    "cover": "",
+    "year": "",
+    "duration_fr": "",
+    "duration_en": "",
+    "role_fr": "Direction technique",
+    "role_en": "Technical direction",
+    "team_fr": "Équipe",
+    "team_en": "Team",
     "links": {
       "site": "",
       "github": ""
-    }
+    },
+    "content": [
+      {
+        "type": "text",
+        "title_fr": "Le concept",
+        "title_en": "The concept",
+        "text_fr": "Texte à venir.\n\nUne ligne vide entre deux paragraphes crée un nouveau paragraphe.",
+        "text_en": "Text coming soon."
+      },
+      {
+        "type": "media",
+        "src": "images/projets/letallurgie/galerie-01.jpg",
+        "width": "full",
+        "alt_fr": "",
+        "alt_en": "",
+        "caption_fr": "Légende à venir.",
+        "caption_en": "Caption coming soon.",
+        "tools": [
+          "Unity"
+        ],
+        "credits": [
+          "Fanny Fortier"
+        ]
+      },
+      {
+        "type": "duo",
+        "title_fr": "Processus",
+        "title_en": "Process",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon.",
+        "media": {
+          "src": "images/projets/letallurgie/galerie-02.jpg",
+          "alt_fr": "",
+          "alt_en": "",
+          "caption_fr": "",
+          "caption_en": "",
+          "tools": [],
+          "credits": []
+        }
+      }
+    ]
   },
   {
     "id": "studio-tattoo",
@@ -39,14 +117,34 @@
     "category": "identite",
     "description_fr": "Description du projet à compléter.",
     "description_en": "Project description to come.",
-    "tags": ["Figma", "Illustrator"],
-    "thumbnail": "images/projets/studio-tattoo/vignette.jpg",
-    "gallery_images": [
-      "images/projets/studio-tattoo/galerie-01.jpg"
+    "tags": [
+      "Figma",
+      "Illustrator"
     ],
+    "thumbnail": "images/projets/studio-tattoo/vignette.jpg",
+    "cover": "",
+    "year": "",
+    "duration_fr": "",
+    "duration_en": "",
+    "role_fr": "",
+    "role_en": "",
+    "team_fr": "",
+    "team_en": "",
     "links": {
       "site": ""
-    }
+    },
+    "content": [
+      {
+        "type": "media",
+        "src": "images/projets/studio-tattoo/galerie-01.jpg",
+        "alt_fr": "",
+        "alt_en": "",
+        "caption_fr": "",
+        "caption_en": "",
+        "tools": [],
+        "credits": []
+      }
+    ]
   },
   {
     "id": "petit-pas",
@@ -54,9 +152,19 @@
     "category": "application",
     "description_fr": "Description du projet à compléter.",
     "description_en": "Project description to come.",
-    "tags": ["Figma"],
+    "tags": [
+      "Figma"
+    ],
     "thumbnail": "images/projets/petit-pas/vignette.jpg",
-    "gallery_images": [],
-    "links": {}
+    "cover": "",
+    "year": "",
+    "duration_fr": "",
+    "duration_en": "",
+    "role_fr": "",
+    "role_en": "",
+    "team_fr": "",
+    "team_en": "",
+    "links": {},
+    "content": []
   }
 ]
