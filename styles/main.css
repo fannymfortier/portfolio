@@ -80,6 +80,7 @@
   --rayon-carte: 0.25rem;
   --rayon-petit: 0.25rem;
   --rayon-champ: 0.5rem;
+  --forme-organique: 58% 42% 34% 66% / 52% 38% 62% 48%;
   --bordure: 1px solid var(--couleur-ligne);
 
   /* Vagues entre les sections */
@@ -94,7 +95,13 @@
 
   /* Texture */
   --texture-mode: multiply;
-  --texture-opacite: 0.2;
+  --texture-taille: 512px;
+  --texture-opacite: 0.3;
+
+  /* Photo */
+  --photo-filtre: brightness(1.08) contrast(0.92) saturate(1.05);
+  --photo-teinte: #e2869c;
+  --photo-teinte-opacite: 0.2;
 }
 
 /* ---------- 2. THÈME SOMBRE ---------- */
@@ -114,6 +121,8 @@
 
   --texture-mode: screen;
   --texture-opacite: 0.08;
+
+  --photo-filtre: brightness(0.98) contrast(0.95) saturate(1);
 }
 
 
@@ -157,8 +166,9 @@ body::before {
   z-index: 1000;
   pointer-events: none;
 
-  background-image: url('../images/texture/rough.png');
+  background-image: url('../images/texture/rough-tuile.webp');
   background-repeat: repeat;
+  background-size: var(--texture-taille);
 
   opacity: var(--texture-opacite);
   mix-blend-mode: var(--texture-mode);
@@ -227,6 +237,33 @@ h2 {
 h3 {
   font-size: var(--taille-h3);
   line-height: var(--interligne-moyen);
+}
+
+/* Texture dans les titres */
+:is(h1, h2),
+:is(h1, h2) * {
+  background-image:
+    url('../images/texture/rough-tuile.webp'),
+    linear-gradient(currentColor, currentColor);
+  background-size: var(--texture-taille), auto;
+  background-blend-mode: multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:is(h1, h2)::selection,
+:is(h1, h2) *::selection {
+  background-color: var(--couleur-texte);
+  -webkit-text-fill-color: var(--couleur-fond-plein);
+}
+
+@media (forced-colors: active) {
+  :is(h1, h2),
+  :is(h1, h2) * {
+    background-image: none;
+    -webkit-text-fill-color: currentColor;
+  }
 }
 
 p {

@@ -22,7 +22,8 @@ export const traductions = {
     "controles.langue": "English",
 
     "apropos.titre": "À propos",
-    "apropos.texte": "Texte de présentation à venir.",
+    "apropos.accroche": "Étudiante en Intégration Multimédia à Montréal, je conçois des expériences numériques à la frontière du design d'interface, du développement front-end et de la création interactive.",
+    "apropos.texte": "Mon approche privilégie la clarté typographique, l'accessibilité web et des concepts visuels forts sans artifices inutiles.",
 
     "projets.titre": "Projets",
     "projets.chargement": "Chargement des projets…",
@@ -72,7 +73,8 @@ export const traductions = {
     "controles.langue": "Français",
 
     "apropos.titre": "About",
-    "apropos.texte": "Introduction coming soon.",
+    "apropos.accroche": "Introduction coming soon.",
+    "apropos.texte": "More about my path coming soon.",
 
     "projets.titre": "Projects",
     "projets.chargement": "Loading projects…",
