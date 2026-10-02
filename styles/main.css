@@ -20,7 +20,7 @@
   /* Thème clair - Fonds translucides */
   --couleur-fond: color-mix(in srgb, var(--creme) 88%, transparent);
   --couleur-surface: color-mix(in srgb, var(--creme-fonce) 90%, transparent);
-  --couleur-fond-plein: var(--creme); /* pour les menus et overlays */
+  --couleur-fond-plein: var(--creme);
   
   --couleur-texte: var(--charbon);
   --couleur-texte-doux: color-mix(in srgb, var(--charbon) 70%, transparent);
@@ -37,8 +37,6 @@
   --police-texte: "Plus Jakarta Sans", system-ui, sans-serif;
 
   /* Tailles typographiques */
-  /* Échelle fluide : min à 320px, max à 1280px.
-     rem + vw pour que le zoom du navigateur fonctionne */
   --taille-hero: clamp(2.75rem, 0.3333rem + 12.0833vw, 10rem);
   --taille-h1: clamp(2.5rem, 1.3333rem + 5.8333vw, 6rem);
   --taille-h2: clamp(2rem, 1.3333rem + 3.3333vw, 4rem);
@@ -90,6 +88,8 @@
   /* Mouvement */
   --duree-theme: 0.3s;
   --duree-survol: 0.2s;
+  --duree-menu: 0.5s;
+  --courbe-menu: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* Texture */
   --texture-mode: multiply;
@@ -148,7 +148,7 @@ body {
   color: var(--couleur-texte);
 }
 
-/* Texture globale, par-dessus tout (ne bloque pas les clics) */
+/* Texture globale */
 body::before {
   content: "";
   position: fixed;
@@ -163,7 +163,6 @@ body::before {
   mix-blend-mode: var(--texture-mode);
 }
 
-/* hidden gagne toujours, même sur un élément en flex */
 [hidden] {
   display: none !important;
 }

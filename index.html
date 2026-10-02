@@ -22,8 +22,8 @@
 
       <nav id="navigation-principale" class="navigation" aria-label="Navigation principale" data-i18n-aria-label="nav.etiquette">
         <ul class="navigation__liste">
-          <li><a href="#about" data-i18n="nav.apropos">À propos</a></li>
           <li><a href="#projects" data-i18n="nav.projets">Projets</a></li>
+          <li><a href="#about" data-i18n="nav.apropos">À propos</a></li>
           <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
 
@@ -37,7 +37,6 @@
         </div>
       </nav>
 
-      <!-- Visible seulement sur mobile -->
       <button type="button" id="bouton-menu" class="entete__menu-bouton" aria-expanded="false" aria-controls="navigation-principale">
         <span class="visuellement-cache" data-i18n="menu.ouvrir">Ouvrir le menu</span>
         <span class="entete__menu-icone" aria-hidden="true"></span>
@@ -72,6 +71,18 @@
       <span class="hero__etiquette hero__etiquette--br etiquette">(01)</span>
     </section>
 
+    <!-- ========== PROJETS ========== -->
+    <section id="projects" class="section">
+      <div class="conteneur">
+        <div class="projets__entete">
+          <h2 data-i18n="projets.titre">Projets</h2>
+        </div>
+        <div id="grille-projets" class="grille-projets" aria-live="polite">
+          <p class="grille-projets__message" data-i18n="projets.chargement">Chargement des projets…</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== À PROPOS ========== -->
     <section id="about" class="section">
       <div class="conteneur">
@@ -85,18 +96,6 @@
           <p class="apropos__detail">
             Mon approche privilégie la clarté typographique, l'accessibilité web et des concepts visuels forts sans artifices inutiles.
           </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== PROJETS ========== -->
-    <section id="projects" class="section">
-      <div class="conteneur">
-        <div class="projets__entete">
-          <h2 data-i18n="projets.titre">Projets</h2>
-        </div>
-        <div id="grille-projets" class="grille-projets" aria-live="polite">
-          <p class="grille-projets__message" data-i18n="projets.chargement">Chargement des projets…</p>
         </div>
       </div>
     </section>
@@ -147,8 +146,7 @@
   </template>
 
 
-  <!-- ========== OVERLAY PROJET ==========
-       Rempli par main.js avec le projet cliqué -->
+  <!-- ========== OVERLAY PROJET ========== -->
   <dialog id="projet-overlay" class="projet-overlay" aria-labelledby="projet-overlay-titre">
     <div class="projet-overlay__interieur">
       <button type="button" class="projet-overlay__fermer" data-i18n-aria-label="projet.fermer" aria-label="Fermer le projet">

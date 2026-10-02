@@ -84,9 +84,6 @@ function initialiserTheme() {
 
 /* =========================================================
    2. MENU MOBILE
-   ---------------------------------------------------------
-   Sous 48rem, la navigation devient un menu plein écran.
-   Pendant qu'il est ouvert, le reste de la page est inerte.
    ========================================================= */
 const boutonMenu = document.getElementById("bouton-menu");
 const navigation = document.getElementById("navigation-principale");
@@ -111,7 +108,6 @@ function menuEstOuvert() {
 function initialiserMenu() {
   boutonMenu.addEventListener("click", () => basculerMenu(!menuEstOuvert()));
 
-  // Un lien choisi = on ferme pour voir la section
   navigation.addEventListener("click", (evenement) => {
     if (evenement.target.closest("a")) basculerMenu(false);
   });
@@ -123,7 +119,6 @@ function initialiserMenu() {
     }
   });
 
-  // Retour sur grand écran = menu fermé
   ecranMobile.addEventListener("change", () => basculerMenu(false));
 }
 
@@ -223,12 +218,10 @@ function creerCarteProjet(projet) {
   const carte = gabaritCarte.content.firstElementChild.cloneNode(true);
   carte.id = `projet-${projet.id}`;
 
-  // Vignette décorative : le titre suffit pour les lecteurs d'écran
   const image = carte.querySelector(".carte-projet__vignette img");
   cacherSiErreur(image, image);
   image.src = projet.thumbnail;
 
-  // Le titre est un bouton étiré sur toute la carte (voir composants.css)
   const bouton = carte.querySelector(".carte-projet__bouton");
   bouton.textContent = projet.title;
   bouton.addEventListener("click", () => ouvrirProjet(projet));
@@ -250,7 +243,6 @@ function creerTag(tag) {
   return item;
 }
 
-// Image introuvable : on cache l'élément au lieu d'une image brisée
 function cacherSiErreur(image, elementACacher) {
   elementACacher.hidden = false;
   image.onerror = () => {
@@ -258,7 +250,6 @@ function cacherSiErreur(image, elementACacher) {
   };
 }
 
-// Liste vide = cachée (comme ça elle reste réutilisable dans l'overlay)
 function remplirListe(liste, elements = [], creerItem) {
   liste.hidden = elements.length === 0;
   liste.replaceChildren(...elements.map(creerItem));
@@ -267,9 +258,6 @@ function remplirListe(liste, elements = [], creerItem) {
 
 /* =========================================================
    5. OVERLAY PROJET
-   ---------------------------------------------------------
-   Un seul <dialog> réutilisé : on le remplit avec le
-   projet cliqué, puis on l'ouvre.
    ========================================================= */
 const overlay = document.getElementById("projet-overlay");
 let projetOuvert = null;
@@ -282,7 +270,7 @@ function ouvrirProjet(projet) {
 }
 
 function remplirOverlay(projet) {
-  // Grande image (ouvre la lightbox)
+  // Grande image
   const boutonImage = overlay.querySelector(".projet-overlay__image");
   const image = boutonImage.querySelector("img");
   cacherSiErreur(image, boutonImage);
@@ -297,7 +285,7 @@ function remplirOverlay(projet) {
   overlay.querySelector(".projet-overlay__description").textContent = descriptionDe(projet);
   remplirListe(overlay.querySelector(".projet-overlay__tags"), projet.tags, creerTag);
 
-  // Galerie (chaque image ouvre la lightbox)
+  // Galerie
   remplirListe(overlay.querySelector(".projet-overlay__galerie"), projet.gallery_images, (source, index) => {
     const item = document.createElement("li");
     const bouton = document.createElement("button");
@@ -316,7 +304,7 @@ function remplirOverlay(projet) {
     return item;
   });
 
-  // Liens (URL vide = ignoré)
+  // Liens
   const liensValides = Object.entries(projet.links ?? {}).filter(([, url]) => url);
   remplirListe(overlay.querySelector(".projet-overlay__liens"), liensValides, ([type, url]) => {
     const item = document.createElement("li");
@@ -333,7 +321,6 @@ function remplirOverlay(projet) {
 function initialiserOverlay() {
   overlay.querySelector(".projet-overlay__fermer").addEventListener("click", () => overlay.close());
 
-  // Clic à l'extérieur du contenu = fermer
   overlay.addEventListener("click", (evenement) => {
     if (evenement.target === overlay) overlay.close();
   });

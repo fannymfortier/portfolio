@@ -207,7 +207,7 @@
 
 /* ---------- 3. À PROPOS ---------- */
 #about {
-  background-color: var(--couleur-surface);
+  background-color: var(--couleur-fond);
 }
 
 .apropos__entete,
@@ -257,7 +257,7 @@
 
 /* ---------- 4. PROJETS ---------- */
 #projects {
-  background-color: var(--couleur-fond);
+  background-color: var(--couleur-surface);
 }
 
 .grille-projets {
@@ -270,7 +270,7 @@
   color: var(--couleur-texte-doux);
 }
 
-/* Carte de projet : toute la carte est cliquable */
+/* Carte de projet */
 .carte-projet {
   position: relative;
   display: flex;
@@ -279,7 +279,7 @@
   padding: 1.25rem;
   border: var(--bordure);
   border-radius: var(--rayon-carte);
-  background-color: var(--couleur-surface);
+  background-color: var(--couleur-fond);
   transition: border-color var(--duree-survol) ease;
 }
 
@@ -302,7 +302,7 @@
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: var(--rayon-petit);
-  background-color: var(--couleur-fond);
+  background-color: var(--couleur-surface);
 }
 
 .carte-projet__vignette img,
@@ -488,7 +488,6 @@
   background-color: var(--couleur-voile);
 }
 
-/* Pas de défilement de la page derrière un dialog ouvert */
 body:has(dialog[open]) {
   overflow: hidden;
 }
@@ -500,7 +499,6 @@ body:has(dialog[open]) {
   padding: var(--espace-l);
 }
 
-/* Reste visible en haut pendant qu'on défile */
 .projet-overlay__fermer {
   position: sticky;
   top: 0;
@@ -629,21 +627,46 @@ body:has(dialog[open]) {
 
   .navigation {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
     z-index: 1;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--espace-xl);
-    padding: var(--entete-hauteur) var(--gouttiere) var(--espace-xl);
+    width: 100%;
+    height: calc(var(--entete-hauteur) + 1px);
+    padding: calc(var(--entete-hauteur) + var(--espace-xxl)) var(--gouttiere) var(--espace-xl);
+    overflow: hidden;
+    border-bottom: var(--bordure);
     background-color: var(--couleur-fond-plein);
-    opacity: 0;
     visibility: hidden;
-    transition: opacity var(--duree-theme) ease, visibility var(--duree-theme);
+    transition:
+      height var(--duree-menu) var(--courbe-menu),
+      visibility 0s linear var(--duree-menu);
   }
 
   .navigation--ouverte {
-    opacity: 1;
+    height: 100dvh;
     visibility: visible;
+    transition:
+      height var(--duree-menu) var(--courbe-menu),
+      visibility 0s;
+  }
+
+  .navigation > * {
+    opacity: 0;
+    transform: translateY(-1rem);
+    transition:
+      opacity var(--duree-survol) ease,
+      transform var(--duree-survol) ease;
+  }
+
+  .navigation--ouverte > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--duree-theme) ease calc(var(--duree-menu) / 2),
+      transform var(--duree-theme) var(--courbe-menu) calc(var(--duree-menu) / 2);
   }
 
   .navigation__liste {
@@ -660,17 +683,11 @@ body:has(dialog[open]) {
     letter-spacing: 0.02em;
   }
 
-  /* Le flou de l'en-tête empêcherait le menu de couvrir tout l'écran */
-  .menu-ouvert .entete {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
   .menu-ouvert {
     overflow: hidden;
   }
 
-  /* --- Projets : défilement horizontal --- */
+  /* --- Projets : scroll horizontal --- */
   .grille-projets {
     display: flex;
     gap: var(--espace-m);
