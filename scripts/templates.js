@@ -58,8 +58,11 @@ export function decouperEnLettres(element) {
 
   const cle = element.dataset.i18nLettres;
   const traduction = traduire(cle);
-  const texte = traduction === cle ? element.dataset.texteOriginal : traduction;
+  decouperTexte(element, traduction === cle ? element.dataset.texteOriginal : traduction);
+}
 
+// Même chose pour un texte qui ne vient pas des traductions (ex. titre d'un projet)
+export function decouperTexte(element, texte) {
   // Même texte = on ne rejoue pas l'animation
   if (element.dataset.texte === texte) return;
   element.dataset.texte = texte;

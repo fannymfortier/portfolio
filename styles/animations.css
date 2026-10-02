@@ -191,3 +191,53 @@
     animation: bouillir var(--vitesse-boil) steps(1) infinite;
   }
 }
+
+
+/* ---------- 7. PAGE PROJET ---------- */
+/* Démarre quand projet.js a rempli la page (.projet--pret) */
+@media (prefers-reduced-motion: no-preference) {
+  .projet__entete .conteneur > * {
+    opacity: 0;
+  }
+
+  .projet--pret .projet__entete .conteneur > * {
+    animation: entrer-rebond 0.8s var(--courbe-rebond) both;
+  }
+
+  .projet--pret .projet__retour {
+    animation-delay: 0.1s;
+  }
+
+  .projet--pret .projet__categorie {
+    animation-delay: 0.15s;
+  }
+
+  .projet--pret .projet__description {
+    animation-delay: 0.55s;
+  }
+
+  .projet--pret .projet__fiche {
+    animation-delay: 0.7s;
+  }
+
+  .projet--pret .projet__liens {
+    animation-delay: 0.85s;
+  }
+
+  /* Titre : lettre par lettre, puis edge boil en continu */
+  .projet--pret .projet__titre {
+    animation:
+      monter-rebond var(--duree-entree) var(--courbe-rebond) 0.2s both,
+      bouillir var(--vitesse-boil) steps(1) infinite;
+  }
+
+  .projet--pret .projet__titre:has(.decoupe__lettre) {
+    opacity: 1;
+    animation: bouillir var(--vitesse-boil) steps(1) infinite;
+  }
+
+  .projet__titre .decoupe__lettre {
+    animation: monter-rebond 0.7s var(--courbe-rebond) both;
+    animation-delay: calc(0.2s + var(--i) * var(--delai-lettre));
+  }
+}

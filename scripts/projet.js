@@ -13,7 +13,8 @@ import {
   creerBlocs,
   creerCarteProjet,
   creerBoutonFiltre,
-  creerMessageGrille
+  creerMessageGrille,
+  decouperTexte
 } from "./templates.js";
 
 const page = document.getElementById("page-projet");
@@ -161,11 +162,17 @@ function afficherPageProjet(projets, id) {
   remplirCouverture(projet);
   page.querySelector(".projet__blocs").replaceChildren(...creerBlocs(projet.content ?? []));
   remplirSuivant(projets[(index + 1) % projets.length], projets.length > 1);
+
+  // Contenu en place : l'animation d'entrée peut commencer
+  page.classList.add("projet--pret");
 }
 
 function afficherMessage(cle) {
   basculerContenu(false);
-  page.querySelector(".projet__titre").textContent = traduire(cle);
+  const titre = page.querySelector(".projet__titre");
+  titre.textContent = traduire(cle);
+  delete titre.dataset.texte;
+  page.classList.add("projet--pret");
 }
 
 function basculerContenu(visible) {
@@ -177,7 +184,7 @@ function basculerContenu(visible) {
 
 function remplirEntete(projet) {
   page.querySelector(".projet__categorie").textContent = traduire(`categorie.${projet.category}`);
-  page.querySelector(".projet__titre").textContent = projet.title;
+  decouperTexte(page.querySelector(".projet__titre"), projet.title);
   page.querySelector(".projet__description").textContent = texteDe(projet, "description");
 
   remplirFiche(page.querySelector(".projet__fiche"), {

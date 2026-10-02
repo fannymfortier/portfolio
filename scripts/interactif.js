@@ -177,7 +177,7 @@ function initialiserLightbox() {
    à l'écran. Sans JS, tout reste simplement visible.
    ========================================================= */
 const SELECTEUR_APPARITION = [
-  ".section h2",
+  ":is(.projets__entete, .apropos__entete, .contact__entete) h2",
   ".filtre-projets",
   ".carte-projet",
   ".apropos__photo",
