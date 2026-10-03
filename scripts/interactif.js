@@ -36,7 +36,7 @@ const boutonTheme = document.getElementById("bouton-theme");
 function appliquerTheme(estSombre) {
   document.body.classList.toggle("dark-theme", estSombre);
 
-  // Le bouton annonce l'action à venir : "Mode clair" quand on est en sombre
+  // Le bouton annonce l'action à venir : "Clair" quand on est en sombre
   boutonTheme.setAttribute("aria-pressed", String(estSombre));
   const texteBouton = boutonTheme.querySelector("[data-i18n]");
   texteBouton.dataset.i18n = estSombre ? "controles.theme.clair" : "controles.theme";
