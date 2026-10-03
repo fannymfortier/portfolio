@@ -343,7 +343,8 @@ function creerBlocDuo(bloc) {
    5. MÉDIAS (IMAGE, VIDÉO)
    ---------------------------------------------------------
    "src" : image
-   "video" : "youtube:ID", "vimeo:ID" ou chemin d'un .mp4
+   "video" : "youtube:ID", "vimeo:ID", "behance:ID", chemin d'un .mp4
+   ou adresse d'intégration complète (ex. prototype Figma)
    ========================================================= */
 function creerMedia(bloc) {
   const texteAlternatif = texteDe(bloc, "alt");
@@ -376,13 +377,15 @@ function creerVideo(bloc, texteAlternatif) {
   const adresses = {
     youtube: `https://www.youtube-nocookie.com/embed/${id}`,
     vimeo: `https://player.vimeo.com/video/${id}?dnt=1`,
-    behance: `https://www.behance.net/embed/project/${id}?ilo0=1`
+    behance: `https://www.behance.net/embed/project/${id}?ilo0=1`,
+    https: bloc.video
   };
 
   if (adresses[service]) {
     const iframe = document.createElement("iframe");
     iframe.className = `bloc-media__video bloc-media__video--externe bloc-media__video--${service}`;
     iframe.src = adresses[service];
+    if (bloc.ratio) iframe.style.aspectRatio = bloc.ratio;
     iframe.title = texteAlternatif || traduire("projet.video");
     iframe.loading = "lazy";
     iframe.allow = "autoplay; fullscreen; picture-in-picture";

@@ -295,10 +295,20 @@
     "description_en": "Project description to come.",
     "tags": [
       "Figma",
-      "Illustrator"
+      "CSS",
+      "JavaScript"
     ],
-    "thumbnail": "images/projets/mtltattoo/vignette.jpg",
-    "cover": "",
+    "thumbnail": "images/projets/mtltattoo/vignette.webp",
+    "cover": {
+      "src": "images/projets/mtltattoo/poster.webp",
+      "ratio": "1600 / 781",
+      "alt_fr": "Page d'accueil du site de MTL Tattoo",
+      "alt_en": "MTL Tattoo website homepage",
+      "caption_fr": "",
+      "caption_en": "",
+      "tools": [],
+      "credits": []
+    },
     "date": "2025-10",
     "duration_fr": "",
     "duration_en": "",
@@ -307,7 +317,7 @@
     "team_fr": "",
     "team_en": "",
     "links": {
-      "site": ""
+      "prototype": ""
     },
     "content": [
       {
@@ -358,11 +368,121 @@
         ],
         "caption_fr": "",
         "caption_en": "",
-        "tools": [],
+        "tools": [
+          "Figma"
+        ],
         "credits": [
           "Fanny Fortier",
           "Olivia-Ly"
         ]
+      },
+      {
+        "type": "text",
+        "title_fr": "Prototype Figma",
+        "title_en": "Figma prototype",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon."
+      },
+      {
+        "type": "media",
+        "video": "https://embed.figma.com/proto/Vgmkkl2qLoMinMsKCS29to/DOCUMENT-TP2?page-id=60%3A4&node-id=60-7&viewport=354%2C315%2C0.06&scaling=scale-down&content-scaling=fixed&starting-point-node-id=60%3A7&show-proto-sidebar=1&embed-host=share",
+        "alt_fr": "Prototype Figma de la version mobile",
+        "alt_en": "Figma prototype of the mobile version",
+        "caption_fr": "",
+        "caption_en": "",
+        "tools": [
+          "Figma"
+        ],
+        "credits": []
+      },
+      {
+        "type": "text",
+        "title_fr": "Prototype web",
+        "title_en": "Web prototype",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon."
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "images/projets/mtltattoo/site/mobile-1.webp",
+            "ratio": "482 / 940",
+            "alt_fr": "Page d'accueil en version mobile — capture 1",
+            "alt_en": "Homepage, mobile version — screenshot 1"
+          },
+          {
+            "src": "images/projets/mtltattoo/site/mobile-2.webp",
+            "ratio": "482 / 940",
+            "alt_fr": "Page d'accueil en version mobile — capture 2",
+            "alt_en": "Homepage, mobile version — screenshot 2"
+          },
+          {
+            "src": "images/projets/mtltattoo/site/mobile-3.webp",
+            "ratio": "482 / 940",
+            "alt_fr": "Page d'accueil en version mobile — capture 3",
+            "alt_en": "Homepage, mobile version — screenshot 3"
+          }
+        ],
+        "caption_fr": "Mobile",
+        "caption_en": "Mobile",
+        "tools": [],
+        "credits": []
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "images/projets/mtltattoo/site/tablette-1.webp",
+            "ratio": "711 / 941",
+            "alt_fr": "Page d'accueil en version tablette — capture 1",
+            "alt_en": "Homepage, tablet version — screenshot 1"
+          },
+          {
+            "src": "images/projets/mtltattoo/site/tablette-2.webp",
+            "ratio": "711 / 941",
+            "alt_fr": "Page d'accueil en version tablette — capture 2",
+            "alt_en": "Homepage, tablet version — screenshot 2"
+          },
+          {
+            "src": "images/projets/mtltattoo/site/tablette-3.webp",
+            "ratio": "711 / 941",
+            "alt_fr": "Page d'accueil en version tablette — capture 3",
+            "alt_en": "Homepage, tablet version — screenshot 3"
+          }
+        ],
+        "caption_fr": "Tablette",
+        "caption_en": "Tablet",
+        "tools": [],
+        "credits": []
+      },
+      {
+        "type": "gallery",
+        "width": "full",
+        "images": [
+          {
+            "src": "images/projets/mtltattoo/site/desktop-1.webp",
+            "ratio": "1600 / 779",
+            "alt_fr": "Page d'accueil en version desktop — capture 1",
+            "alt_en": "Homepage, desktop version — screenshot 1"
+          },
+          {
+            "src": "images/projets/mtltattoo/site/desktop-2.webp",
+            "ratio": "1600 / 779",
+            "alt_fr": "Page d'accueil en version desktop — capture 2",
+            "alt_en": "Homepage, desktop version — screenshot 2"
+          },
+          {
+            "src": "images/projets/mtltattoo/site/desktop-3.webp",
+            "ratio": "1600 / 779",
+            "alt_fr": "Page d'accueil en version desktop — capture 3",
+            "alt_en": "Homepage, desktop version — screenshot 3"
+          }
+        ],
+        "caption_fr": "Desktop",
+        "caption_en": "Desktop",
+        "tools": [],
+        "credits": []
       }
     ]
   },
