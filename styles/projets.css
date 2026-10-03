@@ -175,6 +175,19 @@
   color: var(--couleur-accent);
 }
 
+.carte-projet__surtitre {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espace-s);
+}
+
+.carte-projet__annee {
+  font-size: var(--taille-micro);
+  font-weight: var(--graisse-forte);
+  letter-spacing: var(--lettres-espacees);
+  color: var(--couleur-texte-doux);
+}
+
 .carte-projet__titre {
   font-size: 1.75rem;
   transition: color var(--duree-survol) ease;

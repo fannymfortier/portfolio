@@ -289,7 +289,7 @@
   },
   {
     "id": "studio-tattoo",
-    "title": "Studio Tattoo",
+    "title": "MTL Tattoo",
     "category": "identite",
     "description_fr": "Description du projet à compléter.",
     "description_en": "Project description to come.",
@@ -334,6 +334,27 @@
     "thumbnail": "images/projets/petit-pas/vignette.jpg",
     "cover": "",
     "date": "2025-03",
+    "duration_fr": "",
+    "duration_en": "",
+    "role_fr": "",
+    "role_en": "",
+    "team_fr": "",
+    "team_en": "",
+    "links": {},
+    "content": []
+  },
+  {
+    "id": "pocmaw-bowling",
+    "title": "PocMaw! Bowling VR",
+    "category": "jeu",
+    "description_fr": "Description du projet à compléter.",
+    "description_en": "Project description to come.",
+    "tags": [
+      "Unity"
+    ],
+    "thumbnail": "images/projets/pocmaw-bowling/vignette.jpg",
+    "cover": "",
+    "date": "2026-09",
     "duration_fr": "",
     "duration_en": "",
     "role_fr": "",

@@ -8,7 +8,7 @@
    5. Médias (image, vidéo)
    ========================================================= */
 
-import { traduire, texteDe, FILTRE_TOUS } from "./utilitaire.js";
+import { traduire, texteDe, anneeDe, FILTRE_TOUS } from "./utilitaire.js";
 
 
 
@@ -152,6 +152,7 @@ export function creerCarteProjet(projet) {
   lien.href = `projet.html?id=${encodeURIComponent(projet.id)}`;
 
   carte.querySelector(".carte-projet__categorie").textContent = traduire(`categorie.${projet.category}`);
+  carte.querySelector(".carte-projet__annee").textContent = anneeDe(projet.date);
   carte.querySelector(".carte-projet__description").textContent = texteDe(projet, "description");
   remplirListe(carte.querySelector(".carte-projet__tags"), projet.tags, creerTag);
 

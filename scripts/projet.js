@@ -6,7 +6,7 @@
    Les gabarits (cartes, blocs, médias) sont dans templates.js
    ========================================================= */
 
-import { CHEMIN_PROJETS, FILTRE_TOUS, traduire, texteDe, chargerJSON, normaliser, formaterDate, trierParDate } from "./utilitaire.js";
+import { CHEMIN_PROJETS, FILTRE_TOUS, traduire, texteDe, chargerJSON, normaliser, anneeDe, trierParDate } from "./utilitaire.js";
 import {
   remplirFiche,
   marquerVideSiErreur,
@@ -202,7 +202,7 @@ function remplirEntete(projet) {
   page.querySelector(".projet__description").textContent = texteDe(projet, "description");
 
   remplirFiche(page.querySelector(".projet__fiche"), {
-    year: formaterDate(projet.date),
+    year: anneeDe(projet.date),
     duration: texteDe(projet, "duration"),
     role: texteDe(projet, "role"),
     team: texteDe(projet, "team"),
