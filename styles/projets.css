@@ -464,11 +464,20 @@ body:has(dialog[open]) {
   margin-top: var(--espace-l);
 }
 
-/* Bloc duo */
+/* Bloc duo : le titre au-dessus, le média et le texte en dessous */
 .bloc-duo {
   display: grid;
   align-items: center;
   gap: var(--espace-l);
+}
+
+.bloc-duo__titre {
+  grid-column: 1 / -1;
+}
+
+/* Mobile : le texte avant le média */
+.bloc-duo__media {
+  order: 2;
 }
 
 /* Projet suivant */
@@ -630,6 +639,10 @@ body:has(dialog[open]) {
   .bloc-duo {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--espace-xl);
+  }
+
+  .bloc-duo__media {
+    order: 0;
   }
 
   .bloc-duo--inverse .bloc-duo__media {
