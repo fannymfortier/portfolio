@@ -97,7 +97,8 @@
   --vague-forme: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0,32 C280,85 520,5 720,48 C920,90 1200,15 1440,55 L1440,120 L0,120 Z'/%3E%3C/svg%3E");
 
   /* Mouvement */
-  --duree-theme: 0.3s;
+  --duree-theme: 0.9s;
+  --courbe-theme: cubic-bezier(0.4, 0, 0.2, 1);
   --duree-survol: 0.2s;
   --duree-menu: 0.5s;
   --courbe-menu: cubic-bezier(0.65, 0, 0.35, 1);
@@ -440,12 +441,22 @@ html:has(.hero) {
 
 
 /* ---------- 9. TRANSITIONS & ACCESSIBILITÉ ---------- */
-body,
-body > * {
-  transition:
-    background-color var(--duree-theme) ease,
-    color var(--duree-theme) ease,
-    border-color var(--duree-theme) ease;
+/* Changement de thème : tout glisse en douceur, comme un gradateur.
+   La classe est ajoutée seulement pendant le changement (interactif.js) */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-en-transition,
+  .theme-en-transition *,
+  .theme-en-transition *::before,
+  .theme-en-transition *::after {
+    transition:
+      background-color var(--duree-theme) var(--courbe-theme),
+      color var(--duree-theme) var(--courbe-theme),
+      border-color var(--duree-theme) var(--courbe-theme),
+      fill var(--duree-theme) var(--courbe-theme),
+      stroke var(--duree-theme) var(--courbe-theme),
+      opacity var(--duree-theme) var(--courbe-theme),
+      filter var(--duree-theme) var(--courbe-theme) !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

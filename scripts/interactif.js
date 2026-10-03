@@ -32,6 +32,15 @@ import { chargerProjets, initialiserFiltres, afficherLesProjets } from "./projet
    via les variables redéfinies dans .dark-theme.
    ========================================================= */
 const boutonTheme = document.getElementById("bouton-theme");
+let minuteurTheme;
+
+// Active la transition douce le temps du changement, puis la retire
+function adoucirChangementTheme() {
+  const duree = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--duree-theme")) * 1000 || 900;
+  document.body.classList.add("theme-en-transition");
+  clearTimeout(minuteurTheme);
+  minuteurTheme = setTimeout(() => document.body.classList.remove("theme-en-transition"), duree + 100);
+}
 
 function appliquerTheme(estSombre) {
   document.body.classList.toggle("dark-theme", estSombre);
@@ -55,6 +64,7 @@ function initialiserTheme() {
 
   boutonTheme.addEventListener("click", () => {
     const devientSombre = !document.body.classList.contains("dark-theme");
+    adoucirChangementTheme();
     appliquerTheme(devientSombre);
     ecrireStockage(CLE_STOCKAGE_THEME, devientSombre ? "sombre" : "clair");
   });
