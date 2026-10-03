@@ -110,10 +110,25 @@
     <!-- ========== CONTENU DU PROJET ========== -->
     <section class="section projet__corps">
       <div class="conteneur">
-        <figure class="projet__couverture">
-          <button type="button" class="projet__couverture-bouton" data-lightbox>
-            <img src="" alt="">
-          </button>
+        <figure class="projet__couverture bloc-media">
+          <div class="bloc-media__cadre">
+            <button type="button" class="projet__couverture-bouton" data-lightbox>
+              <img src="" alt="">
+            </button>
+          </div>
+          <figcaption class="bloc-media__fiche">
+            <p class="bloc-media__legende"></p>
+            <dl class="bloc-media__infos">
+              <div data-champ="tools">
+                <dt data-i18n="projet.outils">Outils</dt>
+                <dd></dd>
+              </div>
+              <div data-champ="credits">
+                <dt data-i18n="projet.credits">Crédits</dt>
+                <dd></dd>
+              </div>
+            </dl>
+          </figcaption>
         </figure>
         <div class="projet__blocs"></div>
       </div>

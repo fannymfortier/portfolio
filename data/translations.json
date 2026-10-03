@@ -42,6 +42,7 @@
     "lien.github": "Code sur GitHub",
     "lien.demo": "Démo",
     "lien.video": "Vidéo",
+    "lien.behance": "Voir sur Behance",
     "contact.titre.debut": "Discutons d'un",
     "contact.titre.accent": "projet",
     "contact.texte": "Basée à Montréal, disponible pour des projets de conception web et de multimédia.",
@@ -55,6 +56,7 @@
     "projet.credits": "Crédits",
     "projet.suivant": "Projet suivant",
     "projet.sousProjet": "Sous-projet",
+    "projet.telechargerPdf": "Télécharger le PDF",
     "projet.introuvable": "Projet introuvable",
     "projet.video": "Vidéo du projet",
     "pied.texte": "Tous droits réservés."
@@ -102,6 +104,7 @@
     "lien.github": "Code on GitHub",
     "lien.demo": "Demo",
     "lien.video": "Video",
+    "lien.behance": "View on Behance",
     "contact.titre.debut": "Let's talk about a",
     "contact.titre.accent": "project",
     "contact.texte": "Based in Montréal, available for web design and multimedia projects.",
@@ -115,6 +118,7 @@
     "projet.credits": "Credits",
     "projet.suivant": "Next project",
     "projet.sousProjet": "Sub-project",
+    "projet.telechargerPdf": "Download the PDF",
     "projet.introuvable": "Project not found",
     "projet.video": "Project video",
     "pied.texte": "All rights reserved."

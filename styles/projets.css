@@ -291,8 +291,13 @@ body:has(dialog[open]) {
   background-color: var(--couleur-surface);
 }
 
-.projet__couverture {
+.projet__corps .projet__couverture {
   margin: 0 0 var(--espace-xxl);
+}
+
+.projet__corps .projet__couverture--verticale {
+  max-width: min(100%, 28rem);
+  margin-inline: auto;
 }
 
 .projet__couverture-bouton,
@@ -309,7 +314,6 @@ body:has(dialog[open]) {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: var(--rayon-carte);
 }
 
 /* Image introuvable */
@@ -436,6 +440,49 @@ body:has(dialog[open]) {
   object-fit: contain;
   border-radius: var(--rayon-petit);
   background-color: var(--couleur-surface);
+}
+
+/* Bloc document */
+.bloc-media__cadre--document {
+  display: flex;
+  gap: var(--espace-m);
+  padding: var(--espace-m);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+}
+
+.bloc-media__cadre--document .bloc-media__image {
+  flex: 0 0 min(75%, 18rem);
+  scroll-snap-align: start;
+}
+
+.bloc-media__cadre--document img {
+  aspect-ratio: 612 / 792;
+  object-fit: cover;
+  border: var(--bordure);
+  border-radius: var(--rayon-petit);
+}
+
+.bloc-media__lien {
+  font-size: var(--taille-petit);
+  font-weight: var(--graisse-forte);
+  color: var(--couleur-accent);
+  text-decoration: none;
+}
+
+.bloc-media__lien:hover {
+  text-decoration: underline;
+}
+
+/* Bloc séquence */
+.bloc-media__cadre--sequence .bloc-media__image.media--en-chargement {
+  aspect-ratio: auto;
+}
+
+/* Carte Behance intégrée */
+.bloc-media__video--behance {
+  aspect-ratio: 404 / 316;
 }
 
 /* Bloc sous-projet */
@@ -618,7 +665,7 @@ body:has(dialog[open]) {
     padding-top: var(--espace-l);
   }
 
-  .projet__couverture {
+  .projet__corps .projet__couverture {
     margin-bottom: var(--espace-xl);
   }
 

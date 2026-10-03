@@ -144,6 +144,7 @@ export function creerCarteProjet(projet) {
   const image = carte.querySelector(".carte-projet__vignette img");
   cacherSiErreur(image, image);
   image.src = projet.thumbnail;
+  image.style.objectPosition = projet.thumbnail_position ?? "";
   suivreChargement(image, carte.querySelector(".carte-projet__vignette"));
 
   const lien = carte.querySelector(".carte-projet__lien");
@@ -206,6 +207,8 @@ function creerBloc(bloc) {
   if (bloc.type === "media") return creerBlocMedia(bloc);
   if (bloc.type === "duo") return creerBlocDuo(bloc);
   if (bloc.type === "gallery") return creerBlocGalerie(bloc);
+  if (bloc.type === "document") return creerBlocDocument(bloc);
+  if (bloc.type === "sequence") return creerBlocSequence(bloc);
   if (bloc.type === "subproject") return creerBlocSousProjet(bloc);
 
   console.warn("Type de bloc inconnu :", bloc.type);
@@ -246,6 +249,38 @@ function creerBlocMedia(bloc) {
 function creerBlocGalerie(bloc) {
   const figure = creerCadreMedia(bloc, (bloc.images ?? []).map(creerMedia));
   figure.querySelector(".bloc-media__cadre").classList.add("bloc-media__cadre--galerie");
+  return figure;
+}
+
+// Pages d'un document qui défilent à l'horizontale, avec le PDF à télécharger
+function creerBlocDocument(bloc) {
+  const figure = creerCadreMedia(bloc, (bloc.pages ?? []).map((src, index) => creerMedia({
+    src,
+    alt_fr: `${texteDe(bloc, "title") || "Document"} — page ${index + 1}`,
+    alt_en: `${texteDe(bloc, "title") || "Document"} — page ${index + 1}`
+  })));
+  figure.querySelector(".bloc-media__cadre").classList.add("bloc-media__cadre--document");
+
+  if (bloc.pdf) {
+    const lien = document.createElement("a");
+    lien.className = "bloc-media__lien";
+    lien.href = bloc.pdf;
+    lien.target = "_blank";
+    lien.rel = "noopener";
+    lien.textContent = `${traduire("projet.telechargerPdf")} ↗`;
+
+    const fiche = figure.querySelector(".bloc-media__fiche");
+    fiche.append(lien);
+    fiche.hidden = false;
+  }
+
+  return figure;
+}
+
+// Images et vidéos collées l'une sous l'autre, comme un seul long fichier
+function creerBlocSequence(bloc) {
+  const figure = creerCadreMedia(bloc, (bloc.items ?? []).map(creerMedia));
+  figure.querySelector(".bloc-media__cadre").classList.add("bloc-media__cadre--sequence");
   return figure;
 }
 
@@ -337,12 +372,16 @@ function creerMedia(bloc) {
 function creerVideo(bloc, texteAlternatif) {
   const [service, id] = bloc.video.split(":");
 
-  if (service === "youtube" || service === "vimeo") {
+  const adresses = {
+    youtube: `https://www.youtube-nocookie.com/embed/${id}`,
+    vimeo: `https://player.vimeo.com/video/${id}?dnt=1`,
+    behance: `https://www.behance.net/embed/project/${id}?ilo0=1`
+  };
+
+  if (adresses[service]) {
     const iframe = document.createElement("iframe");
-    iframe.className = "bloc-media__video bloc-media__video--externe";
-    iframe.src = service === "youtube"
-      ? `https://www.youtube-nocookie.com/embed/${id}`
-      : `https://player.vimeo.com/video/${id}?dnt=1`;
+    iframe.className = `bloc-media__video bloc-media__video--externe bloc-media__video--${service}`;
+    iframe.src = adresses[service];
     iframe.title = texteAlternatif || traduire("projet.video");
     iframe.loading = "lazy";
     iframe.allow = "autoplay; fullscreen; picture-in-picture";
@@ -356,6 +395,7 @@ function creerVideo(bloc, texteAlternatif) {
   video.playsInline = true;
   video.preload = "metadata";
   if (bloc.poster) video.poster = bloc.poster;
+  if (bloc.ratio) video.style.aspectRatio = bloc.ratio;
   if (texteAlternatif) video.setAttribute("aria-label", texteAlternatif);
 
   // Boucle muette, sauf si l'utilisateur préfère moins d'animations

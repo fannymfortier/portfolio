@@ -200,8 +200,13 @@ function remplirEntete(projet) {
   remplirLiens(page.querySelector(".projet__liens"), projet.links);
 }
 
+// "cover" peut être un chemin, ou un objet avec ses crédits comme un bloc média
 function remplirCouverture(projet) {
-  const source = projet.cover || projet.thumbnail;
+  const couverture = projet.cover && typeof projet.cover === "object"
+    ? projet.cover
+    : { src: projet.cover || projet.thumbnail };
+
+  const source = couverture.src;
   const figure = page.querySelector(".projet__couverture");
   const bouton = figure.querySelector("button");
   const image = bouton.querySelector("img");
@@ -209,17 +214,35 @@ function remplirCouverture(projet) {
   figure.hidden = !source;
   if (!source) return;
 
+  // Image verticale : centrée et moins large
+  const [largeur, hauteur] = (couverture.ratio ?? "").split("/").map(Number);
+  figure.classList.toggle("projet__couverture--verticale", hauteur > largeur);
+
   // Seulement au premier affichage, pas à chaque changement de langue
   if (image.dataset.source !== source) {
     image.dataset.source = source;
+    image.style.aspectRatio = couverture.ratio ?? "";
     marquerVideSiErreur(image, bouton);
     bouton.dataset.lightbox = source;
     image.src = source;
     suivreChargement(image, bouton);
   }
 
-  image.alt = projet.title;
-  bouton.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${projet.title}`);
+  const texteAlternatif = texteDe(couverture, "alt") || projet.title;
+  image.alt = texteAlternatif;
+  bouton.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${texteAlternatif}`);
+
+  const legende = figure.querySelector(".bloc-media__legende");
+  legende.textContent = texteDe(couverture, "caption");
+  legende.hidden = !legende.textContent;
+
+  const infos = figure.querySelector(".bloc-media__infos");
+  infos.hidden = remplirFiche(infos, {
+    tools: (couverture.tools ?? []).join(", "),
+    credits: (couverture.credits ?? []).join(", ")
+  }) === 0;
+
+  figure.querySelector(".bloc-media__fiche").hidden = legende.hidden && infos.hidden;
 }
 
 function remplirSuivant(projet, visible) {

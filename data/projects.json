@@ -10,8 +10,18 @@
       "CSS",
       "JavaScript"
     ],
-    "thumbnail": "images/projets/economiq/vignette.jpg",
-    "cover": "",
+    "thumbnail": "images/projets/economiq/poster.png",
+    "thumbnail_position": "top",
+    "cover": {
+      "src": "images/projets/economiq/poster.png",
+      "ratio": "792 / 1224",
+      "alt_fr": "Affiche d'economiQ",
+      "alt_en": "economiQ poster",
+      "caption_fr": "",
+      "caption_en": "",
+      "tools": [],
+      "credits": []
+    },
     "year": "",
     "duration_fr": "",
     "duration_en": "",
@@ -21,24 +31,106 @@
     "team_en": "",
     "links": {
       "site": "",
-      "github": ""
+      "github": "",
+      "behance": "https://www.behance.net/gallery/222622735"
     },
     "content": [
       {
-        "type": "media",
-        "src": "images/projets/economiq/galerie-01.jpg",
-        "alt_fr": "",
-        "alt_en": "",
+        "type": "text",
+        "title_fr": "Idéation du concept",
+        "title_en": "Concept ideation",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon."
+      },
+      {
+        "type": "document",
+        "title_fr": "Document d'idéation",
+        "title_en": "Ideation document",
+        "width": "full",
+        "pages": [
+          "images/projets/economiq/concept/page-01.webp",
+          "images/projets/economiq/concept/page-02.webp",
+          "images/projets/economiq/concept/page-03.webp",
+          "images/projets/economiq/concept/page-04.webp",
+          "images/projets/economiq/concept/page-05.webp",
+          "images/projets/economiq/concept/page-06.webp",
+          "images/projets/economiq/concept/page-07.webp",
+          "images/projets/economiq/concept/page-08.webp",
+          "images/projets/economiq/concept/page-09.webp"
+        ],
+        "pdf": "images/projets/economiq/concept.pdf",
         "caption_fr": "",
         "caption_en": "",
         "tools": [],
         "credits": []
       },
       {
-        "type": "media",
-        "src": "images/projets/economiq/galerie-02.jpg",
-        "alt_fr": "",
-        "alt_en": "",
+        "type": "text",
+        "title_fr": "Présentation finale",
+        "title_en": "Final presentation",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon."
+      },
+      {
+        "type": "sequence",
+        "items": [
+          {
+            "src": "images/projets/economiq/presentation/partie-01.webp",
+            "ratio": "1",
+            "alt_fr": "Logo d'economiQ sur une grande feuille",
+            "alt_en": "economiQ logo on a large leaf"
+          },
+          {
+            "src": "images/projets/economiq/presentation/partie-02.webp",
+            "ratio": "1",
+            "alt_fr": "La surconsommation et notre solution",
+            "alt_en": "Overconsumption and our solution"
+          },
+          {
+            "src": "images/projets/economiq/presentation/partie-03.webp",
+            "ratio": "1",
+            "alt_fr": "Le projet, l'objectif et les fonctionnalités de l'application",
+            "alt_en": "The project, its goal and the app's features"
+          },
+          {
+            "video": "images/projets/economiq/presentation/demo.mp4",
+            "poster": "images/projets/economiq/presentation/video-affiche.webp",
+            "ratio": "16 / 9",
+            "loop": true,
+            "alt_fr": "Démo animée de la navigation dans l'application",
+            "alt_en": "Animated demo of navigating the app"
+          },
+          {
+            "src": "images/projets/economiq/presentation/partie-04.webp",
+            "ratio": "1",
+            "alt_fr": "L'identité visuelle : étymologie, logo et icônes",
+            "alt_en": "Visual identity: etymology, logo and icons"
+          },
+          {
+            "src": "images/projets/economiq/presentation/partie-05.webp",
+            "ratio": "1",
+            "alt_fr": "Fin des icônes de l'identité visuelle",
+            "alt_en": "Visual identity icons, continued"
+          },
+          {
+            "src": "images/projets/economiq/presentation/partie-06.webp",
+            "ratio": "1",
+            "alt_fr": "Maquettes des écrans Connexion et Tableau de bord",
+            "alt_en": "Login and Dashboard screen mockups"
+          },
+          {
+            "src": "images/projets/economiq/presentation/partie-07.webp",
+            "ratio": "1",
+            "alt_fr": "Maquettes des écrans Calendrier et Énergie solaire",
+            "alt_en": "Calendar and Solar energy screen mockups"
+          },
+          {
+            "src": "images/projets/economiq/presentation/partie-08.webp",
+            "ratio": "1",
+            "alt_fr": "Maquette de l'écran Guides et section Derrière le projet",
+            "alt_en": "Guides screen mockup and Behind the project section"
+          }
+        ],
         "caption_fr": "",
         "caption_en": "",
         "tools": [],
@@ -58,7 +150,20 @@
       "Cinemachine"
     ],
     "thumbnail": "images/projets/letallurgie/vignette.png",
-    "cover": "images/projets/letallurgie/poster.png",
+    "cover": {
+      "src": "images/projets/letallurgie/poster.png",
+      "ratio": "2550 / 1650",
+      "alt_fr": "Affiche de Létallurgie",
+      "alt_en": "Létallurgie poster",
+      "caption_fr": "",
+      "caption_en": "",
+      "tools": [
+        "Adobe Photoshop"
+      ],
+      "credits": [
+        "Olivier Paulin"
+      ]
+    },
     "year": "",
     "duration_fr": "",
     "duration_en": "",
