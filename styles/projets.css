@@ -233,7 +233,8 @@ body:has(dialog[open]) {
 }
 
 /* Fiche */
-.projet__fiche {
+.projet__fiche,
+.bloc-sousprojet__fiche {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: var(--espace-m) var(--espace-l);
@@ -243,6 +244,7 @@ body:has(dialog[open]) {
 }
 
 .projet__fiche dt,
+.bloc-sousprojet__fiche dt,
 .bloc-media__infos dt {
   font-size: var(--taille-micro);
   font-weight: var(--graisse-forte);
@@ -251,19 +253,22 @@ body:has(dialog[open]) {
   color: var(--couleur-texte-doux);
 }
 
-.projet__fiche dd {
+.projet__fiche dd,
+.bloc-sousprojet__fiche dd {
   margin: var(--espace-xs) 0 0;
   font-weight: var(--graisse-moyenne);
 }
 
-.projet__liens {
+.projet__liens,
+.bloc-sousprojet__liens {
   display: flex;
   flex-wrap: wrap;
   gap: var(--espace-s);
   margin-top: var(--espace-m);
 }
 
-.projet__liens a {
+.projet__liens a,
+.bloc-sousprojet__liens a {
   display: inline-block;
   padding: 0.5em 1.1em;
   border: 1px solid var(--couleur-ligne-forte);
@@ -276,7 +281,8 @@ body:has(dialog[open]) {
   transition: border-color var(--duree-survol) ease, color var(--duree-survol) ease;
 }
 
-.projet__liens a:hover {
+.projet__liens a:hover,
+.bloc-sousprojet__liens a:hover {
   border-color: var(--couleur-accent);
 }
 
@@ -330,7 +336,8 @@ body:has(dialog[open]) {
 }
 
 .projet__blocs > .bloc-media--pleine,
-.projet__blocs > .bloc-duo {
+.projet__blocs > .bloc-duo,
+.projet__blocs > .bloc-sousprojet {
   grid-column: 1 / -1;
 }
 
@@ -414,6 +421,47 @@ body:has(dialog[open]) {
   margin: 0;
   font-size: var(--taille-petit);
   font-weight: var(--graisse-moyenne);
+}
+
+/* Bloc galerie */
+.bloc-media__cadre--galerie {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: var(--espace-s);
+  padding: var(--espace-s);
+}
+
+.bloc-media__cadre--galerie img {
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: var(--rayon-petit);
+  background-color: var(--couleur-surface);
+}
+
+/* Bloc sous-projet */
+.bloc-sousprojet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-m);
+  padding: var(--espace-xl) var(--espace-l);
+  border: var(--bordure);
+  border-radius: var(--rayon-carte);
+  background-color: var(--couleur-fond);
+}
+
+.bloc-sousprojet__titre {
+  font-size: var(--taille-intertitre);
+}
+
+.bloc-sousprojet__description {
+  font-size: var(--taille-grand);
+}
+
+.bloc-sousprojet__blocs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-xl);
+  margin-top: var(--espace-l);
 }
 
 /* Bloc duo */
@@ -571,6 +619,10 @@ body:has(dialog[open]) {
 
   .bloc-media__fiche {
     flex-direction: column;
+  }
+
+  .bloc-sousprojet {
+    padding: var(--espace-l) var(--espace-m);
   }
 }
 

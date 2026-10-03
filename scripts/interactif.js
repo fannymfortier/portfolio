@@ -21,7 +21,7 @@ import {
   chargerTraductions,
   appliquerTraductions
 } from "./utilitaire.js";
-import { decouperEnLettres } from "./templates.js";
+import { decouperEnLettres, suivreChargement } from "./templates.js";
 import { chargerProjets, initialiserFiltres, afficherLesProjets } from "./projet.js";
 
 
@@ -224,6 +224,9 @@ initialiserMenu();
 initialiserFiltres();
 initialiserLightbox();
 preparerApparitions();
+
+const portrait = document.querySelector(".apropos__photo img");
+if (portrait) suivreChargement(portrait, portrait.parentElement);
 document.addEventListener("contenu-ajoute", preparerApparitions);
 chargerProjets();
 

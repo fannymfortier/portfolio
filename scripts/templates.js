@@ -28,6 +28,41 @@ export function remplirFiche(fiche, valeurs) {
 }
 
 // Image introuvable : on garde le cadre vide plutôt qu'une image brisée
+// Liens externes en pilules (URL vide = ignoré)
+export function remplirLiens(liste, liens = {}) {
+  const valides = Object.entries(liens).filter(([, url]) => url);
+
+  liste.hidden = valides.length === 0;
+  liste.replaceChildren(...valides.map(([type, url]) => {
+    const item = document.createElement("li");
+    const lien = document.createElement("a");
+    lien.href = url;
+    lien.target = "_blank";
+    lien.rel = "noopener";
+    lien.textContent = `${traduire(`lien.${type}`)} ↗`;
+    item.append(lien);
+    return item;
+  }));
+}
+
+// Gribouillis pendant le chargement, puis l'image se développe.
+// À appeler après avoir mis le src. Image déjà en cache = rien à faire.
+export function suivreChargement(image, cadre) {
+  if (image.complete && image.naturalWidth > 0) return;
+
+  cadre.classList.remove("media--developpee");
+  cadre.classList.add("media--en-chargement");
+
+  image.addEventListener("load", () => {
+    cadre.classList.remove("media--en-chargement");
+    cadre.classList.add("media--developpee");
+  }, { once: true });
+
+  image.addEventListener("error", () => {
+    cadre.classList.remove("media--en-chargement");
+  }, { once: true });
+}
+
 export function marquerVideSiErreur(image, cadre) {
   cadre.classList.remove("media--vide");
   image.onerror = () => {
@@ -109,6 +144,7 @@ export function creerCarteProjet(projet) {
   const image = carte.querySelector(".carte-projet__vignette img");
   cacherSiErreur(image, image);
   image.src = projet.thumbnail;
+  suivreChargement(image, carte.querySelector(".carte-projet__vignette"));
 
   const lien = carte.querySelector(".carte-projet__lien");
   lien.textContent = projet.title;
@@ -169,6 +205,8 @@ function creerBloc(bloc) {
   if (bloc.type === "text") return creerBlocTexte(bloc);
   if (bloc.type === "media") return creerBlocMedia(bloc);
   if (bloc.type === "duo") return creerBlocDuo(bloc);
+  if (bloc.type === "gallery") return creerBlocGalerie(bloc);
+  if (bloc.type === "subproject") return creerBlocSousProjet(bloc);
 
   console.warn("Type de bloc inconnu :", bloc.type);
   return null;
@@ -201,10 +239,22 @@ function creerBlocTexte(bloc) {
 }
 
 function creerBlocMedia(bloc) {
+  return creerCadreMedia(bloc, [creerMedia(bloc)]);
+}
+
+// Plusieurs images dans un seul cadre, avec une seule légende
+function creerBlocGalerie(bloc) {
+  const figure = creerCadreMedia(bloc, (bloc.images ?? []).map(creerMedia));
+  figure.querySelector(".bloc-media__cadre").classList.add("bloc-media__cadre--galerie");
+  return figure;
+}
+
+// Cadre média : le ou les médias, puis légende, outils et crédits
+function creerCadreMedia(bloc, medias) {
   const figure = cloner("gabarit-bloc-media");
   if (bloc.width === "full") figure.classList.add("bloc-media--pleine");
 
-  figure.querySelector(".bloc-media__cadre").append(creerMedia(bloc));
+  figure.querySelector(".bloc-media__cadre").append(...medias);
 
   const legende = figure.querySelector(".bloc-media__legende");
   legende.textContent = texteDe(bloc, "caption");
@@ -219,6 +269,28 @@ function creerBlocMedia(bloc) {
 
   figure.querySelector(".bloc-media__fiche").hidden = legende.hidden && infos.hidden;
   return figure;
+}
+
+// Sous-projet : sa propre fiche, ses liens et ses blocs
+function creerBlocSousProjet(bloc) {
+  const element = cloner("gabarit-bloc-sousprojet");
+
+  element.querySelector(".bloc-sousprojet__titre").textContent = texteDe(bloc, "title");
+
+  const description = element.querySelector(".bloc-sousprojet__description");
+  description.textContent = texteDe(bloc, "description");
+  description.hidden = !description.textContent;
+
+  const fiche = element.querySelector(".bloc-sousprojet__fiche");
+  fiche.hidden = remplirFiche(fiche, {
+    role: texteDe(bloc, "role"),
+    team: texteDe(bloc, "team"),
+    tools: (bloc.tools ?? []).join(", ")
+  }) === 0;
+
+  remplirLiens(element.querySelector(".bloc-sousprojet__liens"), bloc.links);
+  element.querySelector(".bloc-sousprojet__blocs").replaceChildren(...creerBlocs(bloc.content ?? []));
+  return element;
 }
 
 function creerBlocDuo(bloc) {
@@ -255,6 +327,8 @@ function creerMedia(bloc) {
   image.src = bloc.src ?? "";
   image.alt = texteAlternatif;
   image.loading = "lazy";
+  if (bloc.ratio) image.style.aspectRatio = bloc.ratio;
+  suivreChargement(image, bouton);
 
   bouton.append(image);
   return bouton;

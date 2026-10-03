@@ -54,6 +54,7 @@
     "projet.outils": "Outils",
     "projet.credits": "Crédits",
     "projet.suivant": "Projet suivant",
+    "projet.sousProjet": "Sous-projet",
     "projet.introuvable": "Projet introuvable",
     "projet.video": "Vidéo du projet",
     "pied.texte": "Tous droits réservés."
@@ -113,6 +114,7 @@
     "projet.outils": "Tools",
     "projet.credits": "Credits",
     "projet.suivant": "Next project",
+    "projet.sousProjet": "Sub-project",
     "projet.introuvable": "Project not found",
     "projet.video": "Project video",
     "pied.texte": "All rights reserved."

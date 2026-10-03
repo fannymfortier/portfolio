@@ -14,7 +14,9 @@ import {
   creerCarteProjet,
   creerBoutonFiltre,
   creerMessageGrille,
-  decouperTexte
+  decouperTexte,
+  remplirLiens,
+  suivreChargement
 } from "./templates.js";
 
 const page = document.getElementById("page-projet");
@@ -195,20 +197,7 @@ function remplirEntete(projet) {
     tools: (projet.tags ?? []).join(", ")
   });
 
-  const liste = page.querySelector(".projet__liens");
-  const liens = Object.entries(projet.links ?? {}).filter(([, url]) => url);
-
-  liste.hidden = liens.length === 0;
-  liste.replaceChildren(...liens.map(([type, url]) => {
-    const item = document.createElement("li");
-    const lien = document.createElement("a");
-    lien.href = url;
-    lien.target = "_blank";
-    lien.rel = "noopener";
-    lien.textContent = `${traduire(`lien.${type}`)} ↗`;
-    item.append(lien);
-    return item;
-  }));
+  remplirLiens(page.querySelector(".projet__liens"), projet.links);
 }
 
 function remplirCouverture(projet) {
@@ -226,6 +215,7 @@ function remplirCouverture(projet) {
     marquerVideSiErreur(image, bouton);
     bouton.dataset.lightbox = source;
     image.src = source;
+    suivreChargement(image, bouton);
   }
 
   image.alt = projet.title;

@@ -57,8 +57,8 @@
       "C#",
       "URP"
     ],
-    "thumbnail": "images/projets/letallurgie/vignette.jpg",
-    "cover": "",
+    "thumbnail": "images/projets/letallurgie/vignette.png",
+    "cover": "images/projets/letallurgie/poster.png",
     "year": "",
     "duration_fr": "",
     "duration_en": "",
@@ -72,42 +72,111 @@
     },
     "content": [
       {
-        "type": "text",
+        "type": "media",
+        "video": "youtube:HTk9IHFB4QU",
+        "width": "full",
+        "alt_fr": "Bande-annonce de Létallurgie",
+        "alt_en": "Létallurgie trailer",
+        "caption_fr": "",
+        "caption_en": "",
+        "tools": [
+          "Adobe Premiere Pro"
+        ],
+        "credits": [
+          "Olivier Paulin"
+        ]
+      },
+      {
+        "type": "duo",
         "title_fr": "Le concept",
         "title_en": "The concept",
-        "text_fr": "Texte à venir.\n\nUne ligne vide entre deux paragraphes crée un nouveau paragraphe.",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon.",
+        "media": {
+          "video": "youtube:ruVGXFU7sP8",
+          "alt_fr": "Vidéo de présentation du concept",
+          "alt_en": "Concept presentation video",
+          "caption_fr": "",
+          "caption_en": "",
+          "tools": [
+            "Microsoft PowerPoint"
+          ],
+          "credits": [
+            "Fanny Fortier"
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title_fr": "L'interface d'inventaire",
+        "title_en": "The inventory UI",
+        "text_fr": "Texte à venir.",
         "text_en": "Text coming soon."
       },
       {
-        "type": "media",
-        "src": "images/projets/letallurgie/galerie-01.jpg",
-        "width": "full",
-        "alt_fr": "",
-        "alt_en": "",
-        "caption_fr": "Légende à venir.",
-        "caption_en": "Caption coming soon.",
+        "type": "gallery",
+        "images": [
+          {
+            "src": "images/projets/letallurgie/small-img1.png",
+            "alt_fr": "Illustration de l'interface d'inventaire (1)",
+            "alt_en": "Inventory UI illustration (1)"
+          },
+          {
+            "src": "images/projets/letallurgie/small-img2.png",
+            "alt_fr": "Illustration de l'interface d'inventaire (2)",
+            "alt_en": "Inventory UI illustration (2)"
+          },
+          {
+            "src": "images/projets/letallurgie/small-img3.png",
+            "alt_fr": "Illustration de l'interface d'inventaire (3)",
+            "alt_en": "Inventory UI illustration (3)"
+          }
+        ],
+        "caption_fr": "",
+        "caption_en": "",
         "tools": [
-          "Unity"
+          "Adobe Illustrator"
         ],
         "credits": [
           "Fanny Fortier"
         ]
       },
       {
-        "type": "duo",
-        "title_fr": "Processus",
-        "title_en": "Process",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon.",
-        "media": {
-          "src": "images/projets/letallurgie/galerie-02.jpg",
-          "alt_fr": "",
-          "alt_en": "",
-          "caption_fr": "",
-          "caption_en": "",
-          "tools": [],
-          "credits": []
-        }
+        "type": "subproject",
+        "title_fr": "Site web promotionnel",
+        "title_en": "Promotional website",
+        "description_fr": "Texte à venir.",
+        "description_en": "Text coming soon.",
+        "role_fr": "Design et développement front-end",
+        "role_en": "Design and front-end development",
+        "team_fr": "Équipe de 2, avec Olivier Vernet (back-end)",
+        "team_en": "Team of 2, with Olivier Vernet (back-end)",
+        "tools": [
+          "React"
+        ],
+        "links": {
+          "site": "",
+          "github": ""
+        },
+        "content": [
+          {
+            "type": "media",
+            "src": "images/projets/letallurgie/screenshot.png",
+            "width": "full",
+            "ratio": "1455 / 941",
+            "alt_fr": "Section d'accueil du site promotionnel de Létallurgie",
+            "alt_en": "Hero section of the Létallurgie promotional website",
+            "caption_fr": "",
+            "caption_en": "",
+            "tools": [
+              "React"
+            ],
+            "credits": [
+              "Fanny Fortier (design, front-end)",
+              "Olivier Vernet (back-end)"
+            ]
+          }
+        ]
       }
     ]
   },
