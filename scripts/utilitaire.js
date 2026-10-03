@@ -107,6 +107,24 @@ export async function chargerJSON(chemin) {
   return reponse.json();
 }
 
+// "2026-05" → "Mai 2026" / "May 2026"
+export function formaterDate(date) {
+  if (!date) return "";
+  const [annee, mois] = date.split("-").map(Number);
+  if (!mois) return String(annee);
+
+  const texte = new Date(annee, mois - 1).toLocaleDateString(langueCourante, { month: "long", year: "numeric" });
+  return texte.charAt(0).toUpperCase() + texte.slice(1);
+}
+
+// Plus récent en premier, ou l'inverse. Sans date = toujours à la fin.
+export function trierParDate(projets, ordre = "recent") {
+  return [...projets].sort((a, b) => {
+    if (!a.date || !b.date) return !a.date - !b.date;
+    return ordre === "recent" ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date);
+  });
+}
+
 export function normaliser(texte) {
   return texte.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }

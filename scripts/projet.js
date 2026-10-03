@@ -6,7 +6,7 @@
    Les gabarits (cartes, blocs, médias) sont dans templates.js
    ========================================================= */
 
-import { CHEMIN_PROJETS, FILTRE_TOUS, traduire, texteDe, chargerJSON, normaliser } from "./utilitaire.js";
+import { CHEMIN_PROJETS, FILTRE_TOUS, traduire, texteDe, chargerJSON, normaliser, formaterDate, trierParDate } from "./utilitaire.js";
 import {
   remplirFiche,
   marquerVideSiErreur,
@@ -26,6 +26,7 @@ let listeProjets = [];
 let projetsCharges = false;
 let filtreCourant = FILTRE_TOUS;
 let rechercheCourante = "";
+let ordreCourant = "recent";
 
 
 /* =========================================================
@@ -37,11 +38,12 @@ const grilleProjets = document.getElementById("grille-projets");
 const filtreCategories = document.getElementById("filtre-categories");
 const champRecherche = document.getElementById("recherche-projets");
 const statutProjets = document.getElementById("statut-projets");
+const boutonTri = document.getElementById("tri-projets");
 const idProjet = new URLSearchParams(window.location.search).get("id");
 
 export async function chargerProjets() {
   try {
-    listeProjets = await chargerJSON(CHEMIN_PROJETS);
+    listeProjets = trierParDate(await chargerJSON(CHEMIN_PROJETS));
     projetsCharges = true;
     afficherLesProjets();
   } catch (erreur) {
@@ -79,7 +81,7 @@ function afficherProjets() {
     return;
   }
 
-  const projetsVisibles = listeProjets.filter(correspondAuFiltre);
+  const projetsVisibles = trierParDate(listeProjets.filter(correspondAuFiltre), ordreCourant);
   statutProjets.textContent = traduire("projets.compte").replace("{n}", projetsVisibles.length);
 
   if (projetsVisibles.length === 0) {
@@ -136,6 +138,16 @@ export function initialiserFiltres() {
     rechercheCourante = normaliser(champRecherche.value.trim());
     afficherProjets();
   });
+
+  boutonTri.addEventListener("click", () => {
+    ordreCourant = ordreCourant === "recent" ? "ancien" : "recent";
+    boutonTri.dataset.ordre = ordreCourant;
+
+    const texte = boutonTri.querySelector(".filtre-projets__tri-texte");
+    texte.dataset.i18n = `tri.${ordreCourant}`;
+    texte.textContent = traduire(texte.dataset.i18n);
+    afficherProjets();
+  });
 }
 
 // interactif.js écoute cet événement pour les apparitions au scroll
@@ -190,7 +202,7 @@ function remplirEntete(projet) {
   page.querySelector(".projet__description").textContent = texteDe(projet, "description");
 
   remplirFiche(page.querySelector(".projet__fiche"), {
-    year: projet.year,
+    year: formaterDate(projet.date),
     duration: texteDe(projet, "duration"),
     role: texteDe(projet, "role"),
     team: texteDe(projet, "team"),

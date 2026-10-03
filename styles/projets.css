@@ -96,6 +96,28 @@
   color: var(--couleur-fond-plein);
 }
 
+/* Tri par année */
+.filtre-projets__tri {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.filtre-projets__tri-icone {
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: rotate var(--duree-survol) ease;
+}
+
+.filtre-projets__tri[data-ordre="ancien"] .filtre-projets__tri-icone {
+  rotate: 180deg;
+}
+
 /* Carte de projet */
 .carte-projet {
   position: relative;
@@ -672,6 +694,7 @@ body:has(dialog[open]) {
   /* Filtre : scroll horizontal */
   .filtre-projets {
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: stretch;
   }
 
@@ -679,6 +702,10 @@ body:has(dialog[open]) {
     flex: none;
     align-self: center;
     width: min(100%, 28rem);
+  }
+
+  .filtre-projets__tri {
+    align-self: center;
   }
 
   .filtre-projets__categories {
