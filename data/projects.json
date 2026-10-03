@@ -3,8 +3,8 @@
     "id": "economiq",
     "title": "economiQ",
     "category": "web",
-    "description_fr": "Description du projet à compléter.",
-    "description_en": "Project description to come.",
+    "description_fr": "Concept d'application mobile qui encourage la population à s'instruire sur l'autosuffisance et l'agriculture urbaine, et à l'intégrer dans son quotidien en partageant ses progrès avec ses amis.",
+    "description_en": "Mobile app concept that encourages people to learn about self-sufficiency and urban agriculture, and to make it part of their daily lives by sharing their progress with friends.",
     "tags": [
       "HTML",
       "CSS",
@@ -27,8 +27,8 @@
     "duration_en": "",
     "role_fr": "",
     "role_en": "",
-    "team_fr": "",
-    "team_en": "",
+    "team_fr": "Projet solo",
+    "team_en": "Solo project",
     "links": {
       "site": "",
       "github": "",
@@ -39,8 +39,8 @@
         "type": "text",
         "title_fr": "Idéation du concept",
         "title_en": "Concept ideation",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon."
+        "text_fr": "En ville, une grande majorité de la population est locataire et n'a pas accès à de grands espaces verts. Beaucoup se sentent impuissants face à leur empreinte écologique. L'idée d'economiQ est de donner aux citadins des outils pour appliquer des trucs qui correspondent à leur réalité.",
+        "text_en": "In the city, most people are renters with no access to large green spaces, and many feel powerless about their ecological footprint. The idea behind economiQ is to give city dwellers tools to apply tips that fit their reality."
       },
       {
         "type": "document",
@@ -68,8 +68,8 @@
         "type": "text",
         "title_fr": "Présentation finale",
         "title_en": "Final presentation",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon."
+        "text_fr": "",
+        "text_en": ""
       },
       {
         "type": "sequence",
@@ -192,11 +192,18 @@
         ]
       },
       {
+        "type": "text",
+        "title_fr": "L'histoire",
+        "title_en": "The story",
+        "text_fr": "Une taverne vide. Une substance inconnue. Un secret enfoui sous des tonnes d'acier. Saurez-vous résoudre l'énigme avant que le village ne soit entièrement corrodé?\n\nDans un village tranquille, une brigade masquée enlève soudainement le tavernier, le seul allié du protagoniste. En partant à sa recherche, le joueur découvre un réseau secret de prisons et d'expérimentations mené par une organisation autoritaire.\n\nAprès avoir sauvé le tavernier, devenu marqué par une étrange substance métallique, le joueur doit infiltrer des lieux de plus en plus dangereux pour comprendre l'origine de ce complot. En affrontant les responsables, il révèle le plan de l'organisation et libère le village de leur emprise.",
+        "text_en": "An empty tavern. An unknown substance. A secret buried under tons of steel. Can you solve the mystery before the whole village is corroded?\n\nIn a quiet village, a masked brigade suddenly kidnaps the tavern keeper, the protagonist's only ally. Searching for him, the player uncovers a secret network of prisons and experiments run by an authoritarian organization.\n\nAfter rescuing the tavern keeper, now marked by a strange metallic substance, the player must infiltrate increasingly dangerous places to understand the origin of the conspiracy. By confronting those responsible, they expose the organization's plan and free the village from its grip."
+      },
+      {
         "type": "duo",
         "title_fr": "Le concept",
         "title_en": "The concept",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon.",
+        "text_fr": "J'ai joué le rôle de tricoteuse de synthèse pour le concept de l'univers et du jeu. Avec toutes les suggestions soulevées en brainstorm dans notre équipe de 5, j'ai assemblé les meilleures idées de tous pour créer l'univers qu'on voit, et intégré un fil narratif cohérent pour lier les différents niveaux d'énigme à l'histoire.\n\nPar exemple, mes coéquipiers ont parlé de taverne, de complot, puis d'enquête, et j'ai rassemblé ces éléments dans une histoire d'enquête sur un complot qui rappelle la situation avec ICE aux États-Unis, afin d'utiliser notre projet pour parler de quelque chose qui nous touche et nous perturbe profondément.",
+        "text_en": "I acted as the team's synthesis weaver for the world and game concept. From all the ideas raised during brainstorms in our team of 5, I put together the best of everyone's suggestions to build the world you see, and wove a consistent narrative thread linking the different puzzle levels to the story.\n\nFor example, my teammates talked about a tavern, a conspiracy, then an investigation, and I brought these elements together into an investigation story about a conspiracy reminiscent of the situation with ICE in the United States, using our project to talk about something that deeply affects and disturbs us.",
         "media": {
           "video": "youtube:ruVGXFU7sP8",
           "alt_fr": "Vidéo de présentation du concept",
@@ -215,8 +222,8 @@
         "type": "text",
         "title_fr": "L'interface d'inventaire",
         "title_en": "The inventory UI",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon."
+        "text_fr": "Mon plus gros défi dans l'illustration des éléments 2D de l'interface était d'ajuster mon style pour qu'il corresponde à l'identité visuelle définie par notre directeur artistique.",
+        "text_en": "My biggest challenge illustrating the 2D interface elements was adapting my style to match the visual identity defined by our art director."
       },
       {
         "type": "gallery",
@@ -250,8 +257,8 @@
         "type": "duo",
         "title_fr": "Programmation",
         "title_en": "Programming",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon.",
+        "text_fr": "Mes principaux modules de programmation : le système d'inventaire et de journal, ainsi que le niveau final contre le boss (dans la vidéo). Ça m'a permis d'expérimenter avec des algorithmes de comportement de PNJ pour le boss final, et d'aiguiser mes maths en créant l'algorithme de validation de l'énigme de la balance.",
+        "text_en": "My main programming modules: the inventory and journal system, and the final boss level (shown in the video). They let me experiment with NPC behaviour algorithms for the final boss, and sharpen my math by building the validation algorithm for the scale puzzle.",
         "media": {
           "video": "images/projets/letallurgie/manoir-web.mp4",
           "poster": "images/projets/letallurgie/manoir-affiche.webp",
@@ -268,8 +275,8 @@
         "type": "subproject",
         "title_fr": "Site web promotionnel",
         "title_en": "Promotional website",
-        "description_fr": "Texte à venir.",
-        "description_en": "Text coming soon.",
+        "description_fr": "Le site promo avait comme objectif de promouvoir notre concept et notre identité visuelle pour l'événement Arcade TIM 2026, où un jury et plus de 300 invités venaient essayer et noter les jeux réalisés dans le cadre de notre cours de jeu vidéo en équipe. J'ai adapté l'identité visuelle du jeu aux codes du design web, en gardant un côté ludique dans l'interactivité.",
+        "description_en": "The promo site's goal was to showcase our concept and visual identity for the Arcade TIM 2026 event, where a jury and over 300 guests came to play and rate the games made in our team video game course. I adapted the game's visual identity to web design conventions, while keeping the interactions playful.",
         "role_fr": "Design et développement front-end",
         "role_en": "Design and front-end development",
         "team_fr": "Fanny Fortier et Olivier Vernet",
@@ -309,8 +316,8 @@
     "id": "mtltattoo",
     "title": "MTL Tattoo",
     "category": "web",
-    "description_fr": "Description du projet à compléter.",
-    "description_en": "Project description to come.",
+    "description_fr": "Refonte UX et graphique du site d'un studio de tatouage et de perçage montréalais, de la recherche au prototype web.",
+    "description_en": "UX and visual redesign of a Montréal tattoo and piercing studio's website, from research to web prototype.",
     "tags": [
       "Figma",
       "CSS",
@@ -342,8 +349,8 @@
         "type": "text",
         "title_fr": "Recherche UX",
         "title_en": "UX research",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon."
+        "text_fr": "Le premier exercice dans lequel j'ai pu appliquer les concepts de design UX appris pendant mes études. On devait choisir le site web d'une entreprise locale et proposer une refonte de l'UX et du design graphique, afin de mieux répondre aux besoins du site.\n\nDans ce cas-ci, le site de MTL Tattoo avait grand besoin d'une réorganisation de l'information et d'ajout de médias pour véhiculer le sens artistique de l'entreprise, et attirer des clients avec un intérêt marqué pour l'expression personnelle. Le site devait aussi démontrer du professionnalisme, pour donner confiance aux clients qui recherchent un endroit sûr pour des procédures de modification corporelle.",
+        "text_en": "The first exercise where I got to apply the UX design concepts learned during my studies. We had to pick a local business's website and propose a redesign of its UX and visual design to better meet the site's needs.\n\nIn this case, MTL Tattoo's website badly needed its information reorganized and more media to convey the studio's artistic sensibility, and attract clients with a strong interest in self-expression. The site also had to show professionalism, to reassure clients looking for a safe place for body modification procedures."
       },
       {
         "type": "document",
@@ -398,8 +405,8 @@
         "type": "text",
         "title_fr": "Prototype Figma",
         "title_en": "Figma prototype",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon."
+        "text_fr": "Après un premier prototype Figma, un exercice de tests utilisateurs avec mes pairs a permis d'identifier plusieurs problèmes d'interactivité et de design qui sont plus difficiles à voir en développement. Ça m'a appris l'importance d'utiliser différentes paires d'yeux pour s'assurer de la performance d'un design.",
+        "text_en": "After a first Figma prototype, user testing with my peers revealed several interaction and design issues that are harder to spot during development. It taught me the importance of getting different pairs of eyes on a design to make sure it performs."
       },
       {
         "type": "media",
@@ -417,8 +424,8 @@
         "type": "text",
         "title_fr": "Prototype web",
         "title_en": "Web prototype",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon."
+        "text_fr": "Le résultat final est beaucoup plus propre et concis que le prototype Figma, ce qui démontre que de bonnes étapes de recherche et de prototypage peuvent grandement améliorer une interface.",
+        "text_en": "The final result is much cleaner and more concise than the Figma prototype, showing how solid research and prototyping steps can greatly improve an interface."
       },
       {
         "type": "gallery",
@@ -526,7 +533,7 @@
       "tools": [],
       "credits": []
     },
-    "date": "2025-03",
+    "date": "2025-11",
     "duration_fr": "",
     "duration_en": "",
     "role_fr": "Concept, direction artistique, design UX et développement",
@@ -577,8 +584,8 @@
         "reverse": true,
         "title_fr": "Le logo",
         "title_en": "The logo",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon.",
+        "text_fr": "Le titre et le logo du jeu cherchent à faire ressortir l'idée que tout grand combat peut être gagné, en commençant par de petits pas. Ce n'est pas un grand geste dramatique qui sort notre personnage de la dépression, mais la constance de plusieurs petits pas vers la santé mentale. Le pied intégré au logo réitère ce concept.",
+        "text_en": "The game's title and logo aim to highlight the idea that any big fight can be won, starting with small steps. It's not a big dramatic gesture that pulls our character out of depression, but the consistency of many small steps toward mental health. The footprint built into the logo reinforces this idea.",
         "media": {
           "src": "images/projets/petitspas/logo.webp",
           "ratio": "1066 / 643",
@@ -593,6 +600,13 @@
             "Fanny Fortier"
           ]
         }
+      },
+      {
+        "type": "text",
+        "title_fr": "Ce que j'ai appris",
+        "title_en": "What I learned",
+        "text_fr": "Ce projet était ambitieux pour un premier essai de jeu 3D en solo. J'ai beaucoup appris sur la sécurité du code, comme ajouter des fallbacks pour éviter les memory leaks, et sur la construction de systèmes modulaires réutilisables dans Unity.",
+        "text_en": "This project was ambitious for a first solo attempt at a 3D game. I learned a lot about code safety, like adding fallbacks to avoid memory leaks, and about building reusable modular systems in Unity."
       }
     ]
   },
@@ -600,8 +614,8 @@
     "id": "pocmaw",
     "title": "PocMaw! Bowling VR",
     "category": "jeu",
-    "description_fr": "Description du projet à compléter.",
-    "description_en": "Project description to come.",
+    "description_fr": "Jeu de bowling immersif en réalité virtuelle, dans lequel on lance des chats sur des chats.",
+    "description_en": "Immersive virtual reality bowling game where you throw cats at cats.",
     "tags": [
       "Unity",
       "C#",
@@ -623,16 +637,23 @@
     "duration_en": "",
     "role_fr": "",
     "role_en": "",
-    "team_fr": "",
-    "team_en": "",
+    "team_fr": "Projet solo",
+    "team_en": "Solo project",
     "links": {},
     "content": [
+      {
+        "type": "text",
+        "title_fr": "Le concept",
+        "title_en": "The concept",
+        "text_fr": "PocMaw! Bowling VR est la culmination de mon intérêt marqué pour les créatures félines et les environnements de jeu colorés et simples. Un jeu de bowling immersif dans lequel on lance des chats sur des chats, en tentant d'atteindre l'ultime PocMaw (abat).\n\nUn bon exercice pour me rappeler que les jeux les plus divertissants n'ont pas besoin d'être les plus complexes. Réinventer un système qui a fait ses preuves peut mener à de belles surprises.",
+        "text_en": "PocMaw! Bowling VR is the culmination of my strong interest in feline creatures and colourful, simple game environments. An immersive bowling game where you throw cats at cats, aiming for the ultimate PocMaw (strike).\n\nA good reminder that the most entertaining games don't need to be the most complex. Reinventing a proven system can lead to lovely surprises."
+      },
       {
         "type": "duo",
         "title_fr": "L'environnement",
         "title_en": "The environment",
-        "text_fr": "Texte à venir.",
-        "text_en": "Text coming soon.",
+        "text_fr": "Comme le projet était un court exercice solo d'introduction à la réalité virtuelle et à OpenXR, une phase de production d'assets 3D n'était pas dans les cartes. Pour personnaliser mon environnement malgré tout, j'ai conçu ses éléments principaux en croquis, faits sur mon cellulaire avec un doigt dans Adobe Express, pour ensuite les faire passer dans Meshy.ai.\n\nÇa m'a beaucoup appris sur la place que l'intelligence artificielle peut prendre dans la production d'assets, tout en gardant la direction artistique 100 % humaine et authentique.",
+        "text_en": "Since the project was a short solo introduction to virtual reality and OpenXR, a 3D asset production phase wasn't in the cards. To personalize my environment anyway, I designed its main elements as sketches, drawn on my phone with one finger in Adobe Express, then ran them through Meshy.ai.\n\nIt taught me a lot about the role artificial intelligence can play in asset production, while keeping the art direction 100% human and authentic.",
         "media": {
           "src": "images/projets/pocmaw/screenshot-environnement.webp",
           "ratio": "1007 / 543",
@@ -672,6 +693,63 @@
         "credits": [
           "Fanny Fortier"
         ]
+      }
+    ]
+  },
+  {
+    "id": "zodia",
+    "title": "Zodia",
+    "category": "web",
+    "description_fr": "Site WordPress qui enseigne l'astrologie.",
+    "description_en": "WordPress website that teaches astrology.",
+    "tags": [
+      "WordPress",
+      "PHP",
+      "JavaScript",
+      "CSS"
+    ],
+    "thumbnail": "images/projets/zodia/poster.webp",
+    "cover": {
+      "src": "images/projets/zodia/poster.webp",
+      "ratio": "1330 / 1002",
+      "alt_fr": "Page d'accueil du site Zodia",
+      "alt_en": "Zodia website homepage",
+      "caption_fr": "",
+      "caption_en": "",
+      "tools": [],
+      "credits": []
+    },
+    "date": "2026-03",
+    "duration_fr": "",
+    "duration_en": "",
+    "role_fr": "Direction artistique, design front-end et développement back-end",
+    "role_en": "Art direction, front-end design and back-end development",
+    "team_fr": "Projet solo",
+    "team_en": "Solo project",
+    "links": {},
+    "content": [
+      {
+        "type": "text",
+        "title_fr": "Adaptabilité",
+        "title_en": "Responsiveness",
+        "text_fr": "Pendant ce projet, j'ai appris de manière autodidacte à utiliser les query loops de WordPress en PHP pour pousser les limites du « blogue » et adapter cette interface comme une application web et mobile.",
+        "text_en": "During this project, I taught myself to use WordPress query loops in PHP to push past the limits of a \"blog\" and adapt the interface into a web and mobile app."
+      },
+      {
+        "type": "media",
+        "width": "full",
+        "video": "images/projets/zodia/adaptabilite-web.mp4",
+        "poster": "images/projets/zodia/video-affiche.webp",
+        "ratio": "1600 / 1022",
+        "loop": true,
+        "alt_fr": "Le site Zodia qui s'adapte du desktop à la tablette puis au mobile",
+        "alt_en": "The Zodia website adapting from desktop to tablet to mobile",
+        "caption_fr": "",
+        "caption_en": "",
+        "tools": [
+          "WordPress"
+        ],
+        "credits": []
       }
     ]
   }
