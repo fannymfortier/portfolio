@@ -346,6 +346,17 @@ html:has(.hero) {
   scroll-snap-align: start;
 }
 
+/* Mobile : tuile de texture plus petite, et seul le hero s'accroche */
+@media (max-width: 48rem) {
+  :root {
+    --texture-taille: 256px;
+  }
+
+  .section {
+    scroll-snap-align: none;
+  }
+}
+
 
 /* ---------- 6. UTILITAIRES ---------- */
 .etiquette {
