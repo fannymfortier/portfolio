@@ -505,25 +505,96 @@
     ]
   },
   {
-    "id": "petit-pas",
-    "title": "Petit Pas",
-    "category": "application",
-    "description_fr": "Description du projet à compléter.",
-    "description_en": "Project description to come.",
+    "id": "petitspas",
+    "title": "Petits Pas",
+    "category": "jeu",
+    "description_fr": "Jeu de simulation et de survie dans lequel le joueur doit vaincre la dépression en balançant ses besoins et en interagissant avec le monde autour de lui.",
+    "description_en": "Simulation and survival game where the player must overcome depression by balancing their needs and interacting with the world around them.",
     "tags": [
-      "Figma"
+      "Unity",
+      "C#",
+      "Illustrator"
     ],
-    "thumbnail": "images/projets/petit-pas/vignette.jpg",
-    "cover": "",
+    "thumbnail": "images/projets/petitspas/poster.webp",
+    "cover": {
+      "src": "images/projets/petitspas/poster.webp",
+      "ratio": "1770 / 961",
+      "alt_fr": "Le logo Petits Pas au-dessus du monde du jeu",
+      "alt_en": "The Petits Pas logo above the game world",
+      "caption_fr": "",
+      "caption_en": "",
+      "tools": [],
+      "credits": []
+    },
     "date": "2025-03",
     "duration_fr": "",
     "duration_en": "",
-    "role_fr": "",
-    "role_en": "",
-    "team_fr": "",
-    "team_en": "",
+    "role_fr": "Concept, direction artistique, design UX et développement",
+    "role_en": "Concept, art direction, UX design and development",
+    "team_fr": "Projet solo",
+    "team_en": "Solo project",
     "links": {},
-    "content": []
+    "content": [
+      {
+        "type": "media",
+        "video": "images/projets/petitspas/petitspas-web.mp4",
+        "poster": "images/projets/petitspas/petitspas-affiche.webp",
+        "ratio": "16 / 9",
+        "alt_fr": "Vidéo de jeu de Petits Pas",
+        "alt_en": "Petits Pas gameplay video",
+        "caption_fr": "",
+        "caption_en": "",
+        "tools": [
+          "Unity"
+        ],
+        "credits": [
+          "Assets 3D : Unity Asset Store"
+        ]
+      },
+      {
+        "type": "duo",
+        "title_fr": "Le concept",
+        "title_en": "The concept",
+        "text_fr": "Petits Pas est un jeu de survie et de simulation sur la santé mentale et la recherche de balance. Le joueur incarne un personnage qui combat la dépression : son objectif est de faire monter ses quatre jauges (énergie, divertissement, appartenance et batterie sociale) au-dessus de 90 %, alors qu'elles diminuent avec le temps. Si une seule tombe à 0 %, le personnage fait un pas en arrière et la partie est perdue.\n\nChaque interaction a un prix. Regarder la télé divertit, mais nuit au sentiment d'appartenance. Parler à une amie le nourrit, mais vide la batterie sociale et l'énergie. Le joueur doit aussi gérer son argent : aller travailler coûte cher à toutes les jauges, mais permet des activités plus puissantes, comme une séance de thérapie ou un voyage.",
+        "text_en": "Petits Pas is a survival and simulation game about mental health and the search for balance. The player embodies a character fighting depression: the goal is to raise four gauges (energy, entertainment, belonging and social battery) above 90%, while they drain over time. If a single one drops to 0%, the character takes a step back and the game is lost.\n\nEvery interaction has a cost. Watching TV is entertaining, but hurts the sense of belonging. Talking to a friend nurtures it, but drains social battery and energy. The player also has to manage money: going to work is costly for every gauge, but unlocks more powerful activities, like a therapy session or a trip.",
+        "media": {
+          "src": "images/projets/petitspas/screenshot.webp",
+          "ratio": "993 / 556",
+          "alt_fr": "Le personnage devant sa maison, avec ses quatre jauges à l'écran",
+          "alt_en": "The character outside her house, with the four gauges on screen",
+          "caption_fr": "",
+          "caption_en": "",
+          "tools": [
+            "Unity"
+          ],
+          "credits": [
+            "Assets 3D : Unity Asset Store"
+          ]
+        }
+      },
+      {
+        "type": "duo",
+        "reverse": true,
+        "title_fr": "Le logo",
+        "title_en": "The logo",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon.",
+        "media": {
+          "src": "images/projets/petitspas/logo.webp",
+          "ratio": "1066 / 643",
+          "alt_fr": "Logo de Petits Pas",
+          "alt_en": "Petits Pas logo",
+          "caption_fr": "",
+          "caption_en": "",
+          "tools": [
+            "Illustrator"
+          ],
+          "credits": [
+            "Fanny Fortier"
+          ]
+        }
+      }
+    ]
   },
   {
     "id": "pocmaw",
@@ -572,6 +643,35 @@
           "tools": [],
           "credits": []
         }
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "images/projets/pocmaw/croquis1.jpg",
+            "alt_fr": "Croquis de l'arche PocMaw! couverte de fleurs",
+            "alt_en": "Sketch of the flower-covered PocMaw! arch"
+          },
+          {
+            "src": "images/projets/pocmaw/croquis2.jpg",
+            "alt_fr": "Croquis d'une souche d'arbre servant de pupitre",
+            "alt_en": "Sketch of a tree stump used as a lectern"
+          },
+          {
+            "src": "images/projets/pocmaw/croquis3.jpg",
+            "alt_fr": "Croquis d'un panneau en bois",
+            "alt_en": "Sketch of a wooden sign"
+          }
+        ],
+        "caption_fr": "Croquis d'idéation de l'environnement, ensuite modélisés en 3D avec Meshy.",
+        "caption_en": "Ideation sketches for the environment, later turned into 3D models with Meshy.",
+        "tools": [
+          "Adobe Express",
+          "Meshy"
+        ],
+        "credits": [
+          "Fanny Fortier"
+        ]
       }
     ]
   }
