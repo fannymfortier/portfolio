@@ -55,7 +55,7 @@
     "tags": [
       "Unity",
       "C#",
-      "URP"
+      "Cinemachine"
     ],
     "thumbnail": "images/projets/letallurgie/vignette.png",
     "cover": "images/projets/letallurgie/poster.png",
@@ -64,8 +64,8 @@
     "duration_en": "",
     "role_fr": "Direction technique",
     "role_en": "Technical direction",
-    "team_fr": "Équipe",
-    "team_en": "Team",
+    "team_fr": "Fanny Fortier, Olivier Vernet, Edric Larouche, Olivier Paulin et Ramy Aissiouane",
+    "team_en": "Fanny Fortier, Olivier Vernet, Edric Larouche, Olivier Paulin and Ramy Aissiouane",
     "links": {
       "site": "",
       "github": ""
@@ -149,10 +149,12 @@
         "description_en": "Text coming soon.",
         "role_fr": "Design et développement front-end",
         "role_en": "Design and front-end development",
-        "team_fr": "Équipe de 2, avec Olivier Vernet (back-end)",
-        "team_en": "Team of 2, with Olivier Vernet (back-end)",
+        "team_fr": "Fanny Fortier et Olivier Vernet",
+        "team_en": "Fanny Fortier and Olivier Vernet",
         "tools": [
-          "React"
+          "React",
+          "Figma",
+          "Adobe Illustrator"
         ],
         "links": {
           "site": "",
