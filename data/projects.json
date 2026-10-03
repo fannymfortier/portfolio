@@ -247,6 +247,24 @@
         ]
       },
       {
+        "type": "duo",
+        "title_fr": "Programmation",
+        "title_en": "Programming",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon.",
+        "media": {
+          "video": "images/projets/letallurgie/manoir-web.mp4",
+          "poster": "images/projets/letallurgie/manoir-affiche.webp",
+          "ratio": "1178 / 672",
+          "alt_fr": "Démo de jeu dans le manoir",
+          "alt_en": "Gameplay demo inside the manor",
+          "caption_fr": "",
+          "caption_en": "",
+          "tools": [],
+          "credits": []
+        }
+      },
+      {
         "type": "subproject",
         "title_fr": "Site web promotionnel",
         "title_en": "Promotional website",
@@ -290,7 +308,7 @@
   {
     "id": "mtltattoo",
     "title": "MTL Tattoo",
-    "category": "identite",
+    "category": "web",
     "description_fr": "Description du projet à compléter.",
     "description_en": "Project description to come.",
     "tags": [
@@ -298,7 +316,7 @@
       "CSS",
       "JavaScript"
     ],
-    "thumbnail": "images/projets/mtltattoo/vignette.webp",
+    "thumbnail": "images/projets/mtltattoo/poster.webp",
     "cover": {
       "src": "images/projets/mtltattoo/poster.webp",
       "ratio": "1600 / 781",
@@ -508,16 +526,27 @@
     "content": []
   },
   {
-    "id": "pocmaw-bowling",
+    "id": "pocmaw",
     "title": "PocMaw! Bowling VR",
     "category": "jeu",
     "description_fr": "Description du projet à compléter.",
     "description_en": "Project description to come.",
     "tags": [
-      "Unity"
+      "Unity",
+      "C#",
+      "OpenXR"
     ],
-    "thumbnail": "images/projets/pocmaw-bowling/vignette.jpg",
-    "cover": "",
+    "thumbnail": "images/projets/pocmaw/poster.webp",
+    "cover": {
+      "src": "images/projets/pocmaw/poster.webp",
+      "ratio": "1672 / 941",
+      "alt_fr": "Affiche de PocMaw! Bowling VR",
+      "alt_en": "PocMaw! Bowling VR poster",
+      "caption_fr": "",
+      "caption_en": "",
+      "tools": [],
+      "credits": []
+    },
     "date": "2026-09",
     "duration_fr": "",
     "duration_en": "",
@@ -526,6 +555,24 @@
     "team_fr": "",
     "team_en": "",
     "links": {},
-    "content": []
+    "content": [
+      {
+        "type": "duo",
+        "title_fr": "L'environnement",
+        "title_en": "The environment",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon.",
+        "media": {
+          "src": "images/projets/pocmaw/screenshot-environnement.webp",
+          "ratio": "1007 / 543",
+          "alt_fr": "L'allée de bowling dans un pré, sous l'arche PocMaw!",
+          "alt_en": "The bowling lane in a meadow, under the PocMaw! arch",
+          "caption_fr": "",
+          "caption_en": "",
+          "tools": [],
+          "credits": []
+        }
+      }
+    ]
   }
 ]
