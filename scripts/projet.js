@@ -6,7 +6,7 @@
    Les gabarits (cartes, blocs, médias) sont dans templates.js
    ========================================================= */
 
-import { CHEMIN_PROJETS, FILTRE_TOUS, traduire, texteDe, chargerJSON, normaliser, anneeDe, trierParDate } from "./utilitaire.js";
+import { CHEMIN_PROJETS, FILTRE_TOUS, traduire, texteDe, chargerJSON, normaliser, anneeDe, trierParDate, listeDe } from "./utilitaire.js";
 import {
   remplirFiche,
   marquerVideSiErreur,
@@ -242,7 +242,7 @@ function remplirCouverture(projet) {
 
   const texteAlternatif = texteDe(couverture, "alt") || projet.title;
   image.alt = texteAlternatif;
-  bouton.setAttribute("aria-label", `${traduire("projets.agrandir")} : ${texteAlternatif}`);
+  bouton.setAttribute("aria-label", `${traduire("projets.agrandir")}${traduire("ponctuation.deuxpoints")}${texteAlternatif}`);
 
   const legende = figure.querySelector(".bloc-media__legende");
   legende.textContent = texteDe(couverture, "caption");
@@ -250,8 +250,8 @@ function remplirCouverture(projet) {
 
   const infos = figure.querySelector(".bloc-media__infos");
   infos.hidden = remplirFiche(infos, {
-    tools: (couverture.tools ?? []).join(", "),
-    credits: (couverture.credits ?? []).join(", ")
+    tools: listeDe(couverture, "tools"),
+    credits: listeDe(couverture, "credits")
   }) === 0;
 
   figure.querySelector(".bloc-media__fiche").hidden = legende.hidden && infos.hidden;

@@ -791,7 +791,7 @@ body:has(dialog[open]) {
   }
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 64rem) {
   .bloc-duo {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--espace-xl);

@@ -8,7 +8,7 @@
    5. Médias (image, vidéo)
    ========================================================= */
 
-import { traduire, texteDe, anneeDe, FILTRE_TOUS } from "./utilitaire.js";
+import { traduire, texteDe, listeDe, anneeDe, FILTRE_TOUS } from "./utilitaire.js";
 
 
 
@@ -298,8 +298,8 @@ function creerCadreMedia(bloc, medias) {
 
   const infos = figure.querySelector(".bloc-media__infos");
   const nombreInfos = remplirFiche(infos, {
-    tools: (bloc.tools ?? []).join(", "),
-    credits: (bloc.credits ?? []).join(", ")
+    tools: listeDe(bloc, "tools"),
+    credits: listeDe(bloc, "credits")
   });
   infos.hidden = nombreInfos === 0;
 
@@ -357,7 +357,7 @@ function creerMedia(bloc) {
   bouton.className = "bloc-media__image";
   bouton.dataset.lightbox = bloc.src ?? "";
   bouton.setAttribute("aria-label", texteAlternatif
-    ? `${traduire("projets.agrandir")} : ${texteAlternatif}`
+    ? `${traduire("projets.agrandir")}${traduire("ponctuation.deuxpoints")}${texteAlternatif}`
     : traduire("projets.agrandir"));
 
   marquerVideSiErreur(image, bouton);

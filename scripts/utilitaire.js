@@ -97,6 +97,11 @@ export function texteDe(objet, champ) {
   return objet[`${champ}_${langueCourante}`] || objet[`${champ}_fr`] || "";
 }
 
+// Liste traduite au besoin ("credits_en"), sinon la liste commune
+export function listeDe(objet, champ) {
+  return (objet[`${champ}_${langueCourante}`] ?? objet[champ] ?? []).join(", ");
+}
+
 
 /* =========================================================
    4. DONNÉES

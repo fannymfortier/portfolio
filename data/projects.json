@@ -6,9 +6,8 @@
     "description_fr": "Concept d'application mobile qui encourage la population à s'instruire sur l'autosuffisance et l'agriculture urbaine, et à l'intégrer dans son quotidien en partageant ses progrès avec ses amis.",
     "description_en": "Mobile app concept that encourages people to learn about self-sufficiency and urban agriculture, and to make it part of their daily lives by sharing their progress with friends.",
     "tags": [
-      "HTML",
-      "CSS",
-      "JavaScript"
+      "Adobe Illustrator",
+      "Adobe After Effects"
     ],
     "thumbnail": "images/projets/economiq/poster.png",
     "thumbnail_position": "top",
@@ -556,6 +555,9 @@
         ],
         "credits": [
           "Assets 3D : Unity Asset Store"
+        ],
+        "credits_en": [
+          "3D assets: Unity Asset Store"
         ]
       },
       {
@@ -576,6 +578,9 @@
           ],
           "credits": [
             "Assets 3D : Unity Asset Store"
+          ],
+          "credits_en": [
+            "3D assets: Unity Asset Store"
           ]
         }
       },

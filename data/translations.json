@@ -20,8 +20,8 @@
     "controles.theme.clair": "Mode clair",
     "controles.langue": "English",
     "apropos.titre": "À propos",
-    "apropos.accroche": "Étudiante en Intégration Multimédia à Montréal, je conçois des expériences numériques à la frontière du design d'interface, du développement front-end et de la création interactive.",
-    "apropos.texte": "Mon approche privilégie la clarté typographique, l'accessibilité web et des concepts visuels forts sans artifices inutiles.",
+    "apropos.accroche": "Finissante en Intégration multimédia à Montréal, je crée des expériences interactives porteuses de sens, du concept jusqu'au code.",
+    "apropos.texte": "Je suis arrivée au multimédia par le maquillage artistique, qui m'a appris à jouer avec les ombres et les lumières, et surtout le contact humain. Seule, je mène mes projets du début à la fin; en équipe, je deviens la tricoteuse qui rassemble les idées de chacun en une vision cohérente. Malgré mon côté artistique, je suis méthodique : derrière chaque expérience se cache un système, et je construis les miens pour qu'ils soient faciles à optimiser et à faire grandir. Et quand un cours s'arrête avant mes questions, je vais chercher plus loin.",
     "projets.titre": "Projets",
     "projets.chargement": "Chargement des projets…",
     "projets.erreur": "Les projets n'ont pas pu être chargés. Actualise la page pour réessayer.",
@@ -65,7 +65,8 @@
     "projet.telechargerPdf": "Télécharger le PDF",
     "projet.introuvable": "Projet introuvable",
     "projet.video": "Vidéo du projet",
-    "pied.texte": "Tous droits réservés."
+    "pied.texte": "Tous droits réservés.",
+    "ponctuation.deuxpoints": " : "
   },
   "en": {
     "site.nom": "Fanny Fortier",
@@ -88,8 +89,8 @@
     "controles.theme.clair": "Light mode",
     "controles.langue": "Français",
     "apropos.titre": "About",
-    "apropos.accroche": "Introduction coming soon.",
-    "apropos.texte": "More about my path coming soon.",
+    "apropos.accroche": "Graduating Multimedia Integration student in Montréal, I create meaningful interactive experiences, from concept to code.",
+    "apropos.texte": "I came to multimedia through artistic makeup, which taught me to play with light and shadow, and above all, human connection. On my own, I carry projects from start to finish; in a team, I become the weaver who brings everyone's ideas together into one coherent vision. Despite my artistic side, I'm methodical: behind every experience lies a system, and I build mine so they're easy to optimize and grow. And when a class stops before my questions do, I keep digging.",
     "projets.titre": "Projects",
     "projets.chargement": "Loading projects…",
     "projets.erreur": "Projects couldn't be loaded. Refresh the page to try again.",
@@ -133,6 +134,7 @@
     "projet.telechargerPdf": "Download the PDF",
     "projet.introuvable": "Project not found",
     "projet.video": "Project video",
-    "pied.texte": "All rights reserved."
+    "pied.texte": "All rights reserved.",
+    "ponctuation.deuxpoints": ": "
   }
 }

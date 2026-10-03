@@ -9,7 +9,7 @@
 
 .apropos__grille {
   display: grid;
-  gap: var(--espace-xl);
+  gap: var(--espace-l);
   align-items: center;
 }
 
@@ -17,7 +17,7 @@
   position: relative;
   isolation: isolate;
   justify-self: center;
-  width: min(70%, 16rem);
+  width: min(45%, 10rem);
   aspect-ratio: 4 / 5;
   margin: 0;
 }
@@ -74,6 +74,7 @@
 @media (min-width: 48rem) {
   .apropos__grille {
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--espace-xl);
   }
 
   .apropos__photo {
