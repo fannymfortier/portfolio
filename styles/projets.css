@@ -590,10 +590,79 @@ body:has(dialog[open]) {
   color: var(--couleur-accent);
 }
 
+.lightbox__scene {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-m);
+}
+
 .lightbox__image {
-  max-height: 80vh;
+  min-width: 0;
+  max-height: calc(90vh - 8rem);
   width: auto;
   margin-inline: auto;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox__fleche {
+  flex: none;
+  padding: 0.4em 0.8em;
+  border: 1px solid var(--couleur-ligne-forte);
+  border-radius: var(--rayon-pilule);
+  background: none;
+  font-size: var(--taille-grand);
+  cursor: pointer;
+  transition: border-color var(--duree-survol) ease, color var(--duree-survol) ease, translate var(--duree-survol) ease;
+}
+
+.lightbox__fleche:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}
+
+.lightbox__fleche[data-direction="-1"]:hover {
+  translate: -0.15em 0;
+}
+
+.lightbox__fleche[data-direction="1"]:hover {
+  translate: 0.15em 0;
+}
+
+.lightbox__compteur {
+  margin: var(--espace-s) auto 0;
+  font-size: var(--taille-micro);
+  font-weight: var(--graisse-forte);
+  letter-spacing: var(--lettres-espacees);
+  text-align: center;
+  color: var(--couleur-texte-doux);
+}
+
+/* Petit écran : flèches par-dessus l'image */
+@media (max-width: 40rem) {
+  .lightbox__scene {
+    position: relative;
+  }
+
+  .lightbox__fleche {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    background-color: var(--couleur-fond);
+  }
+
+  .lightbox__fleche[data-direction="-1"] {
+    left: var(--espace-xs);
+  }
+
+  .lightbox__fleche[data-direction="1"] {
+    right: var(--espace-xs);
+  }
+
+  .lightbox__fleche:hover {
+    translate: 0 -50%;
+  }
 }
 
 

@@ -220,7 +220,16 @@
     <button type="button" class="lightbox__fermer" data-i18n-aria-label="lightbox.fermer" aria-label="Fermer">
       <span aria-hidden="true">×</span>
     </button>
-    <img class="lightbox__image" src="" alt="">
+    <div class="lightbox__scene">
+      <button type="button" class="lightbox__fleche" data-direction="-1" data-i18n-aria-label="lightbox.precedente" aria-label="Image précédente" hidden>
+        <span aria-hidden="true">←</span>
+      </button>
+      <img class="lightbox__image" src="" alt="">
+      <button type="button" class="lightbox__fleche" data-direction="1" data-i18n-aria-label="lightbox.suivante" aria-label="Image suivante" hidden>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+    <p class="lightbox__compteur" aria-live="polite" hidden></p>
   </dialog>
 
 </body>

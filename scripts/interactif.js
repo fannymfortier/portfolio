@@ -139,10 +139,44 @@ function initialiserLangue() {
 const lightbox = document.getElementById("lightbox");
 const imageLightbox = lightbox.querySelector(".lightbox__image");
 const boutonFermer = lightbox.querySelector(".lightbox__fermer");
+const flechesLightbox = lightbox.querySelectorAll(".lightbox__fleche");
+const compteurLightbox = lightbox.querySelector(".lightbox__compteur");
 
-function ouvrirLightbox(source, texteAlternatif = "") {
-  imageLightbox.src = source;
-  imageLightbox.alt = texteAlternatif;
+// Images du même cadre (galerie, document, séquence) qu'on parcourt avec les flèches
+let groupeLightbox = [];
+let positionLightbox = 0;
+
+function texteAlternatifDe(declencheur) {
+  return declencheur.querySelector("img")?.alt || declencheur.getAttribute("aria-label") || "";
+}
+
+function afficherImageLightbox() {
+  const declencheur = groupeLightbox[positionLightbox];
+  imageLightbox.src = declencheur.dataset.lightbox;
+  imageLightbox.alt = texteAlternatifDe(declencheur);
+
+  const plusieurs = groupeLightbox.length > 1;
+  flechesLightbox.forEach((fleche) => { fleche.hidden = !plusieurs; });
+  if (compteurLightbox) {
+    compteurLightbox.hidden = !plusieurs;
+    compteurLightbox.textContent = `${positionLightbox + 1} / ${groupeLightbox.length}`;
+  }
+}
+
+function naviguerLightbox(direction) {
+  if (groupeLightbox.length < 2) return;
+  positionLightbox = (positionLightbox + direction + groupeLightbox.length) % groupeLightbox.length;
+  afficherImageLightbox();
+}
+
+function ouvrirLightbox(declencheur) {
+  const cadre = declencheur.closest(".bloc-media__cadre");
+  groupeLightbox = cadre
+    ? [...cadre.querySelectorAll("[data-lightbox]")].filter((element) => element.dataset.lightbox)
+    : [declencheur];
+  positionLightbox = Math.max(0, groupeLightbox.indexOf(declencheur));
+
+  afficherImageLightbox();
   lightbox.showModal();
 }
 
@@ -150,9 +184,26 @@ function initialiserLightbox() {
   document.addEventListener("click", (evenement) => {
     const declencheur = evenement.target.closest("[data-lightbox]");
     if (!declencheur || !declencheur.dataset.lightbox) return;
+    ouvrirLightbox(declencheur);
+  });
 
-    const texteAlternatif = declencheur.querySelector("img")?.alt || declencheur.getAttribute("aria-label") || "";
-    ouvrirLightbox(declencheur.dataset.lightbox, texteAlternatif);
+  flechesLightbox.forEach((fleche) => {
+    fleche.addEventListener("click", () => naviguerLightbox(Number(fleche.dataset.direction)));
+  });
+
+  lightbox.addEventListener("keydown", (evenement) => {
+    if (evenement.key === "ArrowLeft") naviguerLightbox(-1);
+    if (evenement.key === "ArrowRight") naviguerLightbox(1);
+  });
+
+  // Glisser du doigt sur mobile
+  let departGlisse = null;
+  imageLightbox.addEventListener("pointerdown", (evenement) => { departGlisse = evenement.clientX; });
+  imageLightbox.addEventListener("pointerup", (evenement) => {
+    if (departGlisse === null) return;
+    const distance = evenement.clientX - departGlisse;
+    departGlisse = null;
+    if (Math.abs(distance) > 50) naviguerLightbox(distance < 0 ? 1 : -1);
   });
 
   boutonFermer.addEventListener("click", () => lightbox.close());
@@ -166,6 +217,7 @@ function initialiserLightbox() {
   lightbox.addEventListener("close", () => {
     imageLightbox.src = "";
     imageLightbox.alt = "";
+    groupeLightbox = [];
   });
 }
 
