@@ -288,7 +288,7 @@
     ]
   },
   {
-    "id": "studio-tattoo",
+    "id": "mtltattoo",
     "title": "MTL Tattoo",
     "category": "identite",
     "description_fr": "Description du projet à compléter.",
@@ -297,13 +297,13 @@
       "Figma",
       "Illustrator"
     ],
-    "thumbnail": "images/projets/studio-tattoo/vignette.jpg",
+    "thumbnail": "images/projets/mtltattoo/vignette.jpg",
     "cover": "",
     "date": "2025-10",
     "duration_fr": "",
     "duration_en": "",
-    "role_fr": "",
-    "role_en": "",
+    "role_fr": "Recherche UX, design du prototype et développement web",
+    "role_en": "UX research, prototype design and web development",
     "team_fr": "",
     "team_en": "",
     "links": {
@@ -311,14 +311,58 @@
     },
     "content": [
       {
-        "type": "media",
-        "src": "images/projets/studio-tattoo/galerie-01.jpg",
-        "alt_fr": "",
-        "alt_en": "",
+        "type": "text",
+        "title_fr": "Recherche UX",
+        "title_en": "UX research",
+        "text_fr": "Texte à venir.",
+        "text_en": "Text coming soon."
+      },
+      {
+        "type": "document",
+        "title_fr": "Recherche UX",
+        "title_en": "UX research",
+        "width": "full",
+        "pages": [
+          "images/projets/mtltattoo/recherche/page-01.webp",
+          "images/projets/mtltattoo/recherche/page-02.webp",
+          "images/projets/mtltattoo/recherche/page-03.webp",
+          "images/projets/mtltattoo/recherche/page-04.webp",
+          "images/projets/mtltattoo/recherche/page-05.webp",
+          "images/projets/mtltattoo/recherche/page-06.webp",
+          "images/projets/mtltattoo/recherche/page-07.webp",
+          "images/projets/mtltattoo/recherche/page-08.webp",
+          "images/projets/mtltattoo/recherche/page-09.webp",
+          "images/projets/mtltattoo/recherche/page-10.webp",
+          "images/projets/mtltattoo/recherche/page-11.webp",
+          "images/projets/mtltattoo/recherche/page-12.webp",
+          "images/projets/mtltattoo/recherche/page-13.webp",
+          "images/projets/mtltattoo/recherche/page-14.webp",
+          "images/projets/mtltattoo/recherche/page-15.webp",
+          "images/projets/mtltattoo/recherche/page-16.webp",
+          "images/projets/mtltattoo/recherche/page-17.webp",
+          "images/projets/mtltattoo/recherche/page-18.webp",
+          "images/projets/mtltattoo/recherche/page-19.webp",
+          "images/projets/mtltattoo/recherche/page-20.webp",
+          "images/projets/mtltattoo/recherche/page-21.webp",
+          "images/projets/mtltattoo/recherche/page-22.webp",
+          "images/projets/mtltattoo/recherche/page-23.webp",
+          "images/projets/mtltattoo/recherche/page-24.webp",
+          "images/projets/mtltattoo/recherche/page-25.webp",
+          "images/projets/mtltattoo/recherche/page-26.webp",
+          "images/projets/mtltattoo/recherche/page-27.webp",
+          "images/projets/mtltattoo/recherche/page-28.webp",
+          "images/projets/mtltattoo/recherche/page-29.webp",
+          "images/projets/mtltattoo/recherche/page-30.webp",
+          "images/projets/mtltattoo/recherche/page-31.webp",
+          "images/projets/mtltattoo/recherche/page-32.webp"
+        ],
         "caption_fr": "",
         "caption_en": "",
         "tools": [],
-        "credits": []
+        "credits": [
+          "Fanny Fortier",
+          "Olivia-Ly"
+        ]
       }
     ]
   },
